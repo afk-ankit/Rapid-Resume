@@ -1,0 +1,19 @@
+.languageContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    &:last-child{
+        padding-bottom: 0;
+    }
+}
+
+
+.language{
+    flex:1;
+}
+
+.delete{
+    align-self: flex-end;
+}
