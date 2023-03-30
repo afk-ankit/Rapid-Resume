@@ -13,7 +13,7 @@ const {
 const languageArr = Object.entries(language);
 
 const LanguagePicker = () => {
-  const [counter, setCount] = useState(0);
+  const [counter, setCount] = useState(1);
   const [arr, setArray] = useState([]);
   useEffect(() => {
     const array = new Array(counter).fill(0);
