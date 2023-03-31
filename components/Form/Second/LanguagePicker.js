@@ -2,66 +2,86 @@ import { useEffect, useState } from 'react';
 import language from '@/public/languageNames.json';
 import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
-const {
+import softSkill from '@/public/softSkill.json';
+import technicalSkill from '@/public/technicalSkill.json';
+
+import {
   Button,
   InputLabel,
   Select,
   MenuItem,
   Rating,
   IconButton,
-} = require('@mui/material');
+  FormGroup,
+  FormControl,
+} from '@mui/material';
 const languageArr = Object.entries(language);
 
-const LanguagePicker = () => {
-  const [counter, setCount] = useState(1);
-  const [arr, setArray] = useState([]);
-  useEffect(() => {
-    const array = new Array(counter).fill(0);
-    setArray(array);
-  }, [counter]);
+const LanguagePicker = ({ label1, label2 }) => {
+  const [array, setArray] = useState([{ language: '', rating: 0 }]);
 
   const buttonHandler = () => {
-    setCount((prev) => prev + 1);
+    setArray([...array, { language: '', rating: 0 }]);
   };
 
-  //   languageArr.forEach((item) => console.log(item[1].name));
+  const buttonRemover = (count) => {
+    const newArr = [...array];
+    newArr.splice(count, 1);
+    setArray(newArr);
+  };
+
+  const handleInput = (event, index) => {
+    console.log('🔥', event.target.value);
+  };
+
+  let skill;
+  label1 === 'Soft-Skills' ? (skill = softSkill) : (skill = technicalSkill);
+
   return (
     <div>
-      <Button onClick={buttonHandler}>Add Language</Button>
-      {arr.map((item, count) => (
+      <Button onClick={buttonHandler}>Add {label1}</Button>
+      {array.map((item, count) => (
         <div key={count} className={styles.languageContainer}>
           <div className={styles.language}>
-            <InputLabel id="language-select">Language</InputLabel>
-            <Select
-              fullWidth
-              labelId="language-select"
-              id="language-select"
-              label="Select Language"
-              style={{ background: '#E2F2FF' }}
-            >
-              {languageArr.map((value, count) => (
-                <MenuItem value={value[1].name} key={count}>
-                  {value[1].name}
-                </MenuItem>
-              ))}
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel id="language-select">{label1}</InputLabel>
+              <Select
+                labelId="language-select"
+                id="language-select"
+                label="Select Language"
+                style={{ background: '#E2F2FF' }}
+              >
+                {label1 == 'Language'
+                  ? languageArr.map((value, count1) => (
+                      <MenuItem value={value[1].name} key={count1}>
+                        {value[1].name}
+                      </MenuItem>
+                    ))
+                  : skill.map((value, count1) => (
+                      <MenuItem value={value} key={count1}>
+                        {value}
+                      </MenuItem>
+                    ))}
+              </Select>
+            </FormControl>
           </div>
           <div>
-            <InputLabel id="rating-select">Fluency</InputLabel>
+            <InputLabel id="rating-select">{label2}</InputLabel>
             <Rating
               name="simple-controlled"
               size="large"
               labelId="rating-select"
+              onChange={(e) => {
+                console.log('❤️', e.target.value);
+              }}
             />
           </div>
+
           <IconButton
             className={styles.delete}
             size="large"
             color="primary"
-            onClick={() => {
-              console.log('I am delete');
-              setCount((prev) => prev - 1);
-            }}
+            onClick={() => buttonRemover(count)}
           >
             <DeleteIcon />
           </IconButton>
