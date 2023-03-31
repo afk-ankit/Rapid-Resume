@@ -1,4 +1,3 @@
-import styles from '@/styles/Second.module.scss';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import Page from '../utils/Page';

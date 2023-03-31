@@ -1,70 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { useState } from 'react';
+function Test() {
+  const [inputFields, setInputFields] = useState([{ value: '' }]);
 
-const Test = () => {
-  const [inputFields, setInputFields] = useState([
-    {
-      fullName: '',
-    },
-  ]);
-
-  const addInputField = () => {
-    setInputFields([...inputFields, { fullName: '' }]);
+  const handleAddFields = () => {
+    const values = [...inputFields];
+    values.push({ value: '' });
+    setInputFields(values);
   };
 
-  const removeInputFields = (index) => {
-    const rows = [...inputFields];
-    rows.splice(index, 1);
-    setInputFields(rows);
+  const handleDeleteFields = (index) => {
+    const values = [...inputFields];
+    values.splice(index, 1);
+    setInputFields(values);
   };
 
-  const handleChange = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const list = [...inputFields];
-    list[index][name] = value;
-    setInputFields(list);
+  const handleInputChange = (index, event) => {
+    const values = [...inputFields];
+    values[index].value = event.target.value;
+    setInputFields(values);
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-8">
-          {inputFields.map((data, index) => {
-            const { fullName } = data;
-            return (
-              <div className="row my-3" key={index}>
-                <div className="col">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      onChange={(evnt) => handleChange(index, evnt)}
-                      value={fullName}
-                      name="fullName"
-                      className="form-control"
-                      placeholder="Full Name"
-                    />
-                  </div>
-                </div>
-                <div className="col">
-                  {inputFields.length !== 1 ? (
-                    <button
-                      className="btn btn-outline-danger"
-                      onClick={removeInputFields}
-                    >
-                      x
-                    </button>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-            );
-          })}
+    <div>
+      {inputFields.map((inputField, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            value={inputField.value}
+            onChange={(event) => handleInputChange(index, event)}
+          />
+          <button onClick={() => handleDeleteFields(index)}>Delete</button>
         </div>
-      </div>
+      ))}
+      <button onClick={handleAddFields}>Add Input Field</button>
     </div>
   );
-};
+}
 
 export default Test;

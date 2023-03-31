@@ -1,0 +1,15 @@
+.flex{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.fullWidth{
+    flex: 1;
+}
+
+.label{
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+
