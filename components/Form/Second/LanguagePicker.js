@@ -14,50 +14,15 @@ import {
   IconButton,
   FormControl,
 } from '@mui/material';
-import { Field, FieldArray, Form, Formik } from 'formik';
+import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
 const languageArr = Object.entries(language);
 
-const LanguagePicker = ({ label1, label2 }) => {
-  // const [inputFields, setInputFields] = useState([
-  //   { value: 'Dutch', rating: 0 },
-  // ]);
-
-  // const handleAddFields = () => {
-  //   const values = [...inputFields];
-  //   values.push({ value: '' });
-  //   setInputFields(values);
-  // };
-
-  // const handleDeleteFields = (index) => {
-  //   const values = [...inputFields];
-  //   if (inputFields.length >= 2) {
-  //     values.splice(index, 1);
-  //   }
-  //   setInputFields(values);
-  // };
-
-  // const handleInputChange = (index, event) => {
-  //   const values = [...inputFields];
-  //   values[index].value = event.target.value;
-  //   console.log('sexy', event.target.value);
-  //   setInputFields(values);
-  // };
-
-  // const handleRatingChange = (index, event) => {
-  //   const values = [...inputFields];
-  //   values[index].rating = Number(event.target.value);
-  //   setInputFields(values);
-  // };
-
+const LanguagePicker = ({ label1, label2, initialValues, onSubmit }) => {
   let skill;
   label1 === 'Soft-Skills' ? (skill = softSkill) : (skill = technicalSkill);
 
-  const initialValues = {
-    language: [{ name: '', rating: 0 }],
-  };
-  const onSubmit = (value) => {
-    console.log(value);
-  };
+  const formik = useFormikContext();
+  console.log('sdfjkasdfkj', formik);
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -147,7 +112,6 @@ const LanguagePicker = ({ label1, label2 }) => {
                   style={{ marginBottom: '1rem' }}
                   onClick={() => {
                     push({ name: '', rating: 0 });
-                    form.handleSubmit;
                   }}
                 >
                   Add {label1}
@@ -156,6 +120,7 @@ const LanguagePicker = ({ label1, label2 }) => {
             );
           }}
         </FieldArray>
+        <button type="submit">Submit</button>
       </Form>
     </Formik>
   );

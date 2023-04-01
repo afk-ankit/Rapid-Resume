@@ -16,15 +16,19 @@ import { ValidTwo } from '@/schemas/ValidTwo';
 const arr = Object.entries(country);
 
 const Second = () => {
+  const initialValues = {
+    country: '',
+    phoneNumber: '',
+    language: [{ name: '', rating: 0 }],
+  };
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   const formik = useFormik({
-    initialValues: {
-      country: '',
-      phoneNumber: '',
-      languages: [{ language: '', rating: 0 }],
-    },
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    initialValues,
+    onSubmit,
     validationSchema: ValidTwo,
   });
 
@@ -67,7 +71,12 @@ const Second = () => {
           }
           helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
         />
-        <LanguagePicker label1={'Language'} label2={'Fluency'} />
+        <LanguagePicker
+          label1={'Language'}
+          label2={'Fluency'}
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+        />
       </Page>
       <button onClick={formik.handleSubmit}>submit</button>
       <BtnGroup prev="/form/first" next={'/form/third'} />
