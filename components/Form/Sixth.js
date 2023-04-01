@@ -4,7 +4,6 @@ import Page from '../utils/Page';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import EducationInput from './Sixth/EducationInput';
-import Test from '../Test';
 
 const Sixth = () => {
   const [arr, setArr] = useState([]);
@@ -23,7 +22,7 @@ const Sixth = () => {
           <EducationInput setArr={setArr} />
         ))}
       </Page>
-      <Test />
+
       <BtnGroup prev={'/form/fifth'} next={'/form/seventh'} />
     </Container>
   );

@@ -1,41 +1,38 @@
-import React, { useState } from 'react';
+import { Field, FieldArray, Form, Formik } from 'formik';
 
-function Test() {
-  const [inputFields, setInputFields] = useState([{ value: '' }]);
-
-  const handleAddFields = () => {
-    const values = [...inputFields];
-    values.push({ value: '' });
-    setInputFields(values);
+const Test = () => {
+  const initialValues = {
+    name: '',
+    phone: [''],
   };
-
-  const handleDeleteFields = (index) => {
-    const values = [...inputFields];
-    values.splice(index, 1);
-    setInputFields(values);
+  const onsubmit = (values) => {
+    console.log(values);
   };
-
-  const handleInputChange = (index, event) => {
-    const values = [...inputFields];
-    values[index].value = event.target.value;
-    setInputFields(values);
-  };
-
   return (
-    <div>
-      {inputFields.map((inputField, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            value={inputField.value}
-            onChange={(event) => handleInputChange(index, event)}
-          />
-          <button onClick={() => handleDeleteFields(index)}>Delete</button>
-        </div>
-      ))}
-      <button onClick={handleAddFields}>Add Input Field</button>
-    </div>
+    <Formik initialValues={initialValues} onSubmit={onsubmit}>
+      <Form>
+        <Field name="name" />
+        <button>Submit</button>
+        <FieldArray name="phone">
+          {({ push, remove, form }) => {
+            const { values } = form;
+            const { phone } = values;
+            return (
+              <div>
+                {phone.map((item, index) => (
+                  <div key={index}>
+                    <Field name={`phone[${index}]`} />
+                    <button onClick={() => remove(index)}>-</button>
+                    <button onClick={() => push('')}>+</button>
+                  </div>
+                ))}
+              </div>
+            );
+          }}
+        </FieldArray>
+      </Form>
+    </Formik>
   );
-}
+};
 
 export default Test;

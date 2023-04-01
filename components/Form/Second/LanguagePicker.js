@@ -12,26 +12,40 @@ import {
   MenuItem,
   Rating,
   IconButton,
-  FormGroup,
   FormControl,
 } from '@mui/material';
 const languageArr = Object.entries(language);
 
 const LanguagePicker = ({ label1, label2 }) => {
-  const [array, setArray] = useState([{ language: '', rating: 0 }]);
+  const [inputFields, setInputFields] = useState([
+    { value: 'Dutch', rating: 0 },
+  ]);
 
-  const buttonHandler = () => {
-    setArray([...array, { language: '', rating: 0 }]);
+  const handleAddFields = () => {
+    const values = [...inputFields];
+    values.push({ value: '' });
+    setInputFields(values);
   };
 
-  const buttonRemover = (count) => {
-    const newArr = [...array];
-    newArr.splice(count, 1);
-    setArray(newArr);
+  const handleDeleteFields = (index) => {
+    const values = [...inputFields];
+    if (inputFields.length >= 2) {
+      values.splice(index, 1);
+    }
+    setInputFields(values);
   };
 
-  const handleInput = (event, index) => {
-    console.log('🔥', event.target.value);
+  const handleInputChange = (index, event) => {
+    const values = [...inputFields];
+    values[index].value = event.target.value;
+    console.log('sexy', event.target.value);
+    setInputFields(values);
+  };
+
+  const handleRatingChange = (index, event) => {
+    const values = [...inputFields];
+    values[index].rating = Number(event.target.value);
+    setInputFields(values);
   };
 
   let skill;
@@ -39,9 +53,16 @@ const LanguagePicker = ({ label1, label2 }) => {
 
   return (
     <div>
-      <Button onClick={buttonHandler}>Add {label1}</Button>
-      {array.map((item, count) => (
-        <div key={count} className={styles.languageContainer}>
+      <Button
+        onClick={handleAddFields}
+        variant="contained"
+        fullWidth
+        style={{ marginBottom: '1rem' }}
+      >
+        Add {label1}
+      </Button>
+      {inputFields.map((inputField, index) => (
+        <div key={index} className={styles.languageContainer}>
           <div className={styles.language}>
             <FormControl fullWidth>
               <InputLabel id="language-select">{label1}</InputLabel>
@@ -49,7 +70,8 @@ const LanguagePicker = ({ label1, label2 }) => {
                 labelId="language-select"
                 id="language-select"
                 label="Select Language"
-                style={{ background: '#E2F2FF' }}
+                value={inputField.value}
+                onChange={(event) => handleInputChange(index, event)}
               >
                 {label1 == 'Language'
                   ? languageArr.map((value, count1) => (
@@ -71,9 +93,8 @@ const LanguagePicker = ({ label1, label2 }) => {
               name="simple-controlled"
               size="large"
               labelId="rating-select"
-              onChange={(e) => {
-                console.log('❤️', e.target.value);
-              }}
+              value={inputField.rating}
+              onChange={(event) => handleRatingChange(index, event)}
             />
           </div>
 
@@ -81,7 +102,7 @@ const LanguagePicker = ({ label1, label2 }) => {
             className={styles.delete}
             size="large"
             color="primary"
-            onClick={() => buttonRemover(count)}
+            onClick={() => handleDeleteFields(index)}
           >
             <DeleteIcon />
           </IconButton>

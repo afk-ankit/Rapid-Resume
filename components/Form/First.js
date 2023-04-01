@@ -3,8 +3,23 @@ import { TextField } from '@mui/material';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import Page from '../utils/Page';
+import { useFormik } from 'formik';
+import { ValidOne } from '@/schemas/ValidOne';
+import Test from '../Test';
 
 const First = () => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+    validationSchema: ValidOne,
+  });
+
   return (
     <Container>
       <Page>
@@ -12,22 +27,33 @@ const First = () => {
           id="filled-basic"
           label="First Name"
           variant="outlined"
-          style={{ width: '100%', background: '#E2F2FF' }}
+          name="firstName"
+          {...formik.getFieldProps('firstName')}
+          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+          helperText={formik.touched.firstName && formik.errors.firstName}
         />
         <TextField
           id="filled-basic"
+          name="lastName"
           label="Last Name"
           variant="outlined"
-          style={{ width: '100%', background: '#E2F2FF' }}
+          {...formik.getFieldProps('lastName')}
+          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+          helperText={formik.touched.lastName && formik.errors.lastName}
         />
         <TextField
           id="filled-basic"
           label="Email"
+          name="email"
           variant="outlined"
-          style={{ width: '100%', background: '#E2F2FF' }}
+          {...formik.getFieldProps('email')}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
       </Page>
+      <button onClick={formik.handleSubmit}>submit</button>
       <BtnGroup prev="/" next="/form/second" />
+      <Test />
     </Container>
   );
 };
