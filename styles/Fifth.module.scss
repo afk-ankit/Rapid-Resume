@@ -5,16 +5,16 @@
 .type>textarea{
     padding: 1rem;
     margin-top: 1rem;
-    background-color: $blue-light;
+    // background-color: $blue-light;
     width: 100%;
     min-height: 300px;
     font-family: 'Roboto';
     resize: none;
 }
 
-.type>textarea:focus{
-    outline: 1px solid $blue-primary;
-}
+// .type>textarea:focus{
+//     outline: 1px solid $blue-primary;
+// }
 
 .type>h3{
     font-weight: 500;
@@ -22,4 +22,11 @@
     color: #1976d2;
     text-transform: uppercase;
     text-align: center;
+}
+
+.error{
+    font-size: .75rem;
+    font-weight: 400;
+    font-family: 'Roboto';
+    color: $error;
 }

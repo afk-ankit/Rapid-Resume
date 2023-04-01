@@ -21,7 +21,12 @@ const Test = () => {
               <div>
                 {phone.map((item, index) => (
                   <div key={index}>
-                    <Field name={`phone[${index}]`} />
+                    <Field name={`phone[${index}]`}>
+                      {({ field }) => {
+                        console.log(field);
+                        return <input />;
+                      }}
+                    </Field>
                     <button onClick={() => remove(index)}>-</button>
                     <button onClick={() => push('')}>+</button>
                   </div>
