@@ -1,9 +1,11 @@
 import { Field, FieldArray, Form, Formik } from 'formik';
+import Test2 from './Test2';
 
 const Test = () => {
   const initialValues = {
     name: '',
     phone: [''],
+    email: [''],
   };
   const onsubmit = (values) => {
     console.log(values);
@@ -21,12 +23,7 @@ const Test = () => {
               <div>
                 {phone.map((item, index) => (
                   <div key={index}>
-                    <Field name={`phone[${index}]`}>
-                      {({ field }) => {
-                        console.log(field);
-                        return <input />;
-                      }}
-                    </Field>
+                    <Field name={`phone[${index}]`} />
                     <button onClick={() => remove(index)}>-</button>
                     <button onClick={() => push('')}>+</button>
                   </div>
@@ -35,6 +32,12 @@ const Test = () => {
             );
           }}
         </FieldArray>
+        <FieldArray
+          name="email"
+          render={(arrayHelpers) => (
+            <Test2 form={arrayHelpers.form} boka="ankit" />
+          )}
+        />
       </Form>
     </Formik>
   );

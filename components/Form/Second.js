@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import LanguagePicker from './Second/LanguagePicker';
-import { useFormik } from 'formik';
+import { Field, FieldArray, Form, Formik, useFormik } from 'formik';
 import { ValidTwo } from '@/schemas/ValidTwo';
 
 const arr = Object.entries(country);
@@ -26,60 +26,63 @@ const Second = () => {
     console.log(values);
   };
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema: ValidTwo,
-  });
-
   return (
     <Container>
-      <Page>
-        <FormControl>
-          <InputLabel id="demo-simple-select-label">
-            Country of origin
-          </InputLabel>
-          <Select
-            required={true}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Country of origin"
-            name="country"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.country}
-            error={formik.touched.country && Boolean(formik.errors.country)}
-            helperText={formik.touched.country && formik.errors.country}
-          >
-            {arr.map((item, count) => (
-              <MenuItem value={item[1].country} key={count}>
-                {item[1].country}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          id="filled-basic"
-          label="Phone Number"
-          variant="outlined"
-          name="phoneNumber"
-          value={formik.values.phoneNumber}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={
-            formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-          }
-          helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-        />
-        <LanguagePicker
-          label1={'Language'}
-          label2={'Fluency'}
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-        />
-      </Page>
-      <button onClick={formik.handleSubmit}>submit</button>
-      <BtnGroup prev="/form/first" next={'/form/third'} />
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Form>
+          <Page>
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">
+                Country of origin
+              </InputLabel>
+              <Field name="country">
+                {({ field }) => {
+                  return (
+                    <Select
+                      required={true}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Country of origin"
+                      {...field}
+                    >
+                      {arr.map((item, count) => (
+                        <MenuItem value={item[1].country} key={count}>
+                          {item[1].country}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  );
+                }}
+              </Field>
+            </FormControl>
+            <Field name="phoneNumber">
+              {({ field }) => (
+                <TextField
+                  id="filled-basic"
+                  label="Phone Number"
+                  variant="outlined"
+                  {...field}
+                />
+              )}
+            </Field>
+            <FieldArray
+              name="language"
+              render={(arrayHelpers) => (
+                <LanguagePicker
+                  label1={'Language'}
+                  label2={'Fluency'}
+                  form={arrayHelpers.form}
+                  push={arrayHelpers.push}
+                  remove={arrayHelpers.remove}
+                  field={'language'}
+                />
+              )}
+            />
+          </Page>
+          <button>submit</button>
+          <BtnGroup prev="/form/first" next={'/form/third'} />
+        </Form>
+      </Formik>
     </Container>
   );
 };
