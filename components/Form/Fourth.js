@@ -5,8 +5,11 @@ import { Button } from '@mui/material';
 import LanguagePicker from './Second/LanguagePicker';
 import BtnGroup from '../utils/BtnGroup';
 import { FieldArray, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { populate } from '@/store/slice/userSlice';
 
 const Fourth = () => {
+  const dispatch = useDispatch();
   const initialValues = {
     softSkill: [
       {
@@ -24,6 +27,7 @@ const Fourth = () => {
 
   const onSubmit = (values) => {
     console.log(values);
+    dispatch(populate(values));
   };
 
   return (

@@ -5,9 +5,12 @@ import Container from '../utils/Container';
 import Page from '../utils/Page';
 import { useFormik } from 'formik';
 import { ValidOne } from '@/schemas/ValidOne';
-import Test from '../Test';
+import { useDispatch } from 'react-redux';
+import { populate } from '@/store/slice/userSlice';
 
 const First = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -16,6 +19,7 @@ const First = () => {
     },
     onSubmit: (values) => {
       console.log(values);
+      dispatch(populate(values));
     },
     validationSchema: ValidOne,
   });
@@ -53,7 +57,6 @@ const First = () => {
       </Page>
       <button onClick={formik.handleSubmit}>submit</button>
       <BtnGroup prev="/" next="/form/second" />
-      <Test />
     </Container>
   );
 };

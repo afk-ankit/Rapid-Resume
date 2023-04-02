@@ -1,5 +1,7 @@
+import Seventh from '@/components/Form/Seventh';
+
 const seventh = () => {
-  return <div>seventh</div>;
+  return <Seventh />;
 };
 
 export default seventh;

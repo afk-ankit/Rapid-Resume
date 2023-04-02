@@ -12,10 +12,14 @@ import {
 import LanguagePicker from './Second/LanguagePicker';
 import { Field, FieldArray, Form, Formik, useFormik } from 'formik';
 import { ValidTwo } from '@/schemas/ValidTwo';
+import { useDispatch } from 'react-redux';
+import { populate } from '@/store/slice/userSlice';
 
 const arr = Object.entries(country);
 
 const Second = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     country: '',
     phoneNumber: '',
@@ -24,6 +28,7 @@ const Second = () => {
 
   const onSubmit = (values) => {
     console.log(values);
+    dispatch(populate(values));
   };
 
   return (

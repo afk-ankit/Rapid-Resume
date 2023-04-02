@@ -5,14 +5,19 @@ import styles from '@/styles/Fifth.module.scss';
 import BtnGroup from '../utils/BtnGroup';
 import { useFormik } from 'formik';
 import { ValidFive } from '@/schemas/ValidFive';
+import { useDispatch } from 'react-redux';
+import { populate } from '@/store/slice/userSlice';
 
 const Fifth = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       about: '',
     },
     onSubmit: (values) => {
       console.log(values);
+      dispatch(populate(values));
     },
     validationSchema: ValidFive,
   });
