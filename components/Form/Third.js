@@ -14,7 +14,12 @@ const Third = () => {
           <input type="file" id="ankit" style={{ marginTop: '1rem' }} />
         </div>
       </Page>
-      <BtnGroup prev={'/form/second'} next={'/form/fourth'} />
+      <BtnGroup
+        prev={'/form/second'}
+        next={'/form/fourth'}
+        isValid={true}
+        onSubmit={() => {}}
+      />
     </Container>
   );
 };

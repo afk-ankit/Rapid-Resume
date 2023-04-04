@@ -7,7 +7,7 @@ import BtnGroup from '../utils/BtnGroup';
 import { FieldArray, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
-
+import { ValidFour } from '@/schemas/ValidFour';
 const Fourth = () => {
   const dispatch = useDispatch();
   const initialValues = {
@@ -26,46 +26,57 @@ const Fourth = () => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
     dispatch(populate(values));
   };
 
   return (
     <Container>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form>
-          <Page>
-            <FieldArray
-              name="softSkill"
-              render={(arrayHelpers) => (
-                <LanguagePicker
-                  label1={'Soft-Skills'}
-                  label2={'Skill'}
-                  form={arrayHelpers.form}
-                  push={arrayHelpers.push}
-                  remove={arrayHelpers.remove}
-                  field={'softSkill'}
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={ValidFour}
+      >
+        {(formik) => {
+          return (
+            <Form>
+              <Page>
+                <FieldArray
+                  name="softSkill"
+                  render={(arrayHelpers) => (
+                    <LanguagePicker
+                      label1={'Soft-Skills'}
+                      label2={'Skill'}
+                      form={arrayHelpers.form}
+                      push={arrayHelpers.push}
+                      remove={arrayHelpers.remove}
+                      field={'softSkill'}
+                    />
+                  )}
                 />
-              )}
-            />
-            <FieldArray
-              name="technicalSkill"
-              render={(arrayHelpers) => (
-                <LanguagePicker
-                  label1={'Technical-Skills'}
-                  label2={'Skill'}
-                  form={arrayHelpers.form}
-                  push={arrayHelpers.push}
-                  remove={arrayHelpers.remove}
-                  field={'technicalSkill'}
+                <FieldArray
+                  name="technicalSkill"
+                  render={(arrayHelpers) => (
+                    <LanguagePicker
+                      label1={'Technical-Skills'}
+                      label2={'Skill'}
+                      form={arrayHelpers.form}
+                      push={arrayHelpers.push}
+                      remove={arrayHelpers.remove}
+                      field={'technicalSkill'}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Page>
-          <button type="submit">Submit</button>
-        </Form>
+              </Page>
+              <BtnGroup
+                prev={'/form/third'}
+                next={'/form/fifth'}
+                onSubmit={formik.handleSubmit}
+                isValid={formik.dirty && formik.isValid}
+              />
+            </Form>
+          );
+        }}
       </Formik>
-      <BtnGroup prev={'/form/third'} next={'/form/fifth'} />
     </Container>
   );
 };

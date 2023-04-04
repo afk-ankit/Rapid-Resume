@@ -6,6 +6,7 @@ import HobbyInput from './Eighth/HobbyInput';
 import BtnGroup from '../utils/BtnGroup';
 import { useDispatch } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { ValidEight } from '@/schemas/ValidEight';
 
 const Eighth = () => {
   const dispatch = useDispatch();
@@ -20,15 +21,25 @@ const Eighth = () => {
 
   return (
     <Container>
-      <Page>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={ValidEight}
+      >
+        {(formik) => (
           <Form>
-            <FieldArray component={HobbyInput} name="hobby" />
-            <button type="subimt">Submit</button>
+            <Page>
+              <FieldArray component={HobbyInput} name="hobby" />
+            </Page>
+            <BtnGroup
+              prev={'/form/seventh'}
+              next={'/form/ninth'}
+              onSubmit={formik.handleSubmit}
+              isValid={formik.dirty && formik.isValid}
+            />
           </Form>
-        </Formik>
-        <BtnGroup prev={'/form/seventh'} next={'/form/ninth'} />
-      </Page>
+        )}
+      </Formik>
     </Container>
   );
 };

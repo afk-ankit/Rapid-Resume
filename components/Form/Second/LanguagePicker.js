@@ -14,6 +14,7 @@ import {
   IconButton,
   FormControl,
   FormHelperText,
+  FormGroup,
 } from '@mui/material';
 import { Field, Form } from 'formik';
 const languageArr = Object.entries(language);
@@ -42,7 +43,6 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
           <div key={index} className={styles.languageContainer}>
             <Field name={`${field}[${index}].name`}>
               {({ form, field, meta }) => {
-                console.log(meta);
                 return (
                   <>
                     <div className={styles.language}>
@@ -86,16 +86,28 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             </Field>
             <Field name={`${field}[${index}].rating`}>
               {({ field, form, meta }) => {
+                console.log(meta);
+
                 return (
                   <>
                     <div>
-                      <InputLabel id="rating-select">{label2}</InputLabel>
-                      <Rating
-                        name="simple-controlled"
-                        size="large"
-                        labelId="rating-select"
-                        {...field}
-                      />
+                      <FormGroup error={meta.error && meta.touched}>
+                        <InputLabel
+                          id="rating-select"
+                          error={meta.error && meta.touched}
+                        >
+                          {label2}
+                        </InputLabel>
+                        <Rating
+                          name="simple-controlled"
+                          size="large"
+                          labelId="rating-select"
+                          {...field}
+                        />
+                        {meta.error && meta.touched && (
+                          <FormHelperText>{meta.error}</FormHelperText>
+                        )}
+                      </FormGroup>
                     </div>
 
                     {arr.length > 1 && (

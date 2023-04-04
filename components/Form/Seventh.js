@@ -7,7 +7,7 @@ import { populate } from '@/store/slice/userSlice';
 import { FieldArray, Form, Formik } from 'formik';
 import EducationInput from './Sixth/EducationInput';
 import { format } from 'date-fns';
-
+import { ValidSeven } from '@/schemas/ValidSeven';
 const Seventh = () => {
   const dispatch = useDispatch();
   const initialValues = {
@@ -32,27 +32,35 @@ const Seventh = () => {
   };
   return (
     <Container>
-      <Page>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={ValidSeven}
+      >
+        {(formik) => (
           <Form>
-            <FieldArray
-              name="job"
-              render={(arrayHelpers) => (
-                <EducationInput
-                  form={arrayHelpers.form}
-                  push={arrayHelpers.push}
-                  remove={arrayHelpers.remove}
-                  title="job"
-                />
-              )}
+            <Page>
+              <FieldArray
+                name="job"
+                render={(arrayHelpers) => (
+                  <EducationInput
+                    form={arrayHelpers.form}
+                    push={arrayHelpers.push}
+                    remove={arrayHelpers.remove}
+                    title="job"
+                  />
+                )}
+              />
+            </Page>
+            <BtnGroup
+              prev={'/form/sixth'}
+              next={'/form/eighth'}
+              onSubmit={formik.handleSubmit}
+              isValid={formik.dirty && formik.isValid}
             />
-
-            <button type="submit">Submit</button>
           </Form>
-        </Formik>
-      </Page>
-
-      <BtnGroup prev={'/form/sixth'} next={'/form/eighth'} />
+        )}
+      </Formik>
     </Container>
   );
 };

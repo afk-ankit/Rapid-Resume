@@ -8,6 +8,7 @@ import { FieldArray, Form, Formik } from 'formik';
 import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { ValidSix } from '@/schemas/ValidSix';
 
 const Sixth = () => {
   const dispatch = useDispatch();
@@ -34,27 +35,35 @@ const Sixth = () => {
 
   return (
     <Container>
-      <Page>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={ValidSix}
+      >
+        {(formik) => (
           <Form>
-            <FieldArray
-              name="education"
-              render={(arrayHelpers) => (
-                <EducationInput
-                  form={arrayHelpers.form}
-                  push={arrayHelpers.push}
-                  remove={arrayHelpers.remove}
-                  title="education"
-                />
-              )}
+            <Page>
+              <FieldArray
+                name="education"
+                render={(arrayHelpers) => (
+                  <EducationInput
+                    form={arrayHelpers.form}
+                    push={arrayHelpers.push}
+                    remove={arrayHelpers.remove}
+                    title="education"
+                  />
+                )}
+              />
+            </Page>
+            <BtnGroup
+              prev={'/form/fifth'}
+              next={'/form/seventh'}
+              onSubmit={formik.handleSubmit}
+              isValid={formik.dirty && formik.isValid}
             />
-
-            <button type="submit">Submit</button>
           </Form>
-        </Formik>
-      </Page>
-
-      <BtnGroup prev={'/form/fifth'} next={'/form/seventh'} />
+        )}
+      </Formik>
     </Container>
   );
 };

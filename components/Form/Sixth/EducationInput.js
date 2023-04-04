@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '@/styles/Sixth.module.scss';
@@ -41,24 +41,28 @@ const EducationInput = ({ form, push, remove, title }) => {
           key={index}
         >
           <Field name={`${title}[${index}].name`}>
-            {({ field }) => (
+            {({ field, meta }) => (
               <TextField
                 id="outlined-basic"
                 label={label1}
                 variant="outlined"
                 fullWidth
                 {...field}
+                error={meta.touched && Boolean(meta.error)}
+                helperText={meta.touched && meta.error}
               />
             )}
           </Field>
           <Field name={`${title}[${index}].field`}>
-            {({ field }) => (
+            {({ field, meta }) => (
               <TextField
                 id="outlined-basic"
                 label={label2}
                 variant="outlined"
                 fullWidth
                 {...field}
+                error={meta.touched && Boolean(meta.error)}
+                helperText={meta.touched && meta.error}
               />
             )}
           </Field>
@@ -66,39 +70,56 @@ const EducationInput = ({ form, push, remove, title }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className={styles.flex}>
               <Field name={`${title}[${index}].startDate`}>
-                {({ form, field }) => {
+                {({ form, field, meta }) => {
                   const { setFieldValue } = form;
+                  console.log(meta);
+                  console.log(field);
                   return (
-                    <DatePicker
-                      label="Choose Starting Date"
-                      views={['year', 'month']}
-                      className={styles.fullWidth}
-                      {...field}
-                      onChange={(val) =>
-                        setFieldValue(`${title}[${index}].startDate`, val)
-                      }
-                    />
+                    <FormControl
+                      fullWidth
+                      error={meta.touched && Boolean(meta.error)}
+                    >
+                      <DatePicker
+                        label="Choose Starting Date"
+                        views={['year', 'month']}
+                        className={styles.fullWidth}
+                        {...field}
+                        onChange={(val) =>
+                          setFieldValue(`${title}[${index}].startDate`, val)
+                        }
+                        inputProps={{
+                          error: meta.touched && Boolean(meta.error),
+                        }}
+                      />
+                      {meta.error && meta.touched && (
+                        <FormHelperText>{meta.error}</FormHelperText>
+                      )}
+                    </FormControl>
                   );
                 }}
               </Field>
               <Field name={`${title}[${index}].endDate`}>
-                {({ form, field }) => {
+                {({ form, field, meta }) => {
                   const { setFieldValue } = form;
                   return (
-                    <DatePicker
-                      label="Choose Ending Date"
-                      views={['year', 'month']}
-                      className={styles.fullWidth}
-                      {...field}
-                      onChange={(val) =>
-                        setFieldValue(`${title}[${index}].endDate`, val)
-                      }
-                    />
+                    <FormControl fullWidth>
+                      <DatePicker
+                        label="Choose Ending Date"
+                        views={['year', 'month']}
+                        className={styles.fullWidth}
+                        {...field}
+                        onChange={(val) => {
+                          setFieldValue(`${title}[${index}].endDate`, val);
+                        }}
+                      />
+                    </FormControl>
                   );
                 }}
               </Field>
             </div>
-            <h3 className={styles.label}>Three things you are proud of</h3>
+            <h3 className={styles.label}>
+              Three things you are proud of (Optional)
+            </h3>
             <Field name={`${title}[${index}].proud[0]`}>
               {({ field }) => (
                 <TextField
@@ -133,16 +154,33 @@ const EducationInput = ({ form, push, remove, title }) => {
               )}
             </Field>
           </LocalizationProvider>
-
-          <Button variant="contained" fullWidth style={{ background: 'red' }}>
-            Delete
-          </Button>
-
-          <Button variant="contained" fullWidth>
-            Add {title}
-          </Button>
+          {arr.length > 1 && (
+            <Button
+              variant="contained"
+              style={{ background: 'red', alignSelf: 'center' }}
+              onClick={() => remove(index)}
+            >
+              Delete
+            </Button>
+          )}
+          <hr />
         </div>
       ))}
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={() =>
+          push({
+            name: '',
+            field: '',
+            startDate: null,
+            endDate: null,
+            proud: ['', '', ''],
+          })
+        }
+      >
+        Add {title}
+      </Button>
     </>
   );
 };
