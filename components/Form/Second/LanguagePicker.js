@@ -13,8 +13,9 @@ import {
   Rating,
   IconButton,
   FormControl,
+  FormHelperText,
 } from '@mui/material';
-import { Field } from 'formik';
+import { Field, Form } from 'formik';
 const languageArr = Object.entries(language);
 
 const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
@@ -41,16 +42,26 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
           <div key={index} className={styles.languageContainer}>
             <Field name={`${field}[${index}].name`}>
               {({ form, field, meta }) => {
+                console.log(meta);
                 return (
                   <>
                     <div className={styles.language}>
-                      <FormControl fullWidth>
-                        <InputLabel id="language-select">{label1}</InputLabel>
+                      <FormControl
+                        fullWidth
+                        error={meta.touched && Boolean(meta.error)}
+                      >
+                        <InputLabel
+                          id="language-select"
+                          error={meta.touched && Boolean(meta.error)}
+                        >
+                          {label1}
+                        </InputLabel>
                         <Select
                           labelId="language-select"
                           id="language-select"
                           label="Select Language"
                           {...field}
+                          error={meta.touched && Boolean(meta.error)}
                         >
                           {label1 == 'Language'
                             ? languageArr.map((value, count1) => (
@@ -64,6 +75,9 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                                 </MenuItem>
                               ))}
                         </Select>
+                        {meta.error && meta.touched && (
+                          <FormHelperText>{meta.error}</FormHelperText>
+                        )}
                       </FormControl>
                     </div>
                   </>
@@ -84,16 +98,18 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                       />
                     </div>
 
-                    <IconButton
-                      className={styles.delete}
-                      size="large"
-                      color="primary"
-                      onClick={() => {
-                        remove(index);
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
+                    {arr.length > 1 && (
+                      <IconButton
+                        className={styles.delete}
+                        size="large"
+                        color="primary"
+                        onClick={() => {
+                          remove(index);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    )}
                   </>
                 );
               }}

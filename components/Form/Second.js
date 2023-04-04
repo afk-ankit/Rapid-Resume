@@ -24,7 +24,7 @@ const Second = () => {
   const initialValues = {
     country: '',
     phoneNumber: '',
-    language: [{ name: '', rating: 0 }],
+    language: [{ name: 'English', rating: 0 }],
   };
 
   const onSubmit = (values) => {
@@ -44,7 +44,6 @@ const Second = () => {
               <Page>
                 <Field name="country">
                   {({ field, meta }) => {
-                    console.log('🔥🔥', meta);
                     return (
                       <>
                         <FormControl
@@ -53,7 +52,6 @@ const Second = () => {
                           <InputLabel
                             id="demo-simple-select-label"
                             error={meta.touched && Boolean(meta.error)}
-                            helperText={meta.touched && meta.error}
                           >
                             Country of origin
                           </InputLabel>
@@ -64,7 +62,6 @@ const Second = () => {
                             label="Country of origin"
                             {...field}
                             error={meta.touched && Boolean(meta.error)}
-                            helperText={meta.touched && meta.error}
                           >
                             {arr.map((item, count) => (
                               <MenuItem value={item[1].country} key={count}>
@@ -72,10 +69,8 @@ const Second = () => {
                               </MenuItem>
                             ))}
                           </Select>
-                          {meta.error && (
-                            <FormHelperText variant="error">
-                              {meta.error}
-                            </FormHelperText>
+                          {meta.error && meta.touched && (
+                            <FormHelperText>{meta.error}</FormHelperText>
                           )}
                         </FormControl>
                       </>
@@ -84,7 +79,6 @@ const Second = () => {
                 </Field>
                 <Field name="phoneNumber">
                   {({ field, meta }) => {
-                    console.log(meta);
                     return (
                       <TextField
                         id="filled-basic"
