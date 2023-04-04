@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import language from '@/public/languageNames.json';
 import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';

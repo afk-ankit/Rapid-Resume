@@ -5,12 +5,13 @@ import Container from '../utils/Container';
 import Page from '../utils/Page';
 import { useFormik } from 'formik';
 import { ValidOne } from '@/schemas/ValidOne';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 
 const First = () => {
   const dispatch = useDispatch();
-
+  const userData = useSelector((state) => state.uesrData);
+  console.log(userData);
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -18,7 +19,6 @@ const First = () => {
       email: '',
     },
     onSubmit: (values) => {
-      console.log(values);
       dispatch(populate(values));
     },
     validationSchema: ValidOne,
