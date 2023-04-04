@@ -7,21 +7,28 @@ import { useFormik } from 'formik';
 import { ValidOne } from '@/schemas/ValidOne';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { handleIsValid } from '../utils/handleIsValid';
 
 const First = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.uesrData);
-  console.log(userData);
+  const userData = useSelector((state) => state);
+
+  const savedData =
+    Boolean(userData.firstName) ||
+    Boolean(userData.lastName) ||
+    Boolean(userData.email);
+
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: userData.firstName || '',
+      lastName: userData.lastName || '',
+      email: userData.email || '',
     },
     onSubmit: (values) => {
       dispatch(populate(values));
     },
     validationSchema: ValidOne,
+    enableReinitialize: true,
   });
 
   return (
@@ -60,7 +67,7 @@ const First = () => {
         prev="/"
         next="/form/second"
         onSubmit={formik.handleSubmit}
-        isValid={formik.dirty && formik.isValid}
+        isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
       />
     </Container>
   );

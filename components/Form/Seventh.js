@@ -2,16 +2,19 @@ import React from 'react';
 import Container from '../utils/Container';
 import Page from '../utils/Page';
 import BtnGroup from '../utils/BtnGroup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { FieldArray, Form, Formik } from 'formik';
 import EducationInput from './Sixth/EducationInput';
 import { format } from 'date-fns';
 import { ValidSeven } from '@/schemas/ValidSeven';
+import { handleIsValid } from '../utils/handleIsValid';
 const Seventh = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
+  const savedData = Boolean(userData.job);
   const initialValues = {
-    job: [
+    job: userData.job || [
       {
         name: '',
         field: '',
@@ -56,7 +59,7 @@ const Seventh = () => {
               prev={'/form/sixth'}
               next={'/form/eighth'}
               onSubmit={formik.handleSubmit}
-              isValid={formik.dirty && formik.isValid}
+              isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
             />
           </Form>
         )}

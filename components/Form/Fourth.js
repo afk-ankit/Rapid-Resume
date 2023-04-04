@@ -5,19 +5,24 @@ import { Button } from '@mui/material';
 import LanguagePicker from './Second/LanguagePicker';
 import BtnGroup from '../utils/BtnGroup';
 import { FieldArray, Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidFour } from '@/schemas/ValidFour';
+import { handleIsValid } from '../utils/handleIsValid';
 const Fourth = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
+  const savedData =
+    Boolean(userData.softSkill) || Boolean(userData.technicalSkill);
+
   const initialValues = {
-    softSkill: [
+    softSkill: userData.softSkill || [
       {
         name: '',
         rating: 0,
       },
     ],
-    technicalSkill: [
+    technicalSkill: userData.technicalSkill || [
       {
         name: '',
         rating: 0,
@@ -35,6 +40,7 @@ const Fourth = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={ValidFour}
+        enableReinitialize={true}
       >
         {(formik) => {
           return (
@@ -71,7 +77,7 @@ const Fourth = () => {
                 prev={'/form/third'}
                 next={'/form/fifth'}
                 onSubmit={formik.handleSubmit}
-                isValid={formik.dirty && formik.isValid}
+                isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
               />
             </Form>
           );

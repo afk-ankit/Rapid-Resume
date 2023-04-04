@@ -6,14 +6,18 @@ import Container from '../utils/Container';
 import EducationInput from './Sixth/EducationInput';
 import { FieldArray, Form, Formik } from 'formik';
 import { format } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidSix } from '@/schemas/ValidSix';
+import { handleIsValid } from '../utils/handleIsValid';
 
 const Sixth = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
+  const savedData = Boolean(userData.education);
+
   const initialValues = {
-    education: [
+    education: userData.education || [
       {
         name: '',
         field: '',
@@ -39,6 +43,7 @@ const Sixth = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={ValidSix}
+        enableReinitialize
       >
         {(formik) => (
           <Form>
@@ -59,7 +64,7 @@ const Sixth = () => {
               prev={'/form/fifth'}
               next={'/form/seventh'}
               onSubmit={formik.handleSubmit}
-              isValid={formik.dirty && formik.isValid}
+              isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
             />
           </Form>
         )}

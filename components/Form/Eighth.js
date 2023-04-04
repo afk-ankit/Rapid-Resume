@@ -4,18 +4,19 @@ import Page from '../utils/Page';
 import { FieldArray, Form, Formik } from 'formik';
 import HobbyInput from './Eighth/HobbyInput';
 import BtnGroup from '../utils/BtnGroup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidEight } from '@/schemas/ValidEight';
+import { handleIsValid } from '../utils/handleIsValid';
 
 const Eighth = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
   const initialValues = {
-    hobby: [''],
+    hobby: userData.hobby || [''],
   };
-
+  const savedData = Boolean(userData.hobby);
   const onSubmit = (values) => {
-    console.log(values);
     dispatch(populate(values));
   };
 
@@ -35,7 +36,7 @@ const Eighth = () => {
               prev={'/form/seventh'}
               next={'/form/ninth'}
               onSubmit={formik.handleSubmit}
-              isValid={formik.dirty && formik.isValid}
+              isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
             />
           </Form>
         )}

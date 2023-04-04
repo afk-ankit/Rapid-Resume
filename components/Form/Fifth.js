@@ -5,15 +5,19 @@ import styles from '@/styles/Fifth.module.scss';
 import BtnGroup from '../utils/BtnGroup';
 import { useFormik } from 'formik';
 import { ValidFive } from '@/schemas/ValidFive';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { handleIsValid } from '../utils/handleIsValid';
 
 const Fifth = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
+
+  const savedData = Boolean(userData.about);
 
   const formik = useFormik({
     initialValues: {
-      about: '',
+      about: userData.about || '',
     },
     onSubmit: (values) => {
       console.log(values);
@@ -25,7 +29,7 @@ const Fifth = () => {
   const handleStyle = (value1, value2) => {
     if (value1 && value2) {
       return {
-        outline: '1px solid #d32f2f',
+        outline: '3px solid #d32f2f',
         border: '0',
       };
     } else {
@@ -50,8 +54,12 @@ const Fifth = () => {
           <h3 className={styles.error}>*{formik.errors.about}</h3>
         ) : null}
       </Page>
-      <button onClick={formik.handleSubmit}>Submit</button>
-      <BtnGroup prev={'/form/fourth'} next={'/form/sixth'} />
+      <BtnGroup
+        prev={'/form/fourth'}
+        next={'/form/sixth'}
+        onSubmit={formik.handleSubmit}
+        isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
+      />
     </Container>
   );
 };

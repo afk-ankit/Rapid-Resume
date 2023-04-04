@@ -13,18 +13,25 @@ import {
 import LanguagePicker from './Second/LanguagePicker';
 import { Field, FieldArray, Form, Formik, useFormik } from 'formik';
 import { ValidTwo } from '@/schemas/ValidTwo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { handleIsValid } from '../utils/handleIsValid';
 
 const arr = Object.entries(country);
 
 const Second = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state);
+
+  const savedData =
+    Boolean(userData.country) ||
+    Boolean(userData.phoneNumber) ||
+    Boolean(userData.language);
 
   const initialValues = {
-    country: '',
-    phoneNumber: '',
-    language: [{ name: 'English', rating: 0 }],
+    country: userData.country || '',
+    phoneNumber: userData.phoneNumber || '',
+    language: userData.language || [{ name: 'English', rating: 0 }],
   };
 
   const onSubmit = (values) => {
@@ -37,6 +44,7 @@ const Second = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={ValidTwo}
+        enableReinitialize={true}
       >
         {(formik) => {
           return (
@@ -108,7 +116,7 @@ const Second = () => {
               <BtnGroup
                 prev="/form/first"
                 next={'/form/third'}
-                isValid={formik.dirty && formik.isValid}
+                isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
                 onSubmit={formik.handleSubmit}
               />
             </Form>

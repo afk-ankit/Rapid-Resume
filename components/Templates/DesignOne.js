@@ -1,151 +1,163 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from '@/styles/DesignOne.module.scss';
 import { useSelector } from 'react-redux';
+import { Button } from '@mui/material';
+import ReactToPrint from 'react-to-print';
 
 const DesignOne = () => {
-  // const { firstName, lastName, email, about, job, phoneNumber, country } =
-  //   useSelector((state) => state.user);
+  const {
+    firstName,
+    lastName,
+    email,
+    about,
+    job,
+    phoneNumber,
+    country,
+    hobby,
+    language,
+    softSkill,
+    technicalSkill,
+    education,
+    url,
+  } = useSelector((state) => state);
 
-  const initialState = {
-    firstName: 'Ankit',
-    lastName: 'Sharma',
-    email: 'ankitsharmagh093@gmail.com',
-    country: 'India',
-    phoneNumber: '6901775738',
-    language: [
-      { name: 'Hindi', rating: 5 },
-      { name: 'English', rating: 3 },
-    ],
-    softSkill: [
-      {
-        name: 'LeaderShip',
-        rating: 4,
-      },
-      {
-        name: 'Loyalty',
-        rating: 2,
-      },
-    ],
-    technicalSkill: [
-      {
-        name: 'Microsoft Excel',
-        rating: 5,
-      },
-      {
-        name: 'Microsoft Paint',
-        rating: 2,
-      },
-    ],
-    about:
-      'This is me ankit sharma and I am glab to be the part of this industry this and that sdfsdf sdf jalsdf asd falsdfj lasdf jlasdf lsdf lasdf lsdlfj asdlfkskkkkkkkkkkkkkkkk',
-    education: [
-      {
-        name: 'Tezpur University',
-        field: 'B. Tech',
-        startDate: '03/2002',
-        endDate: '05/500',
-        proud: [
-          'I fucked one girl in niribilli',
-          'I punched a professor',
-          'Fuck off',
-        ],
-      },
-      {
-        name: 'Vivekananda Kendra Vidyalaya',
-        field: '12th',
-        startDate: '03/2002',
-        endDate: '05/500',
-        proud: ['I was good', 'I punched a professor', 'Fuck off'],
-      },
-    ],
-    job: [
-      {
-        name: 'Full Stack Developer',
-        field: 'Stark Industies',
-        startDate: '02/3003',
-        endDate: '04/4003',
-        proud: [
-          'I have always wanted to become successfull',
-          'I only did hard work nothing else',
-          'I have made Ai robots in the jungle',
-        ],
-      },
-      {
-        name: 'Web Architecht',
-        field: 'Red postive private limited',
-        startDate: '02/3003',
-        endDate: '23/235',
-        proud: [
-          'I have always wanted to become successfull',
-          'I only did hard work nothing else',
-          'I have made Ai robots in the jungle',
-        ],
-      },
-    ],
-    hobby: [''],
-  };
-
-  const { firstName, lastName, job, about, email, phoneNumber, country } =
-    initialState;
+  const componentRef = useRef();
 
   return (
-    <div className={styles.page}>
-      <div className={styles.headingContainer}>
-        <div className={styles.imageContainer}>
-          <img src="/dp.png" alt="none" />
+    <>
+      <div className={styles.page} ref={componentRef}>
+        <div className={styles.headingContainer}>
+          <div className={styles.imageContainer}>
+            <img src={url} />
+          </div>
+          <div className={styles.headingBox}>
+            <h1 className={styles.headingName}>
+              {firstName} {lastName}
+            </h1>
+            <h2 className={styles.headingWork}>{job[0].name}</h2>
+            <p className={styles.headingDescription}>{about}</p>
+          </div>
         </div>
-        <div className={styles.headingBox}>
-          <h1 className={styles.headingName}>
-            {firstName} {lastName}
-          </h1>
-          <h2 className={styles.headingWork}>{job[0].name}</h2>
-          <p className={styles.headingDescription}>{about}</p>
+        <div className={styles.blueBar}>
+          <div className={styles.links}>
+            <i className="bi bi-envelope-fill" style={{ color: 'white' }}></i>
+            <a href="/#">{email}</a>
+          </div>
+          <div className={styles.links}>
+            <i className="bi bi-phone-fill" style={{ color: 'white' }}></i>
+            <a href="/#">{phoneNumber}</a>
+          </div>
+          <div className={styles.links}>
+            <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
+            <a href="/#">{country}</a>
+          </div>
+          <div className={styles.links}>
+            <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
+            <a href="/#">ankitsharmagh093@gmail.com</a>
+          </div>
         </div>
-      </div>
-      <div className={styles.blueBar}>
-        <div className={styles.links}>
-          <i className="bi bi-envelope-fill" style={{ color: 'white' }}></i>
-          <a href="/#">{email}</a>
-        </div>
-        <div className={styles.links}>
-          <i className="bi bi-phone-fill" style={{ color: 'white' }}></i>
-          <a href="/#">{phoneNumber}</a>
-        </div>
-        <div className={styles.links}>
-          <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
-          <a href="/#">{country}</a>
-        </div>
-        <div className={styles.links}>
-          <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
-          <a href="/#">ankitsharmagh093@gmail.com</a>
-        </div>
-      </div>
-      <main className={styles.main}>
-        <div>
-          <h1 className={styles.heading}>Work Experience</h1>
-          {job.map((item) => {
-            return (
-              <div style={{ marginBottom: '1rem' }}>
-                <h2 className={styles.subHeadingBold}>{item.name}</h2>
-                <h2 className={styles.subHeadingLight}>{item.field}</h2>
-                <div className={styles.dateLocation}>
-                  <h3 className={styles.date}>
-                    {item.startDate} - {item.endDate}
-                  </h3>
-                  <h3 className={styles.date}>Matla</h3>
+        <main className={styles.main}>
+          <div>
+            <h1 className={styles.heading}>Work Experience</h1>
+            {job.map((item) => {
+              return (
+                <div style={{ marginBottom: '1rem' }}>
+                  <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                  <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                  <div className={styles.dateLocation}>
+                    <h3 className={styles.date}>
+                      {item.startDate} - {item.endDate}
+                    </h3>
+                    <h3 className={styles.date}>Matla</h3>
+                  </div>
+                  <h3 className={styles.date}>Achievements/Tasks</h3>
+                  <ul className={`${styles.list} ${styles.normalDescription}`}>
+                    {item.proud.map((item) => {
+                      return <li>{item}</li>;
+                    })}
+                  </ul>
                 </div>
-                <h3 className={styles.date}>Achievements/Tasks</h3>
-                <ul className={`${styles.list} ${styles.normalDescription}`}>
-                  {item.proud.map((item) => {
-                    return <li>{item}</li>;
-                  })}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
-      </main>
-    </div>
+              );
+            })}
+          </div>
+          <div>
+            <h1 className={styles.heading}>Skills</h1>
+            <div
+              className={`${styles.skillsContainer} ${styles.normalDescription}`}
+            >
+              {softSkill.map((item) => (
+                <span className={`${styles.skills}`}>{item.name}</span>
+              ))}
+              {technicalSkill.map((item) => (
+                <span className={`${styles.skills}`}>{item.name}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h1 className={styles.heading}>Education</h1>
+            {education.map((item) => {
+              return (
+                <div style={{ marginBottom: '1rem' }}>
+                  <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                  <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                  <div className={styles.dateLocation}>
+                    <h3 className={styles.date}>
+                      {item.startDate} - {item.endDate}
+                    </h3>
+                    <h3 className={styles.date}>Matla</h3>
+                  </div>
+                  <h3 className={styles.date}>Achievements/Tasks</h3>
+                  <ul className={`${styles.list} ${styles.normalDescription}`}>
+                    {item.proud.map((item) => {
+                      return <li>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <h1 className={styles.heading}>Language</h1>
+            <div className={styles.languageContainer}>
+              {language.map((item) => {
+                const arr1 = new Array(Number(item.rating)).fill(0);
+                const arr2 = new Array(5 - Number(item.rating)).fill(0);
+                console.log(arr1);
+                return (
+                  <div className={styles.language}>
+                    <h3 className={styles.normalDescription}>{item.name}</h3>
+                    <div className={styles.rating}>
+                      {arr1.map((item) => (
+                        <i class="bi bi-circle-fill"></i>
+                      ))}
+                      {arr2.map((item) => (
+                        <i class="bi bi-circle"></i>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <h1 className={styles.heading}>Interests</h1>
+            <div
+              className={`${styles.skillsContainer} ${styles.normalDescription}`}
+            >
+              {hobby.map((item) => (
+                <span className={`${styles.hobby}`}>{item}</span>
+              ))}
+            </div>
+          </div>
+        </main>
+        <img src="/company-logo.png" className={styles.waterMark} />
+      </div>
+      <ReactToPrint
+        trigger={() => <Button variant="contained">Print</Button>}
+        content={() => componentRef.current}
+      />
+    </>
   );
 };
 
