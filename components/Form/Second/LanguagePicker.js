@@ -24,8 +24,6 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
   const { values } = form;
   let arr;
 
-  console.log(values);
-
   if (field == 'language') {
     arr = values.language;
   }
@@ -43,7 +41,6 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
           <div key={index} className={styles.languageContainer}>
             <Field name={`${field}[${index}].name`}>
               {({ form, field, meta }) => {
-                // console.log('❤️ name', field);
                 return (
                   <>
                     <div className={styles.language}>
@@ -75,7 +72,6 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             </Field>
             <Field name={`${field}[${index}].rating`}>
               {({ field, form, meta }) => {
-                // console.log('🔥rating', field);
                 return (
                   <>
                     <div>

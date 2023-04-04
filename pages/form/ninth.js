@@ -1,5 +1,7 @@
+import Ninth from '@/components/Form/Ninth';
+
 const ninth = () => {
-  return <div>ninth</div>;
+  return <Ninth />;
 };
 
 export default ninth;

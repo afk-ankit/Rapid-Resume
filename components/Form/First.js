@@ -55,8 +55,13 @@ const First = () => {
           helperText={formik.touched.email && formik.errors.email}
         />
       </Page>
-      <button onClick={formik.handleSubmit}>submit</button>
-      <BtnGroup prev="/" next="/form/second" />
+
+      <BtnGroup
+        prev="/"
+        next="/form/second"
+        onSubmit={formik.handleSubmit}
+        isValid={formik.dirty && formik.isValid}
+      />
     </Container>
   );
 };
