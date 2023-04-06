@@ -9,6 +9,8 @@ import EducationInput from './Sixth/EducationInput';
 import { format } from 'date-fns';
 import { ValidSeven } from '@/schemas/ValidSeven';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
+import moment from 'moment';
 const Seventh = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
@@ -27,14 +29,16 @@ const Seventh = () => {
 
   const onSubmit = (values) => {
     values.job.map((item) => {
-      item.startDate = format(item.startDate.$d, 'MM/yyyy');
-      item.endDate = format(item.endDate.$d, 'MM/yyyy');
+      item.pStartDate = moment(item.startDate.$d).format('MM/yyyy');
+      item.pEndDate = moment(item.endDate.$d).format('MM/yyyy');
     });
     console.log(values);
     dispatch(populate(values));
   };
   return (
     <Container>
+      <StepCount count={6} />
+
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

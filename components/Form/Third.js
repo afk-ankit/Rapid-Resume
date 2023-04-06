@@ -1,18 +1,24 @@
-import { InputLabel } from '@mui/material';
+import { InputLabel, Stepper } from '@mui/material';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import Page from '../utils/Page';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import StepCount from '../utils/StepCount';
 
 const Third = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
-  selectedFile &&
-    dispatch(populate({ url: URL.createObjectURL(selectedFile) }));
+  useEffect(() => {
+    selectedFile
+      ? dispatch(populate({ url: URL.createObjectURL(selectedFile) }))
+      : dispatch(populate({ urL: '' }));
+  }, [selectedFile]);
+
   return (
     <Container>
+      <StepCount count={2} />
       <Page>
         <div className="">
           <InputLabel id="ankit">

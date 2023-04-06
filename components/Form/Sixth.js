@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from '../utils/Page';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
@@ -10,14 +10,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidSix } from '@/schemas/ValidSix';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
+import moment from 'moment';
 
 const Sixth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
   const savedData = Boolean(userData.education);
 
-  const initialValues = {
-    education: userData.education || [
+  {
+    userData.education &&
+      userData.education.map((item) => {
+        item.startDate = null;
+        item.endDate = null;
+      });
+  }
+
+  const initialValues = userData || {
+    education: [
       {
         name: '',
         field: '',
@@ -30,8 +40,8 @@ const Sixth = () => {
 
   const onSubmit = (values) => {
     values.education.map((item) => {
-      item.startDate = format(item.startDate.$d, 'MM/yyyy');
-      item.endDate = format(item.endDate.$d, 'MM/yyyy');
+      item.pStartDate = moment(item.startDate?.$d).format('MM/yyyy');
+      item.pEndDate = moment(item.endDate?.$d).format('MM/yyyy');
     });
     console.log(values);
     dispatch(populate(values));
@@ -39,11 +49,12 @@ const Sixth = () => {
 
   return (
     <Container>
+      <StepCount count={5} />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={ValidSix}
-        enableReinitialize
+        enableReinitialize={true}
       >
         {(formik) => (
           <Form>

@@ -16,6 +16,7 @@ import { ValidTwo } from '@/schemas/ValidTwo';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
 
 const arr = Object.entries(country);
 
@@ -40,6 +41,7 @@ const Second = () => {
 
   return (
     <Container>
+      <StepCount count={1} />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

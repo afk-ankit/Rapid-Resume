@@ -3,6 +3,7 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '@/styles/Sixth.module.scss';
 import { Field } from 'formik';
+import moment from 'moment';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
@@ -72,23 +73,17 @@ const EducationInput = ({ form, push, remove, title }) => {
               <Field name={`${title}[${index}].startDate`}>
                 {({ form, field, meta }) => {
                   const { setFieldValue } = form;
-                  console.log(meta);
                   console.log(field);
                   return (
-                    <FormControl
-                      fullWidth
-                      error={meta.touched && Boolean(meta.error)}
-                    >
+                    <FormControl fullWidth>
                       <DatePicker
                         label="Choose Starting Date"
                         views={['year', 'month']}
                         className={styles.fullWidth}
                         {...field}
-                        onChange={(val) =>
-                          setFieldValue(`${title}[${index}].startDate`, val)
-                        }
-                        inputProps={{
-                          error: meta.touched && Boolean(meta.error),
+                        onChange={(val) => {
+                          console.log(val);
+                          setFieldValue(`${title}[${index}].startDate`, val);
                         }}
                       />
                       {meta.error && meta.touched && (

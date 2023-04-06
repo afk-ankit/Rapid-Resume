@@ -27,9 +27,12 @@ const DesignOne = () => {
     <>
       <div className={styles.page} ref={componentRef}>
         <div className={styles.headingContainer}>
-          <div className={styles.imageContainer}>
-            <img src={url} />
-          </div>
+          {url && (
+            <div className={styles.imageContainer}>
+              <img src={url} />
+            </div>
+          )}
+
           <div className={styles.headingBox}>
             <h1 className={styles.headingName}>
               {firstName} {lastName}
@@ -66,7 +69,7 @@ const DesignOne = () => {
                   <h2 className={styles.subHeadingLight}>{item.field}</h2>
                   <div className={styles.dateLocation}>
                     <h3 className={styles.date}>
-                      {item.startDate} - {item.endDate}
+                      {item.pStartDate} - {item.pEndDate}
                     </h3>
                     <h3 className={styles.date}>Matla</h3>
                   </div>
@@ -102,7 +105,7 @@ const DesignOne = () => {
                   <h2 className={styles.subHeadingLight}>{item.field}</h2>
                   <div className={styles.dateLocation}>
                     <h3 className={styles.date}>
-                      {item.startDate} - {item.endDate}
+                      {item.pStartDate} - {item.pEndDate}
                     </h3>
                     <h3 className={styles.date}>Matla</h3>
                   </div>

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidEight } from '@/schemas/ValidEight';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
 
 const Eighth = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Eighth = () => {
 
   return (
     <Container>
+      <StepCount count={7} />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

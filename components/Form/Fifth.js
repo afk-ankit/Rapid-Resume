@@ -8,6 +8,7 @@ import { ValidFive } from '@/schemas/ValidFive';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
 
 const Fifth = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Fifth = () => {
 
   return (
     <Container>
+      <StepCount count={4} />
       <Page>
         <div className={styles.type}>
           <h3>Describe yourself in a few sentences</h3>

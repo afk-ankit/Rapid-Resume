@@ -1,5 +1,5 @@
 import styles from '@/styles/First.module.scss';
-import { TextField } from '@mui/material';
+import { Step, StepLabel, Stepper, TextField } from '@mui/material';
 import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import Page from '../utils/Page';
@@ -8,6 +8,7 @@ import { ValidOne } from '@/schemas/ValidOne';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
 
 const First = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const First = () => {
 
   return (
     <Container>
+      <StepCount count={0} />
       <Page>
         <TextField
           id="filled-basic"

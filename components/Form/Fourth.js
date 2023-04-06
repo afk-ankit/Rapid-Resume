@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidFour } from '@/schemas/ValidFour';
 import { handleIsValid } from '../utils/handleIsValid';
+import StepCount from '../utils/StepCount';
 const Fourth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
@@ -36,6 +37,7 @@ const Fourth = () => {
 
   return (
     <Container>
+      <StepCount count={3} />
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
