@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../utils/Container';
 import Page from '../utils/Page';
 import BtnGroup from '../utils/BtnGroup';
@@ -14,9 +14,44 @@ import moment from 'moment';
 const Seventh = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
-  const savedData = Boolean(userData.job);
-  const initialValues = {
-    job: userData.job || [
+  const savedData = Boolean(userData?.job[0].name);
+  const [initialValues, setInitialValuse] = useState({
+    job: [
+      {
+        name: '',
+        field: '',
+        startDate: null,
+        endDate: null,
+        proud: ['', '', ''],
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (userData.job[0].name) {
+      const newData = { ...userData };
+      newData.job = newData.job.map((item) => {
+        return {
+          ...item,
+          startDate: null,
+          endDate: null,
+        };
+      });
+      console.log(newData);
+      setInitialValuse(newData);
+    }
+  }, [userData]);
+
+  const onSubmit = (values) => {
+    values.job.map((item) => {
+      item.pStartDate = moment(item.startDate.$d).format('MM/yyyy');
+      item.pEndDate = moment(item.endDate.$d).format('MM/yyyy');
+    });
+    dispatch(populate(values));
+  };
+
+  const initialValues1 = {
+    job: [
       {
         name: '',
         field: '',
@@ -27,14 +62,6 @@ const Seventh = () => {
     ],
   };
 
-  const onSubmit = (values) => {
-    values.job.map((item) => {
-      item.pStartDate = moment(item.startDate.$d).format('MM/yyyy');
-      item.pEndDate = moment(item.endDate.$d).format('MM/yyyy');
-    });
-    console.log(values);
-    dispatch(populate(values));
-  };
   return (
     <Container>
       <StepCount count={6} />
@@ -43,6 +70,7 @@ const Seventh = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={ValidSeven}
+        enableReinitialize={true}
       >
         {(formik) => (
           <Form>

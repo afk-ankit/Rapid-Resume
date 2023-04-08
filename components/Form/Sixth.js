@@ -16,17 +16,35 @@ import moment from 'moment';
 const Sixth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
-  const savedData = Boolean(userData.education);
+  const savedData = Boolean(userData?.education[0].name);
+  const [initialValues, setInitialValuse] = useState({
+    education: [
+      {
+        name: '',
+        field: '',
+        startDate: null,
+        endDate: null,
+        proud: ['', '', ''],
+      },
+    ],
+  });
 
-  {
-    userData.education &&
-      userData.education.map((item) => {
-        item.startDate = null;
-        item.endDate = null;
+  useEffect(() => {
+    if (userData.education[0].name) {
+      const newData = { ...userData };
+      newData.education = newData.education.map((item) => {
+        return {
+          ...item,
+          startDate: null,
+          endDate: null,
+        };
       });
-  }
+      console.log(newData);
+      setInitialValuse(newData);
+    }
+  }, [userData]);
 
-  const initialValues = userData || {
+  const initialValues1 = {
     education: [
       {
         name: '',
@@ -43,7 +61,6 @@ const Sixth = () => {
       item.pStartDate = moment(item.startDate?.$d).format('MM/yyyy');
       item.pEndDate = moment(item.endDate?.$d).format('MM/yyyy');
     });
-    console.log(values);
     dispatch(populate(values));
   };
 

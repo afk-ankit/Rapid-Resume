@@ -73,7 +73,6 @@ const EducationInput = ({ form, push, remove, title }) => {
               <Field name={`${title}[${index}].startDate`}>
                 {({ form, field, meta }) => {
                   const { setFieldValue } = form;
-                  console.log(field);
                   return (
                     <FormControl fullWidth>
                       <DatePicker
@@ -82,7 +81,6 @@ const EducationInput = ({ form, push, remove, title }) => {
                         className={styles.fullWidth}
                         {...field}
                         onChange={(val) => {
-                          console.log(val);
                           setFieldValue(`${title}[${index}].startDate`, val);
                         }}
                       />
