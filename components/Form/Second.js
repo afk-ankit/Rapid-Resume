@@ -27,7 +27,7 @@ const Second = () => {
   const savedData =
     Boolean(userData.country) ||
     Boolean(userData.phoneNumber) ||
-    Boolean(userData.language);
+    Boolean(userData.language.name);
 
   const initialValues = {
     country: userData.country || '',

@@ -14,7 +14,7 @@ const Fourth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
   const savedData =
-    Boolean(userData.softSkill) || Boolean(userData.technicalSkill);
+    Boolean(userData.softSkill.name) || Boolean(userData.technicalSkill.name);
 
   const initialValues = {
     softSkill: userData.softSkill || [
