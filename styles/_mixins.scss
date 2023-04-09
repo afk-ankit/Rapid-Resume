@@ -1,0 +1,53 @@
+@mixin heading {
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -2.5%;
+    color: #1a4e76;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+@mixin subHeadingBold {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: -2.5%;
+  }
+  
+@mixin subHeadingLight {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  @mixin dateLocation {
+    display: flex;
+    justify-content: space-between;
+  }
+  @mixin date {
+    font-weight: 500;
+    font-style: italic;
+    font-size: 11px;
+    color: #1a4e76;
+    margin-bottom: 5px;
+  }
+  
+  @mixin normalDescription {
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: -2.5%;
+  }
+
+
+  @mixin headingName {
+    font-weight: 500;
+    font-size: 31px;
+  }
+  @mixin headingWork {
+    color: #1a4e76;
+    font-size: 19px;
+    font-weight: 400;
+  }
+  @mixin headingDescription {
+    font-size: 12px;
+    font-weight: 500;
+  }

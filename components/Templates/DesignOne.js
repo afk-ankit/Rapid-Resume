@@ -125,7 +125,6 @@ const DesignOne = () => {
               {language.map((item) => {
                 const arr1 = new Array(Number(item.rating)).fill(0);
                 const arr2 = new Array(5 - Number(item.rating)).fill(0);
-                console.log(arr1);
                 return (
                   <div className={styles.language}>
                     <h3 className={styles.normalDescription}>{item.name}</h3>
