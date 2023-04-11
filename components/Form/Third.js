@@ -13,7 +13,7 @@ const Third = () => {
   useEffect(() => {
     selectedFile
       ? dispatch(populate({ url: URL.createObjectURL(selectedFile) }))
-      : dispatch(populate({ urL: '' }));
+      : dispatch(populate({ url: null }));
   }, [selectedFile]);
 
   return (
