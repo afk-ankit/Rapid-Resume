@@ -54,10 +54,10 @@ const DesignOne = () => {
             <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
             <a href="/#">{country}</a>
           </div>
-          <div className={styles.links}>
+          {/* <div className={styles.links}>
             <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
             <a href="/#">ankitsharmagh093@gmail.com</a>
-          </div>
+          </div> */}
         </div>
         <main className={styles.main}>
           <div>
