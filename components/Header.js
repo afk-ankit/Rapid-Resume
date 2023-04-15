@@ -10,6 +10,7 @@ const Header = () => {
         alt="company-logo"
         width="182"
         height="49"
+        className={styles.image}
       />
     </nav>
   );

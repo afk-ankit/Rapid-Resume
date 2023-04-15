@@ -16,6 +16,7 @@ import {
   FormGroup,
 } from '@mui/material';
 import { Field, Form } from 'formik';
+import useWindowWidth from '@/components/utils/useWindow';
 const languageArr = Object.entries(language);
 
 const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
@@ -34,6 +35,8 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
   if (field == 'technicalSkill') {
     arr = values.technicalSkill;
   }
+
+  const isMobile = useWindowWidth() < 850;
 
   return (
     <>
@@ -109,7 +112,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                       </FormGroup>
                     </div>
 
-                    {arr.length > 1 && (
+                    {arr.length > 1 && !isMobile && (
                       <IconButton
                         className={styles.delete}
                         size="large"
@@ -120,6 +123,15 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                       >
                         <DeleteIcon />
                       </IconButton>
+                    )}
+                    {arr.length > 1 && isMobile && (
+                      <Button
+                        variant="contained"
+                        style={{ background: 'red', alignSelf: 'center' }}
+                        onClick={() => remove(index)}
+                      >
+                        Delete
+                      </Button>
                     )}
                   </>
                 );

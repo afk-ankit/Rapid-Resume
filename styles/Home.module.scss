@@ -20,6 +20,14 @@
     font-size: 1.25rem;
     text-align: center;
     font-weight: 500;
+
+    @media screen and (max-width:1024px) {
+        max-width: 60%;
+    }
+  
+    @media screen and (max-width:850px) {
+        max-width: 85%;
+    }
 }
 
 .button{

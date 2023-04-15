@@ -139,21 +139,21 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    &>h1{
+        @include headingName;
+        color: #313F71;
+    }
+    &>h2{
+        @include headingWork;
+        color: #449399
+    }
+    &>p{
+        @include headingDescription;
+    
+    }
 }
 
-.nameContainer>h1{
-    @include headingName;
-    color: #313F71;
-}
-.nameContainer>h2{
-    @include headingWork;
-    color: #449399
-}
 
-.nameContainer>p{
-    @include headingDescription;
-
-}
 
 //blueBox
 

@@ -37,12 +37,22 @@ const DesignTwo = () => {
                 ></i>
                 <h1 className={styles.skillsHeading}>Skills</h1>
               </div>
-              <div className={styles.skillsCollection}>
+              <div
+                className={styles.skillsCollection}
+                style={{ color: 'white' }}
+              >
+                <h3 className={styles.subHeadingLight}>Soft-Skills</h3>
                 {softSkill.map((item, index) => (
                   <span className={styles.skills} key={index}>
                     {item.name}
                   </span>
                 ))}
+                <h3
+                  className={styles.subHeadingLight}
+                  style={{ color: 'white' }}
+                >
+                  Technical-Skills
+                </h3>
                 {technicalSkill.map((item, index) => (
                   <span className={styles.skills} key={index}>
                     {item.name}

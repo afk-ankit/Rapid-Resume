@@ -15,7 +15,7 @@ import {
 
 const Ninth = () => {
   const userData = useSelector((state) => state.user);
-  const [template, setTemplate] = useState(0);
+  const [template, setTemplate] = useState('0');
   console.log(userData);
   return (
     <Container>
@@ -29,7 +29,7 @@ const Ninth = () => {
             Choose Template
           </FormLabel>
           <RadioGroup
-            defaultValue="Template 1"
+            defaultValue="0"
             name="radio-buttons-group"
             onChange={(e) => setTemplate(e.target.value)}
           >
