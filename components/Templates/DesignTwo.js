@@ -121,43 +121,39 @@ const DesignTwo = () => {
               <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
               <a href="/#">{country}</a>
             </div>
-            {/* <div className={styles.links}>
-              <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
-              <a href="/#">ankitsharmagh093@gmail.com</a>
-            </div> */}
           </div>
           <div className={styles.workContainer}>
-            <h1>Work Experience</h1>
+            <h1 className={styles.heading}>Work Experience</h1>
             {job.map((item) => (
               <>
-                <h2>{item.name}</h2>
-                <h2>{item.field}</h2>
-                <h3>
+                <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                <h3 className={styles.date}>
                   {item.pStartDate}-{item.pEndDate}
                 </h3>
-                <h3>Achievements/results</h3>
+                {item[0] && (
+                  <h3 className={styles.date}>Achievements/results</h3>
+                )}
                 <ul className={styles.description}>
-                  {item.proud.map((item) => (
-                    <li>{item}</li>
-                  ))}
+                  {item.proud.map((item) => item && <li>{item}</li>)}
                 </ul>
               </>
             ))}
           </div>
           <div className={styles.workContainer}>
-            <h1>Education</h1>
+            <h1 className={styles.heading}>Education</h1>
             {education.map((item) => (
               <>
-                <h2>{item.name}</h2>
-                <h2>{item.field}</h2>
-                <h3>
+                <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                <h3 className={styles.date}>
                   {item.pStartDate}-{item.pEndDate}
                 </h3>
-                <h3>Achievements/results</h3>
+                {item[0] && (
+                  <h3 className={styles.date}>Achievements/results</h3>
+                )}
                 <ul className={styles.description}>
-                  {item.proud.map((item) => (
-                    <li>{item}</li>
-                  ))}
+                  {item.proud.map((item) => item && <li>{item}</li>)}
                 </ul>
               </>
             ))}
