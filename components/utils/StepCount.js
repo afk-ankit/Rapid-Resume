@@ -32,9 +32,11 @@ const StepCount = ({ count }) => {
       <Step>
         <StepLabel icon={count + 1}>{steps[count].label}</StepLabel>
       </Step>
-      <Step>
-        <StepLabel icon={count + 2}>{steps[count + 1].label}</StepLabel>
-      </Step>
+      {count <= 7 && (
+        <Step>
+          <StepLabel icon={count + 2}>{steps[count + 1].label}</StepLabel>
+        </Step>
+      )}
     </Stepper>
   ) : (
     <Stepper activeStep={count} alternativeLabel>

@@ -5,6 +5,7 @@ import StepCount from '../utils/StepCount';
 import BtnGroup from '../utils/BtnGroup';
 import DesignTwo from '../Templates/DesignTwo';
 import { useState } from 'react';
+import styles from '@/styles/Ninth.module.scss';
 import {
   FormControl,
   FormControlLabel,
@@ -20,10 +21,7 @@ const Ninth = () => {
   return (
     <Container>
       <StepCount count={8} />
-      <div style={{ marginTop: '2rem' }}>
-        {template == 0 ? <DesignOne /> : <DesignTwo />}
-      </div>
-      <div style={{ position: 'absolute', top: '30rem', left: '8rem' }}>
+      <div className={styles.theme}>
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             Choose Template
@@ -46,6 +44,19 @@ const Ninth = () => {
           </RadioGroup>
         </FormControl>
       </div>
+
+      <div style={{ margin: '2rem 0' }}>
+        {template == 0 ? (
+          <div className={styles.display}>
+            <DesignOne />
+          </div>
+        ) : (
+          <div className={styles.display}>
+            <DesignTwo />
+          </div>
+        )}
+      </div>
+      <div></div>
 
       <BtnGroup prev={'/form/eighth'} />
     </Container>

@@ -23,6 +23,19 @@ const DesignTwo = () => {
   const componentRef = useRef();
   return (
     <>
+      <ReactToPrint
+        trigger={() => (
+          <div
+            style={{
+              width: 'fit-content',
+              margin: '2rem auto',
+            }}
+          >
+            <Button variant="contained">Print</Button>
+          </div>
+        )}
+        content={() => componentRef.current}
+      />
       <div className={styles.page} ref={componentRef}>
         <div className={styles.sidebar}>
           <div></div>
@@ -171,10 +184,6 @@ const DesignTwo = () => {
         </main>
         <img src="/company-logo.png" className={styles.waterMark} />
       </div>
-      <ReactToPrint
-        trigger={() => <Button variant="contained">Print</Button>}
-        content={() => componentRef.current}
-      />
     </>
   );
 };

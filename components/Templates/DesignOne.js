@@ -3,6 +3,7 @@ import styles from '@/styles/DesignOne.module.scss';
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ReactToPrint from 'react-to-print';
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
 const DesignOne = () => {
   const {
@@ -25,6 +26,21 @@ const DesignOne = () => {
 
   return (
     <>
+      <ReactToPrint
+        trigger={() => (
+          <div
+            style={{
+              width: 'fit-content',
+              margin: '2rem auto',
+            }}
+          >
+            <Button variant="contained" endIcon={<LocalPrintshopIcon />}>
+              Print CV
+            </Button>
+          </div>
+        )}
+        content={() => componentRef.current}
+      />
       <div className={styles.page} ref={componentRef}>
         <div className={styles.headingContainer}>
           {url && (
@@ -165,10 +181,6 @@ const DesignOne = () => {
         </main>
         <img src="/company-logo.png" className={styles.waterMark} />
       </div>
-      <ReactToPrint
-        trigger={() => <Button variant="contained">Print</Button>}
-        content={() => componentRef.current}
-      />
     </>
   );
 };

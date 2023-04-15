@@ -9,11 +9,11 @@
     min-height: 100px;
     max-width: 1200px;
 
-    @media screen and (max-width:1200px){
-        width: 70%;
-    }
     @media screen and (max-width:1024px){
         width: 75%;
+    }
+    @media screen and (max-width:900px){
+        width: 85%;
     }
     @media screen and (max-width:500px){
         width: 100%;

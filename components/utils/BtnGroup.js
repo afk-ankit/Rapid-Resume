@@ -32,7 +32,7 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
       style={{
         display: 'flex',
         gap: '1rem',
-        width: '200px',
+        width: 'fit-content',
         margin: 'auto',
       }}
     >
