@@ -54,10 +54,6 @@ const DesignOne = () => {
             <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
             <a href="/#">{country}</a>
           </div>
-          {/* <div className={styles.links}>
-            <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
-            <a href="/#">ankitsharmagh093@gmail.com</a>
-          </div> */}
         </div>
         <main className={styles.main}>
           <div>
@@ -71,12 +67,15 @@ const DesignOne = () => {
                     <h3 className={styles.date}>
                       {item.pStartDate} - {item.pEndDate}
                     </h3>
-                    <h3 className={styles.date}>Matla</h3>
                   </div>
-                  <h3 className={styles.date}>Achievements/Tasks</h3>
+                  {item.proud[0] && (
+                    <h3 className={styles.date}>Achievements/Tasks</h3>
+                  )}
                   <ul className={`${styles.list} ${styles.normalDescription}`}>
                     {item.proud.map((item) => {
-                      return <li>{item}</li>;
+                      if (item) {
+                        return <li>{item}</li>;
+                      }
                     })}
                   </ul>
                 </div>
@@ -84,18 +83,28 @@ const DesignOne = () => {
             })}
           </div>
           <div>
-            <h1 className={styles.heading}>Skills</h1>
-            <div
-              className={`${styles.skillsContainer} ${styles.normalDescription}`}
-            >
-              {softSkill.map((item) => (
-                <span className={`${styles.skills}`}>{item.name}</span>
-              ))}
-              {technicalSkill.map((item) => (
-                <span className={`${styles.skills}`}>{item.name}</span>
-              ))}
+            <div style={{ marginBottom: '2rem' }}>
+              <h1 className={styles.heading}>Soft-Skills</h1>
+              <div
+                className={`${styles.skillsContainer} ${styles.normalDescription}`}
+              >
+                {softSkill.map((item) => (
+                  <span className={`${styles.skills}`}>{item.name}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h1 className={styles.heading}>Technical-Skills</h1>
+              <div
+                className={`${styles.skillsContainer} ${styles.normalDescription}`}
+              >
+                {technicalSkill.map((item) => (
+                  <span className={`${styles.skills}`}>{item.name}</span>
+                ))}
+              </div>
             </div>
           </div>
+
           <div>
             <h1 className={styles.heading}>Education</h1>
             {education.map((item) => {
@@ -107,12 +116,13 @@ const DesignOne = () => {
                     <h3 className={styles.date}>
                       {item.pStartDate} - {item.pEndDate}
                     </h3>
-                    <h3 className={styles.date}>Matla</h3>
                   </div>
-                  <h3 className={styles.date}>Achievements/Tasks</h3>
+                  {item.proud[0] && (
+                    <h3 className={styles.date}>Achievements/Tasks</h3>
+                  )}
                   <ul className={`${styles.list} ${styles.normalDescription}`}>
                     {item.proud.map((item) => {
-                      return <li>{item}</li>;
+                      if (item) return <li>{item}</li>;
                     })}
                   </ul>
                 </div>
