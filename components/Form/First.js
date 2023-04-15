@@ -70,6 +70,7 @@ const First = () => {
         next="/form/second"
         onSubmit={formik.handleSubmit}
         isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
+        single={true}
       />
     </Container>
   );

@@ -3,7 +3,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { useRouter } from 'next/router';
 
-const BtnGroup = ({ prev, next, isValid, onSubmit }) => {
+const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
   const router = useRouter();
   const prevHandler = () => {
     router.push(prev);
@@ -36,21 +36,35 @@ const BtnGroup = ({ prev, next, isValid, onSubmit }) => {
         margin: 'auto',
       }}
     >
-      <Button
-        startIcon={<KeyboardArrowLeftIcon />}
-        style={btnStyle(true)}
-        onClick={prevHandler}
-      >
-        Tilbage
-      </Button>
-      <Button
-        endIcon={<KeyboardArrowRightIcon />}
-        style={btnStyle(isValid)}
-        onClick={nextHandler}
-        disabled={!isValid}
-      >
-        Næste
-      </Button>
+      {!single ? (
+        <>
+          {' '}
+          <Button
+            startIcon={<KeyboardArrowLeftIcon />}
+            style={btnStyle(true)}
+            onClick={prevHandler}
+          >
+            Tilbage
+          </Button>
+          <Button
+            endIcon={<KeyboardArrowRightIcon />}
+            style={btnStyle(isValid)}
+            onClick={nextHandler}
+            disabled={!isValid}
+          >
+            Næste
+          </Button>
+        </>
+      ) : (
+        <Button
+          endIcon={<KeyboardArrowRightIcon />}
+          style={btnStyle(isValid)}
+          onClick={nextHandler}
+          disabled={!isValid}
+        >
+          Næste
+        </Button>
+      )}
     </div>
   );
 };
