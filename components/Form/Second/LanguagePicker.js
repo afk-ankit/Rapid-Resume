@@ -3,6 +3,7 @@ import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import softSkill from '@/public/softSkill.json';
 import technicalSkill from '@/public/technicalSkill.json';
+import AddIcon from '@mui/icons-material/Add';
 
 import {
   Button,
@@ -17,6 +18,7 @@ import {
 } from '@mui/material';
 import { Field, Form } from 'formik';
 import useWindowWidth from '@/components/utils/useWindow';
+import { Toaster, toast } from 'react-hot-toast';
 const languageArr = Object.entries(language);
 
 const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
@@ -139,16 +141,23 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             </Field>
           </div>
         ))}
-        <Button
-          variant="contained"
-          fullWidth
-          style={{ marginBottom: '1rem' }}
-          onClick={() => {
-            push({ name: '', rating: 0 });
-          }}
-        >
-          Add {label1}
-        </Button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant="contained"
+            style={
+              form.isValid
+                ? { marginBottom: '1rem' }
+                : { color: 'white', background: 'gray', marginBottom: '1rem' }
+            }
+            onClick={() => {
+              push({ name: '', rating: 0 });
+            }}
+            disabled={!form.isValid}
+            endIcon={<AddIcon />}
+          >
+            Add More {label1}
+          </Button>
+        </div>
       </div>
     </>
   );
