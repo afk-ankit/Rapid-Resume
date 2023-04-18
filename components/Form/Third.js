@@ -29,6 +29,7 @@ const Third = () => {
             id="ankit"
             style={{ marginTop: '1rem' }}
             onChange={(e) => setSelectedFile(e.target.files[0])}
+            accept="image/*"
           />
         </div>
       </Page>
