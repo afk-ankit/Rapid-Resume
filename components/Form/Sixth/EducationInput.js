@@ -3,10 +3,11 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '@/styles/Sixth.module.scss';
 import { Field } from 'formik';
-import moment from 'moment';
+import AddIcon from '@mui/icons-material/Add';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
+  console.log('🔥', form);
   let arr = [];
   if (title == 'education') {
     arr = values.education;
@@ -160,8 +161,12 @@ const EducationInput = ({ form, push, remove, title }) => {
         </div>
       ))}
       <Button
+        style={
+          form.isValid
+            ? { alignSelf: 'center' }
+            : { alignSelf: 'center', background: 'gray', color: 'white' }
+        }
         variant="contained"
-        fullWidth
         onClick={() =>
           push({
             name: '',
@@ -171,6 +176,8 @@ const EducationInput = ({ form, push, remove, title }) => {
             proud: ['', '', ''],
           })
         }
+        endIcon={<AddIcon />}
+        disabled={!form.isValid}
       >
         Add {title}
       </Button>
