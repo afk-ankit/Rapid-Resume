@@ -1,0 +1,181 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css');
+@import 'mixins';
+
+
+$light-green:#87A8A5;
+$dark-green:#10514B;
+
+
+.fullwidth{
+    align-self: stretch;
+}
+
+.flex{
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.page {
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  margin: auto;
+  min-height: 1120px;
+  width: 792px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: white;
+}
+
+//typography
+.subHeadingBold{
+    @include subHeadingBold
+}
+.subHeadingLight{
+    @include subHeadingLight
+}
+
+.date{
+    @include date
+}
+.normalDescription{
+    @include normalDescription;
+    li{
+        position: relative;
+        left:15px;
+    }
+}
+
+
+//heading
+
+.headingContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 16px;
+    &>div:first-child{
+
+        display: flex;
+        justify-content: space-between;
+
+        &>div:first-child{
+            display: flex;
+            gap: 2rem;
+            &>img{
+                width: 129px;
+                height: 129px;
+                object-fit: cover;
+                border-radius: 5rem;
+            }
+            &>h1{
+                @include headingName
+            }
+        }
+        &>div:nth-child(2){
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+            &>div{
+                display: flex;
+                gap: 16px;
+                &>h2{
+                    @include normalDescription;
+                }
+            }
+        }
+    }
+
+    &>div:nth-child(2){
+        @include normalDescription
+    }
+}
+
+// main section
+
+.main{
+    display: grid;
+    grid: auto/1fr 1fr;
+    gap: 40px;
+    // job section
+    &>div:first-child{ 
+        &>div>div:not(:first-child){
+            padding-left: 32px;
+            margin-bottom: 16px;
+        }
+    }
+    // education etc. section
+   &>div:nth-child(2){
+    &>div:not(:last-child){
+        margin-bottom: 20px;
+    }
+   }
+}
+
+
+.mainHeading{
+    margin-bottom: 16px;
+    &>h1{
+        padding-left: 32px;
+        @include heading;
+        color: black;
+    }
+    &>hr{
+        border: 2px solid $dark-green;
+    }
+}
+
+
+
+//skills 
+.skillsContainer{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .skills{
+    color: white;
+    background-color: $light-green;
+    padding: 3.2px 16px;
+    border-radius: 5px;
+  }
+
+//language
+
+.languageContainer{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4.8px;
+  }
+  
+  .language{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+  }
+  
+  .rating{
+    display: flex;
+    gap: 16px ;
+    scale: (0.7);
+    color: $dark-green;
+  }
+
+//interest
+.hobby{
+    border: 2px solid $dark-green;
+    padding: 3.2px 16px;
+    border-radius: 5px;
+  }
+
+.waterMark{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 150px;
+    opacity: 100%;
+  }

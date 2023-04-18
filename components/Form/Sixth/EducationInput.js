@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
-  console.log('🔥', form);
+
   let arr = [];
   if (title == 'education') {
     arr = values.education;
@@ -167,19 +167,19 @@ const EducationInput = ({ form, push, remove, title }) => {
             : { alignSelf: 'center', background: 'gray', color: 'white' }
         }
         variant="contained"
-        onClick={() =>
+        onClick={() => {
           push({
             name: '',
             field: '',
             startDate: null,
             endDate: null,
             proud: ['', '', ''],
-          })
-        }
+          });
+        }}
         endIcon={<AddIcon />}
         disabled={!form.isValid}
       >
-        Add {title}
+        Add More {title}
       </Button>
     </>
   );

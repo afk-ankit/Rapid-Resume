@@ -2,6 +2,7 @@ import { Button, IconButton, TextField } from '@mui/material';
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Field } from 'formik';
+import AddIcon from '@mui/icons-material/Add';
 
 const HobbyInput = ({ form, push, remove }) => {
   const { values } = form;
@@ -42,7 +43,13 @@ const HobbyInput = ({ form, push, remove }) => {
       <Button
         variant="contained"
         onClick={() => push('')}
-        style={{ alignSelf: 'center' }}
+        style={
+          form.isValid
+            ? { alignSelf: 'center' }
+            : { alignSelf: 'center', background: 'gray', color: 'white' }
+        }
+        endIcon={<AddIcon />}
+        disabled={!form.isValid}
       >
         ADD More Hobby
       </Button>

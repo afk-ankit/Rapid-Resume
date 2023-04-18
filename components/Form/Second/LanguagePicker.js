@@ -3,6 +3,7 @@ import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import softSkill from '@/public/softSkill.json';
 import technicalSkill from '@/public/technicalSkill.json';
+import AddIcon from '@mui/icons-material/Add';
 
 import {
   Button,
@@ -139,16 +140,17 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             </Field>
           </div>
         ))}
-        <Button
-          variant="contained"
-          fullWidth
-          style={{ marginBottom: '1rem' }}
-          onClick={() => {
-            push({ name: '', rating: 0 });
-          }}
-        >
-          Add {label1}
-        </Button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              push({ name: '', rating: 0 });
+            }}
+            endIcon={<AddIcon />}
+          >
+            Add More {label1}
+          </Button>
+        </div>
       </div>
     </>
   );
