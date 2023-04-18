@@ -18,7 +18,6 @@ import {
 } from '@mui/material';
 import { Field, Form } from 'formik';
 import useWindowWidth from '@/components/utils/useWindow';
-import { Toaster, toast } from 'react-hot-toast';
 const languageArr = Object.entries(language);
 
 const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
