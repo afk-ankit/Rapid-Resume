@@ -6,7 +6,9 @@ import BtnGroup from '../utils/BtnGroup';
 import DesignTwo from '../Templates/DesignTwo';
 import { useState } from 'react';
 import styles from '@/styles/Ninth.module.scss';
+import { useRouter } from 'next/router';
 import {
+  Button,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -14,39 +16,62 @@ import {
   RadioGroup,
 } from '@mui/material';
 import DesignThree from '../Templates/DesignThree.js';
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import ReactToPrint from 'react-to-print';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import Link from 'next/link';
 
 const Ninth = () => {
+  const router = useRouter();
+  const prevHandler = () => {
+    router.push('/form/eighth');
+  };
   const templateHandler = (template) => {
     switch (template) {
       case '0':
         return (
           <div className={styles.display}>
-            <DesignOne />
+            <DesignOne handleRef={handleRef} />
           </div>
         );
       case '1':
         return (
           <div className={styles.display}>
-            <DesignTwo />
+            <DesignTwo handleRef={handleRef} />
           </div>
         );
       case '2':
         return (
           <div className={styles.display}>
-            <DesignThree />
+            <DesignThree handleRef={handleRef} />
           </div>
         );
       default:
         return (
           <div className={styles.display}>
-            <DesignOne />
+            <DesignOne handleRef={handleRef} />
           </div>
         );
+    }
+  };
+  const btnStyle = (isValid) => {
+    if (!isValid) {
+      return {
+        background: '#808080',
+        color: 'white',
+      };
+    } else {
+      return {
+        background: '#FF9300',
+        color: 'white',
+      };
     }
   };
 
   const userData = useSelector((state) => state.user);
   const [template, setTemplate] = useState('0');
+  const [componentRef, handleRef] = useState([null, null, null]);
+  console.log(componentRef);
   console.log(userData);
   return (
     <Container>
@@ -61,28 +86,39 @@ const Ninth = () => {
             name="radio-buttons-group"
             onChange={(e) => setTemplate(e.target.value)}
           >
-            <FormControlLabel
-              value="0"
-              control={<Radio />}
-              label="Template 1"
-            />
-            <FormControlLabel
-              value="1"
-              control={<Radio />}
-              label="Template 2"
-            />
-            <FormControlLabel
-              value="2"
-              control={<Radio />}
-              label="Template 3"
-            />
+            <FormControlLabel value="0" control={<Radio />} label="Modern" />
+            <FormControlLabel value="1" control={<Radio />} label="Creative" />
+            <FormControlLabel value="2" control={<Radio />} label="Advance" />
           </RadioGroup>
         </FormControl>
       </div>
 
       <div style={{ margin: '2rem 0' }}>{templateHandler(template)}</div>
-
-      <BtnGroup prev={'/form/eighth'} />
+      <div className={styles.btnGroup}>
+        <Button
+          startIcon={<KeyboardArrowLeftIcon />}
+          style={btnStyle(false)}
+          onClick={prevHandler}
+        >
+          Tilbage
+        </Button>
+        <ReactToPrint
+          trigger={() => (
+            <div>
+              <Button variant="contained" endIcon={<LocalPrintshopIcon />}>
+                Download CV
+              </Button>
+            </div>
+          )}
+          content={() => componentRef[template].current}
+        />
+        <Link
+          href={'https://danskudlandsrekruttering.dk/jobs-i-udlandet/'}
+          target="_blank"
+        >
+          <Button variant="contained">See open jobs</Button>
+        </Link>
+      </div>
     </Container>
   );
 };

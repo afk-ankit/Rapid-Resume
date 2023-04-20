@@ -9,6 +9,7 @@ import { populate } from '@/store/slice/userSlice';
 import { ValidEight } from '@/schemas/ValidEight';
 import { handleIsValid } from '../utils/handleIsValid';
 import StepCount from '../utils/StepCount';
+import { InputLabel } from '@mui/material';
 
 const Eighth = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ const Eighth = () => {
         {(formik) => (
           <Form>
             <Page>
+              <InputLabel style={{ textAlign: 'center' }}>
+                We recommend that you add at least 3 hobbies
+              </InputLabel>
               <FieldArray component={HobbyInput} name="hobby" />
             </Page>
             <BtnGroup

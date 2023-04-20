@@ -5,7 +5,6 @@ import BtnGroup from '../utils/BtnGroup';
 import Container from '../utils/Container';
 import EducationInput from './Sixth/EducationInput';
 import { FieldArray, Form, Formik } from 'formik';
-import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { ValidSix } from '@/schemas/ValidSix';
@@ -39,22 +38,9 @@ const Sixth = () => {
           endDate: null,
         };
       });
-      console.log(newData);
       setInitialValuse(newData);
     }
   }, [userData]);
-
-  const initialValues1 = {
-    education: [
-      {
-        name: '',
-        field: '',
-        startDate: null,
-        endDate: null,
-        proud: ['', '', ''],
-      },
-    ],
-  };
 
   const onSubmit = (values) => {
     values.education.map((item) => {

@@ -41,7 +41,7 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
           {' '}
           <Button
             startIcon={<KeyboardArrowLeftIcon />}
-            style={btnStyle(true)}
+            style={btnStyle(false)}
             onClick={prevHandler}
           >
             Tilbage

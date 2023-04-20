@@ -1,13 +1,22 @@
-import { Button, FormControl, FormHelperText, TextField } from '@mui/material';
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  TextField,
+} from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '@/styles/Sixth.module.scss';
 import { Field } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
+import moment from 'moment';
+import { useState } from 'react';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
-
+  const [checkbox, setCheckbox] = useState(false);
   let arr = [];
   if (title == 'education') {
     arr = values.education;
@@ -25,7 +34,7 @@ const EducationInput = ({ form, push, remove, title }) => {
     label1 = 'Name of School/Educational place';
     label2 = 'Field of study, i.e. Gymnasium or University degree';
     label3 = 'Top grades in English';
-    label4 = 'Part student advisory board';
+    label4 = 'Part of student advisory board';
     label5 = 'Received school award for outstanding result';
   } else {
     label1 = 'Job title';
@@ -73,9 +82,16 @@ const EducationInput = ({ form, push, remove, title }) => {
             <div className={styles.flex}>
               <Field name={`${title}[${index}].startDate`}>
                 {({ form, field, meta }) => {
-                  const { setFieldValue } = form;
+                  const { setFieldValue, setFieldTouched } = form;
+                  console.log(form);
                   return (
-                    <FormControl fullWidth>
+                    <FormControl
+                      fullWidth
+                      error={meta.touched && Boolean(meta.error)}
+                      onBlur={() => {
+                        setFieldTouched(`${title}[${index}].startDate`, true);
+                      }}
+                    >
                       <DatePicker
                         label="Choose Starting Date"
                         views={['year', 'month']}
@@ -84,6 +100,8 @@ const EducationInput = ({ form, push, remove, title }) => {
                         onChange={(val) => {
                           setFieldValue(`${title}[${index}].startDate`, val);
                         }}
+                        disableFuture
+                        minDate={new moment('2000-01-01T00:00:00.000Z')}
                       />
                       {meta.error && meta.touched && (
                         <FormHelperText>{meta.error}</FormHelperText>
@@ -94,18 +112,31 @@ const EducationInput = ({ form, push, remove, title }) => {
               </Field>
               <Field name={`${title}[${index}].endDate`}>
                 {({ form, field, meta }) => {
-                  const { setFieldValue } = form;
+                  const { setFieldValue, setFieldTouched, setFieldError } =
+                    form;
                   return (
-                    <FormControl fullWidth>
-                      <DatePicker
-                        label="Choose Ending Date"
-                        views={['year', 'month']}
-                        className={styles.fullWidth}
-                        {...field}
-                        onChange={(val) => {
-                          setFieldValue(`${title}[${index}].endDate`, val);
-                        }}
-                      />
+                    <FormControl
+                      fullWidth
+                      error={meta.touched && Boolean(meta.error)}
+                      onBlur={() => {
+                        setFieldTouched(`${title}[${index}].endDate`, true);
+                      }}
+                    >
+                      {!checkbox && (
+                        <DatePicker
+                          label="Choose Ending Date"
+                          views={['year', 'month']}
+                          minDate={new moment('2000-01-01T00:00:00.000Z')}
+                          className={styles.fullWidth}
+                          {...field}
+                          onChange={(val) => {
+                            setFieldValue(`${title}[${index}].endDate`, val);
+                          }}
+                        />
+                      )}
+                      {meta.error && meta.touched && (
+                        <FormHelperText>{meta.error}</FormHelperText>
+                      )}
                     </FormControl>
                   );
                 }}
@@ -179,7 +210,7 @@ const EducationInput = ({ form, push, remove, title }) => {
         endIcon={<AddIcon />}
         disabled={!form.isValid}
       >
-        Add More {title}
+        Add More {title}s
       </Button>
     </>
   );

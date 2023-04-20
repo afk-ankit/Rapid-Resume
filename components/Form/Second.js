@@ -23,6 +23,13 @@ const arr = Object.entries(country);
 const Second = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
+  let language;
+
+  if (userData.language[0].name) {
+    language = userData.language;
+  } else {
+    language = [{ name: 'English', rating: 0 }];
+  }
 
   const savedData =
     Boolean(userData.country) ||
@@ -30,9 +37,9 @@ const Second = () => {
     Boolean(userData.language.name);
 
   const initialValues = {
-    country: userData.country || '',
+    country: userData.country || 'Denmark',
     phoneNumber: userData.phoneNumber || '',
-    language: userData.language || [{ name: 'English', rating: 0 }],
+    language,
   };
 
   const onSubmit = (values) => {

@@ -1,7 +1,7 @@
 import Page from '../utils/Page';
 import Container from '@/components/utils/Container';
 import softSkill from '@/public/softSkill.json';
-import { Button } from '@mui/material';
+import { Button, InputLabel } from '@mui/material';
 import LanguagePicker from './Second/LanguagePicker';
 import BtnGroup from '../utils/BtnGroup';
 import { FieldArray, Form, Formik } from 'formik';
@@ -49,6 +49,9 @@ const Fourth = () => {
           return (
             <Form>
               <Page>
+                <InputLabel style={{ textAlign: 'center' }}>
+                  We recommend that you add minimum 5-8 skills
+                </InputLabel>
                 <FieldArray
                   name="softSkill"
                   render={(arrayHelpers) => (
