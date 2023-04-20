@@ -24,7 +24,7 @@ const DesignThree = ({ handleRef, theme }) => {
   useEffect(() => {
     handleRef((prev) => {
       const arr = [prev];
-      arr[0] = componentRef;
+      arr[2] = componentRef;
       return arr;
     });
   }, []);
