@@ -89,8 +89,6 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             </Field>
             <Field name={`${field}[${index}].rating`}>
               {({ field, form, meta }) => {
-                console.log(meta);
-
                 return (
                   <>
                     <div>

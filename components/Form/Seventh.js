@@ -37,7 +37,6 @@ const Seventh = () => {
           endDate: null,
         };
       });
-      console.log(newData);
       setInitialValuse(newData);
     }
   }, [userData]);

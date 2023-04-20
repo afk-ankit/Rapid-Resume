@@ -21,7 +21,6 @@ const Fifth = () => {
       about: userData.about || '',
     },
     onSubmit: (values) => {
-      console.log(values);
       dispatch(populate(values));
     },
     validationSchema: ValidFive,

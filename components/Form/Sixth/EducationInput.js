@@ -82,7 +82,6 @@ const EducationInput = ({ form, push, remove, title }) => {
               <Field name={`${title}[${index}].startDate`}>
                 {({ form, field, meta }) => {
                   const { setFieldValue, setFieldTouched } = form;
-                  console.log(form);
                   return (
                     <FormControl
                       fullWidth

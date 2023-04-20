@@ -12,9 +12,7 @@ const Test = () => {
   const [value, setValue] = useState({
     date: null,
   });
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
+  useEffect(() => {}, [value]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
