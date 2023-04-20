@@ -26,30 +26,33 @@ const Ninth = () => {
   const prevHandler = () => {
     router.push('/form/eighth');
   };
+  const [template, setTemplate] = useState('0');
+  const [color, setColor] = useState('0');
+  const [componentRef, handleRef] = useState([null, null, null]);
   const templateHandler = (template) => {
     switch (template) {
       case '0':
         return (
           <div className={styles.display}>
-            <DesignOne handleRef={handleRef} />
+            <DesignOne handleRef={handleRef} theme={color} />
           </div>
         );
       case '1':
         return (
           <div className={styles.display}>
-            <DesignTwo handleRef={handleRef} />
+            <DesignTwo handleRef={handleRef} theme={color} />
           </div>
         );
       case '2':
         return (
           <div className={styles.display}>
-            <DesignThree handleRef={handleRef} />
+            <DesignThree handleRef={handleRef} theme={color} />
           </div>
         );
       default:
         return (
           <div className={styles.display}>
-            <DesignOne handleRef={handleRef} />
+            <DesignOne handleRef={handleRef} theme={color} />
           </div>
         );
     }
@@ -68,29 +71,46 @@ const Ninth = () => {
     }
   };
 
-  const userData = useSelector((state) => state.user);
-  const [template, setTemplate] = useState('0');
-  const [componentRef, handleRef] = useState([null, null, null]);
-  console.log(componentRef);
-  console.log(userData);
   return (
     <Container>
       <StepCount count={8} />
       <div className={styles.theme}>
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Choose Template
-          </FormLabel>
-          <RadioGroup
-            defaultValue="0"
-            name="radio-buttons-group"
-            onChange={(e) => setTemplate(e.target.value)}
-          >
-            <FormControlLabel value="0" control={<Radio />} label="Modern" />
-            <FormControlLabel value="1" control={<Radio />} label="Creative" />
-            <FormControlLabel value="2" control={<Radio />} label="Advance" />
-          </RadioGroup>
-        </FormControl>
+        <div>
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Choose Template
+            </FormLabel>
+            <RadioGroup
+              defaultValue="0"
+              name="radio-buttons-group"
+              onChange={(e) => setTemplate(e.target.value)}
+            >
+              <FormControlLabel value="0" control={<Radio />} label="Modern" />
+              <FormControlLabel
+                value="1"
+                control={<Radio />}
+                label="Creative"
+              />
+              <FormControlLabel value="2" control={<Radio />} label="Advance" />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">
+              Choose Color
+            </FormLabel>
+            <RadioGroup
+              defaultValue="0"
+              name="radio-buttons-group"
+              onChange={(e) => setColor(e.target.value)}
+            >
+              <FormControlLabel value="0" control={<Radio />} label="Default" />
+              <FormControlLabel value="1" control={<Radio />} label="Pink" />
+              <FormControlLabel value="2" control={<Radio />} label="Orange" />
+            </RadioGroup>
+          </FormControl>
+        </div>
       </div>
 
       <div style={{ margin: '2rem 0' }}>{templateHandler(template)}</div>

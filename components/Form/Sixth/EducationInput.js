@@ -16,7 +16,6 @@ import { useState } from 'react';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
-  const [checkbox, setCheckbox] = useState(false);
   let arr = [];
   if (title == 'education') {
     arr = values.education;
@@ -103,17 +102,16 @@ const EducationInput = ({ form, push, remove, title }) => {
                         disableFuture
                         minDate={new moment('2000-01-01T00:00:00.000Z')}
                       />
-                      {meta.error && meta.touched && (
+                      {/* {meta.error && meta.touched && (
                         <FormHelperText>{meta.error}</FormHelperText>
-                      )}
+                      )} */}
                     </FormControl>
                   );
                 }}
               </Field>
               <Field name={`${title}[${index}].endDate`}>
                 {({ form, field, meta }) => {
-                  const { setFieldValue, setFieldTouched, setFieldError } =
-                    form;
+                  const { setFieldValue, setFieldTouched } = form;
                   return (
                     <FormControl
                       fullWidth
@@ -122,21 +120,19 @@ const EducationInput = ({ form, push, remove, title }) => {
                         setFieldTouched(`${title}[${index}].endDate`, true);
                       }}
                     >
-                      {!checkbox && (
-                        <DatePicker
-                          label="Choose Ending Date"
-                          views={['year', 'month']}
-                          minDate={new moment('2000-01-01T00:00:00.000Z')}
-                          className={styles.fullWidth}
-                          {...field}
-                          onChange={(val) => {
-                            setFieldValue(`${title}[${index}].endDate`, val);
-                          }}
-                        />
-                      )}
-                      {meta.error && meta.touched && (
+                      <DatePicker
+                        label="Choose Ending Date"
+                        views={['year', 'month']}
+                        minDate={new moment('2000-01-01T00:00:00.000Z')}
+                        className={styles.fullWidth}
+                        {...field}
+                        onChange={(val) => {
+                          setFieldValue(`${title}[${index}].endDate`, val);
+                        }}
+                      />
+                      {/* {meta.error && meta.touched && (
                         <FormHelperText>{meta.error}</FormHelperText>
-                      )}
+                      )} */}
                     </FormControl>
                   );
                 }}

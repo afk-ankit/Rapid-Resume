@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ReactToPrint from 'react-to-print';
 
-const DesignTwo = ({ handleRef }) => {
+const DesignTwo = ({ handleRef, theme }) => {
   const {
     firstName,
     lastName,
@@ -37,9 +37,19 @@ const DesignTwo = ({ handleRef }) => {
       return arr;
     });
   }, []);
+  const handleTheme = (theme) => {
+    switch (theme) {
+      case '0':
+        return `${styles.page} ${styles.default}`;
+      case '1':
+        return `${styles.page} ${styles.primary}`;
+      case '2':
+        return `${styles.page} ${styles.secondary}`;
+    }
+  };
   return (
     <>
-      <div className={styles.page} ref={componentRef}>
+      <div className={handleTheme(theme)} ref={componentRef}>
         <div className={styles.sidebar}>
           <div></div>
           <div></div>

@@ -5,6 +5,23 @@
 $light-green: #87A8A5;
 $dark-green: #10514B;
 
+$primary:var(--primary);
+$secondary:var(--secondary);
+
+.default{
+    --primary:#10514B;
+    --secondary:#87A8A5;
+}
+
+.primary{
+    --primary:#ff8ea1 ;
+    --secondary:pink;
+}
+.secondary{
+    --primary:rgb(255, 186, 57) ;
+    --secondary:rgb(255, 197, 89);
+}
+
 
 .fullwidth {
     align-self: stretch;
@@ -103,6 +120,11 @@ $dark-green: #10514B;
     }
 }
 
+.icon{
+    color:$primary
+}
+
+
 // main section
 
 .main {
@@ -137,7 +159,7 @@ $dark-green: #10514B;
     }
 
     &>hr {
-        border: 2px solid $dark-green;
+        border: 2px solid $primary;
     }
 }
 
@@ -152,7 +174,7 @@ $dark-green: #10514B;
 
 .skills {
     color: white;
-    background-color: $light-green;
+    background-color: $secondary;
     padding: 3.2px 16px;
     border-radius: 5px;
 }
@@ -176,12 +198,12 @@ $dark-green: #10514B;
     display: flex;
     gap: 16px;
     scale: (0.7);
-    color: $dark-green;
+    color: $primary;
 }
 
 //interest
 .hobby {
-    border: 2px solid $dark-green;
+    border: 2px solid $primary;
     padding: 3.2px 16px;
     border-radius: 5px;
 }

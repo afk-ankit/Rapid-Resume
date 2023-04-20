@@ -1,11 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '@/styles/DesignOne.module.scss';
 import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
-import ReactToPrint from 'react-to-print';
-import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
-const DesignOne = ({ handleRef }) => {
+const DesignOne = ({ handleRef, theme }) => {
   const {
     firstName,
     lastName,
@@ -42,9 +39,20 @@ const DesignOne = ({ handleRef }) => {
     });
   }, []);
 
+  const handleTheme = (theme) => {
+    switch (theme) {
+      case '0':
+        return `${styles.page} ${styles.default}`;
+      case '1':
+        return `${styles.page} ${styles.primary}`;
+      case '2':
+        return `${styles.page} ${styles.secondary}`;
+    }
+  };
+
   return (
     <>
-      <div className={styles.page} ref={componentRef}>
+      <div className={handleTheme(theme)} ref={componentRef}>
         <div className={styles.headingContainer}>
           {url && (
             <div className={styles.imageContainer}>

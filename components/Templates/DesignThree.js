@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ReactToPrint from 'react-to-print';
 
-const DesignThree = ({ handleRef }) => {
+const DesignThree = ({ handleRef, theme }) => {
   const {
     firstName,
     lastName,
@@ -37,9 +37,19 @@ const DesignThree = ({ handleRef }) => {
       return b.rating - a.rating;
     }
   });
+  const handleTheme = (theme) => {
+    switch (theme) {
+      case '0':
+        return `${styles.page} ${styles.default}`;
+      case '1':
+        return `${styles.page} ${styles.primary}`;
+      case '2':
+        return `${styles.page} ${styles.secondary}`;
+    }
+  };
   return (
     <>
-      <div className={styles.page} ref={componentRef}>
+      <div className={handleTheme(theme)} ref={componentRef}>
         <div className={styles.headingContainer}>
           <div>
             <div>
@@ -51,24 +61,15 @@ const DesignThree = ({ handleRef }) => {
             <div>
               <div className={styles.link}>
                 <h2>{email}</h2>
-                <i
-                  className="bi bi-envelope-fill"
-                  style={{ color: '#10514B' }}
-                ></i>
+                <i className={`bi bi-envelope-fill ${styles.icon}`}></i>
               </div>
               <div className={styles.link}>
                 <h2>{phoneNumber}</h2>
-                <i
-                  className="bi bi-phone-fill"
-                  style={{ color: '#10514B' }}
-                ></i>
+                <i className={`bi bi-phone-fill ${styles.icon}`}></i>
               </div>
               <div className={styles.link}>
                 <h2>{country}</h2>
-                <i
-                  className="bi bi-geo-alt-fill"
-                  style={{ color: '#10514B' }}
-                ></i>
+                <i className={`bi bi-geo-alt-fill ${styles.icon}`}></i>
               </div>
             </div>
           </div>
