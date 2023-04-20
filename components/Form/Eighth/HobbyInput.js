@@ -51,7 +51,7 @@ const HobbyInput = ({ form, push, remove }) => {
         endIcon={<AddIcon />}
         disabled={!form.isValid}
       >
-        ADD More Hobby
+        ADD another Hobby
       </Button>
     </div>
   );

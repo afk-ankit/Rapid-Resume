@@ -31,7 +31,7 @@ export default function Home() {
             }}
             onClick={clickHandler}
           >
-            Contained
+            Lav gratis CV
           </Button>
         </Link>
       </div>

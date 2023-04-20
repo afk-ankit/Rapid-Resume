@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from '@/styles/DesignThree.module.scss';
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import ReactToPrint from 'react-to-print';
 
-const DesignThree = () => {
+const DesignThree = ({ handleRef }) => {
   const {
     firstName,
     lastName,
@@ -21,21 +21,24 @@ const DesignThree = () => {
     url,
   } = useSelector((state) => state);
   const componentRef = useRef();
+  useEffect(() => {
+    handleRef((prev) => {
+      const arr = [prev];
+      arr[0] = componentRef;
+      return arr;
+    });
+  }, []);
+  const sortedLanguage = [...language].sort((a, b) => {
+    if (a.rating === b.rating) {
+      // If the ratings are the same, sort alphabetically by name
+      return a.name.localeCompare(b.name);
+    } else {
+      // Otherwise, sort by rating
+      return b.rating - a.rating;
+    }
+  });
   return (
     <>
-      <ReactToPrint
-        trigger={() => (
-          <div
-            style={{
-              width: 'fit-content',
-              margin: '2rem auto',
-            }}
-          >
-            <Button variant="contained">Print</Button>
-          </div>
-        )}
-        content={() => componentRef.current}
-      />
       <div className={styles.page} ref={componentRef}>
         <div className={styles.headingContainer}>
           <div>
@@ -155,7 +158,7 @@ const DesignThree = () => {
                 <hr />
               </div>
               <div className={styles.languageContainer}>
-                {language.map((item) => {
+                {sortedLanguage.map((item) => {
                   const arr1 = new Array(Number(item.rating)).fill(0);
                   const arr2 = new Array(5 - Number(item.rating)).fill(0);
                   return (

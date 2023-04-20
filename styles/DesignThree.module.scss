@@ -2,15 +2,15 @@
 @import 'mixins';
 
 
-$light-green:#87A8A5;
-$dark-green:#10514B;
+$light-green: #87A8A5;
+$dark-green: #10514B;
 
 
-.fullwidth{
+.fullwidth {
     align-self: stretch;
 }
 
-.flex{
+.flex {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
@@ -18,112 +18,125 @@ $dark-green:#10514B;
 }
 
 .page {
-  position: relative;
-  font-family: 'Inter', sans-serif;
-  margin: auto;
-  min-height: 1120px;
-  width: 792px;
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
-  background-color: white;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    margin: auto;
+    min-height: 1120px;
+    width: 792px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
 }
 
 //typography
-.subHeadingBold{
+.subHeadingBold {
     @include subHeadingBold
 }
-.subHeadingLight{
+
+.subHeadingLight {
     @include subHeadingLight
 }
 
-.date{
+.date {
     @include date
 }
-.normalDescription{
+
+.normalDescription {
     @include normalDescription;
-    li{
+
+    li {
         position: relative;
-        left:15px;
+        left: 15px;
     }
 }
 
 
 //heading
 
-.headingContainer{
+.headingContainer {
     display: flex;
     flex-direction: column;
     padding: 32px;
     gap: 16px;
-    &>div:first-child{
+
+    &>div:first-child {
 
         display: flex;
         justify-content: space-between;
 
-        &>div:first-child{
+        &>div:first-child {
             display: flex;
             gap: 2rem;
-            &>img{
+
+            &>img {
                 width: 129px;
                 height: 129px;
                 object-fit: cover;
                 border-radius: 5rem;
             }
-            &>h1{
+
+            &>h1 {
                 @include headingName
             }
         }
-        &>div:nth-child(2){
+
+        &>div:nth-child(2) {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             justify-content: space-between;
             gap: 12px;
-            &>div{
+
+            &>div {
                 display: flex;
                 gap: 16px;
-                &>h2{
+
+                &>h2 {
                     @include normalDescription;
                 }
             }
         }
     }
 
-    &>div:nth-child(2){
+    &>div:nth-child(2) {
         @include normalDescription
     }
 }
 
 // main section
 
-.main{
+.main {
     display: grid;
     grid: auto/1fr 1fr;
     gap: 40px;
+
     // job section
-    &>div:first-child{ 
-        &>div>div:not(:first-child){
+    &>div:first-child {
+        &>div>div:not(:first-child) {
             padding-left: 32px;
             margin-bottom: 16px;
         }
     }
+
     // education etc. section
-   &>div:nth-child(2){
-    &>div:not(:last-child){
-        margin-bottom: 20px;
+    &>div:nth-child(2) {
+        &>div:not(:last-child) {
+            margin-bottom: 20px;
+        }
     }
-   }
 }
 
 
-.mainHeading{
+.mainHeading {
     margin-bottom: 16px;
-    &>h1{
+
+    &>h1 {
         padding-left: 32px;
         @include heading;
         color: black;
     }
-    &>hr{
+
+    &>hr {
         border: 2px solid $dark-green;
     }
 }
@@ -131,51 +144,52 @@ $dark-green:#10514B;
 
 
 //skills 
-.skillsContainer{
+.skillsContainer {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-  }
-  .skills{
+}
+
+.skills {
     color: white;
     background-color: $light-green;
     padding: 3.2px 16px;
     border-radius: 5px;
-  }
+}
 
 //language
 
-.languageContainer{
+.languageContainer {
     margin-top: 16px;
     display: flex;
     flex-direction: column;
     gap: 4.8px;
-  }
-  
-  .language{
+}
+
+.language {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 16px;
-  }
-  
-  .rating{
+}
+
+.rating {
     display: flex;
-    gap: 16px ;
+    gap: 16px;
     scale: (0.7);
     color: $dark-green;
-  }
+}
 
 //interest
-.hobby{
+.hobby {
     border: 2px solid $dark-green;
     padding: 3.2px 16px;
     border-radius: 5px;
-  }
+}
 
-.waterMark{
+.waterMark {
     position: absolute;
     bottom: 20px;
     right: 20px;
     width: 150px;
-    opacity: 100%;
-  }
+    opacity: 40%;
+}

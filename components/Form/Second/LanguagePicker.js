@@ -148,7 +148,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             }}
             endIcon={<AddIcon />}
           >
-            Add More {label1}
+            Add another {label1}
           </Button>
         </div>
       </div>
