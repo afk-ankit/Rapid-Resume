@@ -4,9 +4,29 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import userReducer from './slice/userSlice';
 
+function excludeUrl(state) {
+  const { url, ...stateWithoutUrl } = state;
+  return stateWithoutUrl;
+}
+
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: [
+    'firstName',
+    'lastName',
+    'email',
+    'country',
+    'phoneNumber',
+    'language',
+    'softSkill',
+    'technicalSkill',
+    'about',
+    'education',
+    'job',
+    'hobby',
+  ],
+  // transforms: [excludeUrl],
 };
 
 const persistedReducer = persistReducer(persistConfig, userReducer);
