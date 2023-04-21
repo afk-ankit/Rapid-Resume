@@ -84,109 +84,116 @@ const DesignOne = ({ handleRef, theme }) => {
         </div>
         <main className={styles.main}>
           <div>
-            <h1 className={styles.heading}>Work Experience</h1>
-            {job.map((item) => {
-              return (
-                <div style={{ marginBottom: '1rem' }}>
-                  <h2 className={styles.subHeadingBold}>{item.name}</h2>
-                  <h2 className={styles.subHeadingLight}>{item.field}</h2>
-                  <div className={styles.dateLocation}>
-                    <h3 className={styles.date}>
-                      {item.pStartDate} - {item.pEndDate}
-                    </h3>
+            <div>
+              <h1 className={styles.heading}>Work Experience</h1>
+              {job.map((item) => {
+                return (
+                  <div style={{ marginBottom: '1rem' }}>
+                    <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                    <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                    <div className={styles.dateLocation}>
+                      <h3 className={styles.date}>
+                        {item.pStartDate} - {item.pEndDate}
+                      </h3>
+                    </div>
+                    {item.proud[0] && (
+                      <h3 className={styles.date}>Achievements/Tasks</h3>
+                    )}
+                    <ul
+                      className={`${styles.list} ${styles.normalDescription}`}
+                    >
+                      {item.proud.map((item) => {
+                        if (item) {
+                          return <li>{item}</li>;
+                        }
+                      })}
+                    </ul>
                   </div>
-                  {item.proud[0] && (
-                    <h3 className={styles.date}>Achievements/Tasks</h3>
-                  )}
-                  <ul className={`${styles.list} ${styles.normalDescription}`}>
-                    {item.proud.map((item) => {
-                      if (item) {
-                        return <li>{item}</li>;
-                      }
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <div style={{ marginBottom: '2rem' }}>
-              <h1 className={styles.heading}>Soft-Skills</h1>
-              <div
-                className={`${styles.skillsContainer} ${styles.normalDescription}`}
-              >
-                {softSkill.map((item) => (
-                  <span className={`${styles.skills}`}>{item.name}</span>
-                ))}
-              </div>
+                );
+              })}
             </div>
             <div>
-              <h1 className={styles.heading}>Technical-Skills</h1>
-              <div
-                className={`${styles.skillsContainer} ${styles.normalDescription}`}
-              >
-                {technicalSkill.map((item) => (
-                  <span className={`${styles.skills}`}>{item.name}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h1 className={styles.heading}>Education</h1>
-            {education.map((item) => {
-              return (
-                <div style={{ marginBottom: '1rem' }}>
-                  <h2 className={styles.subHeadingBold}>{item.name}</h2>
-                  <h2 className={styles.subHeadingLight}>{item.field}</h2>
-                  <div className={styles.dateLocation}>
-                    <h3 className={styles.date}>
-                      {item.pStartDate} - {item.pEndDate}
-                    </h3>
-                  </div>
-                  {item.proud[0] && (
-                    <h3 className={styles.date}>Achievements/Tasks</h3>
-                  )}
-                  <ul className={`${styles.list} ${styles.normalDescription}`}>
-                    {item.proud.map((item) => {
-                      if (item) return <li>{item}</li>;
-                    })}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <h1 className={styles.heading}>Language</h1>
-            <div className={styles.languageContainer}>
-              {sortedLanguage.map((item) => {
-                const arr1 = new Array(Number(item.rating)).fill(0);
-                const arr2 = new Array(5 - Number(item.rating)).fill(0);
+              <h1 className={styles.heading}>Education</h1>
+              {education.map((item) => {
                 return (
-                  <div className={styles.language}>
-                    <h3 className={styles.normalDescription}>{item.name}</h3>
-                    <div className={styles.rating}>
-                      {arr1.map((item) => (
-                        <i class="bi bi-circle-fill"></i>
-                      ))}
-                      {arr2.map((item) => (
-                        <i class="bi bi-circle"></i>
-                      ))}
+                  <div style={{ marginBottom: '1rem' }}>
+                    <h2 className={styles.subHeadingBold}>{item.name}</h2>
+                    <h2 className={styles.subHeadingLight}>{item.field}</h2>
+                    <div className={styles.dateLocation}>
+                      <h3 className={styles.date}>
+                        {item.pStartDate} - {item.pEndDate}
+                      </h3>
                     </div>
+                    {item.proud[0] && (
+                      <h3 className={styles.date}>Achievements/Tasks</h3>
+                    )}
+                    <ul
+                      className={`${styles.list} ${styles.normalDescription}`}
+                    >
+                      {item.proud.map((item) => {
+                        if (item) return <li>{item}</li>;
+                      })}
+                    </ul>
                   </div>
                 );
               })}
             </div>
           </div>
-
           <div>
-            <h1 className={styles.heading}>Interests</h1>
-            <div
-              className={`${styles.skillsContainer} ${styles.normalDescription}`}
-            >
-              {hobby.map((item) => (
-                <span className={`${styles.hobby}`}>{item}</span>
-              ))}
+            <div>
+              <div style={{ marginBottom: '16px' }}>
+                <h1 className={styles.heading}>Soft-Skills</h1>
+                <div
+                  className={`${styles.skillsContainer} ${styles.normalDescription}`}
+                >
+                  {softSkill.map((item) => (
+                    <span className={`${styles.skills}`}>{item.name}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h1 className={styles.heading}>Technical-Skills</h1>
+                <div
+                  className={`${styles.skillsContainer} ${styles.normalDescription}`}
+                >
+                  {technicalSkill.map((item) => (
+                    <span className={`${styles.skills}`}>{item.name}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1 className={styles.heading}>Languages</h1>
+              <div className={styles.languageContainer}>
+                {sortedLanguage.map((item) => {
+                  const arr1 = new Array(Number(item.rating)).fill(0);
+                  const arr2 = new Array(5 - Number(item.rating)).fill(0);
+                  return (
+                    <div className={styles.language}>
+                      <h3 className={styles.normalDescription}>{item.name}</h3>
+                      <div className={styles.rating}>
+                        {arr1.map((item) => (
+                          <i class="bi bi-circle-fill"></i>
+                        ))}
+                        {arr2.map((item) => (
+                          <i class="bi bi-circle"></i>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div>
+              <h1 className={styles.heading}>Interests</h1>
+              <div
+                className={`${styles.skillsContainer} ${styles.normalDescription}`}
+              >
+                {hobby.map((item) => (
+                  <span className={`${styles.hobby}`}>{item}</span>
+                ))}
+              </div>
             </div>
           </div>
         </main>
