@@ -26,18 +26,6 @@ const Ninth = () => {
   const prevHandler = () => {
     router.push('/form/eighth');
   };
-  const pageStyle = `
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  @media print {
-    body {
-      margin: 0;
-      box-shadow: none;
-    }
-  }
-`;
   const [template, setTemplate] = useState('0');
   const [color, setColor] = useState('0');
   const [componentRef, handleRef] = useState([null, null, null]);
@@ -125,7 +113,14 @@ const Ninth = () => {
         </div>
       </div>
 
-      <div style={{ margin: '2rem 0' }}>{templateHandler(template)}</div>
+      <div
+        style={{
+          margin: '2rem auto',
+          // width: '792px',
+        }}
+      >
+        {templateHandler(template)}
+      </div>
       <div className={styles.btnGroup}>
         <Button
           startIcon={<KeyboardArrowLeftIcon />}
@@ -135,7 +130,6 @@ const Ninth = () => {
           Tilbage
         </Button>
         <ReactToPrint
-          pageStyle={pageStyle}
           trigger={() => (
             <div>
               <Button variant="contained" endIcon={<LocalPrintshopIcon />}>

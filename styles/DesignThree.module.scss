@@ -43,6 +43,9 @@ $secondary:var(--secondary);
     overflow: hidden;
     font-family: 'Inter', sans-serif;
     background-color: white;
+    @media print {
+        min-height: 100vh;
+      }
 }
 
 //typography

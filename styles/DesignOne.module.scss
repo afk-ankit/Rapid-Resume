@@ -14,16 +14,20 @@
     --primary:rgb(255, 195, 83);
   }
 
+
 .page {
   position: relative;
   font-family: 'Inter', sans-serif;
   padding: 35px;
   margin: auto;
-  min-height: 1120px;
   width: 792px;
+  min-height: 1120px;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
   background: white;
+  @media print {
+    min-height: 100vh;
+  }
 }
 
 /* This is the heading section */
