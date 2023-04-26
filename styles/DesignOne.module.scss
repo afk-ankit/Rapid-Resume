@@ -1,5 +1,5 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css');
-
+@import './scale';
 
   $color:var(--primary);
   
@@ -15,6 +15,8 @@
   }
 
 
+  
+
 .page {
   position: relative;
   font-family: 'Inter', sans-serif;
@@ -25,6 +27,7 @@
   overflow: hidden;
   font-family: 'Inter', sans-serif;
   background: white;
+ 
   @media print {
     min-height: 100vh;
     min-width:792px;

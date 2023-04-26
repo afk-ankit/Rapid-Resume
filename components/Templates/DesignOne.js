@@ -51,7 +51,7 @@ const DesignOne = ({ handleRef, theme }) => {
   };
 
   return (
-    <>
+    <div className={styles.scale}>
       <div className={handleTheme(theme)} ref={componentRef}>
         <div className={styles.headingContainer}>
           {url && (
@@ -199,7 +199,7 @@ const DesignOne = ({ handleRef, theme }) => {
         </main>
         <img src="/company-logo.png" className={styles.waterMark} />
       </div>
-    </>
+    </div>
   );
 };
 

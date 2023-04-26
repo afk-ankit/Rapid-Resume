@@ -113,13 +113,7 @@ const Ninth = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          margin: '2rem auto',
-        }}
-      >
-        {templateHandler(template)}
-      </div>
+      {templateHandler(template)}
       <div className={styles.btnGroup}>
         <Button
           startIcon={<KeyboardArrowLeftIcon />}

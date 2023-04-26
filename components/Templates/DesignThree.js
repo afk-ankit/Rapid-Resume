@@ -48,7 +48,7 @@ const DesignThree = ({ handleRef, theme }) => {
     }
   };
   return (
-    <>
+    <div className={styles.scale}>
       <div className={handleTheme(theme)} ref={componentRef}>
         <div className={styles.headingContainer}>
           <div>
@@ -196,7 +196,7 @@ const DesignThree = ({ handleRef, theme }) => {
         </main>
         <img src="/company-logo.png" className={styles.waterMark} />
       </div>
-    </>
+    </div>
   );
 };
 
