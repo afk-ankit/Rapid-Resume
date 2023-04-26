@@ -116,7 +116,6 @@ const Ninth = () => {
       <div
         style={{
           margin: '2rem auto',
-          // width: '792px',
         }}
       >
         {templateHandler(template)}
