@@ -6,17 +6,20 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
 
 const Test = () => {
   const [value, setValue] = useState({
-    date: null,
+    date: moment(),
   });
-  useEffect(() => {}, [value]);
 
+  console.log(value);
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <DatePicker
+        autoOk
+        vairant="inline"
         label="Choose Starting Date"
         value={value.date}
         onChange={(e) => setValue({ date: e })}

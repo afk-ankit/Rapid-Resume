@@ -13,6 +13,7 @@ import { Field } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import moment from 'moment';
 import { useState } from 'react';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const EducationInput = ({ form, push, remove, title }) => {
   const { values } = form;
@@ -77,7 +78,7 @@ const EducationInput = ({ form, push, remove, title }) => {
             )}
           </Field>
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <div className={styles.flex}>
               <Field name={`${title}[${index}].startDate`}>
                 {({ form, field, meta }) => {

@@ -34,8 +34,8 @@ const Sixth = () => {
       newData.education = newData.education.map((item) => {
         return {
           ...item,
-          startDate: null,
-          endDate: null,
+          startDate: moment(item.startDate),
+          endDate: moment(item.endDate),
         };
       });
       setInitialValuse(newData);

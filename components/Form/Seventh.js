@@ -33,8 +33,8 @@ const Seventh = () => {
       newData.job = newData.job.map((item) => {
         return {
           ...item,
-          startDate: null,
-          endDate: null,
+          startDate: moment(item.startDate),
+          endDate: moment(item.endDate),
         };
       });
       setInitialValuse(newData);
