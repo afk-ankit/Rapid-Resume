@@ -47,6 +47,9 @@ $secondary-light:var(--secondary-light);
   display: grid;
   grid: auto/244px auto;
   background-color: white;
+  @media print {
+    min-height: 100vh;
+  }
 }
 
 .sidebar{

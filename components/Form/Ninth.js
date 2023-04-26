@@ -125,7 +125,14 @@ const Ninth = () => {
         </div>
       </div>
 
-      <div style={{ margin: '2rem 0' }}>{templateHandler(template)}</div>
+      <div
+        style={{
+          margin: '2rem auto',
+          width: '792px',
+        }}
+      >
+        {templateHandler(template)}
+      </div>
       <div className={styles.btnGroup}>
         <Button
           startIcon={<KeyboardArrowLeftIcon />}
@@ -135,7 +142,6 @@ const Ninth = () => {
           Tilbage
         </Button>
         <ReactToPrint
-          pageStyle={pageStyle}
           trigger={() => (
             <div>
               <Button variant="contained" endIcon={<LocalPrintshopIcon />}>
