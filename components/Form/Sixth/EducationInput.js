@@ -32,7 +32,7 @@ const EducationInput = ({ form, push, remove, title }) => {
 
   if (title == 'education') {
     label1 = 'Name of School/Educational place';
-    label2 = 'Education';
+    label2 = 'Education i.e. Gymnasium or Univeristy degree';
     label3 = 'Top grades in English';
     label4 = 'Part of student advisory board';
     label5 = 'Received school award for outstanding result';

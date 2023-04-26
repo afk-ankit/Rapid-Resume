@@ -49,6 +49,8 @@ $secondary-light:var(--secondary-light);
   background-color: white;
   @media print {
     min-height: 100vh;
+    width:100%;
+    min-width:792px;
   }
 }
 
