@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
-import { PanZoom } from 'react-easy-panzoom';
+
 const Test = () => {
   const [value, setValue] = useState({
     date: moment(),
@@ -16,18 +16,16 @@ const Test = () => {
 
   console.log(value);
   return (
-    <div
-      style={{
-        width: '500px',
-        height: '500px',
-        outline: '1px solid red',
-        overflow: 'scroll',
-      }}
-    >
-      <PanZoom preventPan={() => true}>
-        <img src="dp.png" />
-      </PanZoom>
-    </div>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <DatePicker
+        autoOk
+        vairant="inline"
+        label="Choose Starting Date"
+        value={value.date}
+        onChange={(e) => setValue({ date: e })}
+        views={['year', 'month']}
+      />
+    </LocalizationProvider>
   );
 };
 
