@@ -20,6 +20,7 @@ import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import ReactToPrint from 'react-to-print';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import Link from 'next/link';
+import { PanZoom } from 'react-easy-panzoom';
 
 const Ninth = () => {
   const router = useRouter();
@@ -34,20 +35,22 @@ const Ninth = () => {
       case '0':
         return (
           <div className={styles.display}>
-            <DesignOne handleRef={handleRef} theme={color} />
+            <PanZoom preventPan={() => true}>
+              <DesignOne handleRef={handleRef} theme={color} />
+            </PanZoom>
           </div>
         );
       case '1':
         return (
-          <div className={styles.display}>
+          <PanZoom preventPan={() => true}>
             <DesignTwo handleRef={handleRef} theme={color} />
-          </div>
+          </PanZoom>
         );
       case '2':
         return (
-          <div className={styles.display}>
+          <PanZoom preventPan={() => true}>
             <DesignThree handleRef={handleRef} theme={color} />
-          </div>
+          </PanZoom>
         );
       default:
         return (
@@ -113,13 +116,7 @@ const Ninth = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          margin: '2rem auto',
-        }}
-      >
-        {templateHandler(template)}
-      </div>
+      <div className={styles.themeDisplay}>{templateHandler(template)}</div>
       <div className={styles.btnGroup}>
         <Button
           startIcon={<KeyboardArrowLeftIcon />}
