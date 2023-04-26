@@ -27,6 +27,8 @@
   background: white;
   @media print {
     min-height: 100vh;
+    min-width:792px;
+    width: 100%;
   }
 }
 
