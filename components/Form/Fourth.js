@@ -61,7 +61,7 @@ const Fourth = () => {
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      field={'softSkill'}
+                      tag={'softSkill'}
                     />
                   )}
                 />
@@ -74,7 +74,7 @@ const Fourth = () => {
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      field={'technicalSkill'}
+                      tag={'technicalSkill'}
                     />
                   )}
                 />

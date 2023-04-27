@@ -12,16 +12,28 @@ import styles from '@/styles/Sixth.module.scss';
 import { Field } from 'formik';
 import AddIcon from '@mui/icons-material/Add';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
-const EducationInput = ({ form, push, remove, title }) => {
+const EducationInput = ({
+  form,
+  push,
+  remove,
+  title,
+  setDateValid,
+  DateValid,
+}) => {
+  console.log(DateValid);
   const { values } = form;
+  const { education, job } = values;
+  let dateValid;
   let arr = [];
   if (title == 'education') {
     arr = values.education;
+    dateValid = values.education;
   } else {
     arr = values.job;
+    dateValid = values.job;
   }
 
   let label1;
@@ -32,7 +44,7 @@ const EducationInput = ({ form, push, remove, title }) => {
 
   if (title == 'education') {
     label1 = 'Name of School/Educational place';
-    label2 = 'Education i.e. Gymnasium or Univeristy degree';
+    label2 = 'Education i.e. Gymnasium or University degree';
     label3 = 'Top grades in English';
     label4 = 'Part of student advisory board';
     label5 = 'Received school award for outstanding result';
@@ -102,16 +114,23 @@ const EducationInput = ({ form, push, remove, title }) => {
                         disableFuture
                         minDate={new moment('2000-01-01T00:00:00.000Z')}
                       />
-                      {/* {meta.error && meta.touched && (
-                        <FormHelperText>{meta.error}</FormHelperText>
-                      )} */}
+                      {meta.error && meta.touched && (
+                        <FormHelperText>Start Date is Required</FormHelperText>
+                      )}
                     </FormControl>
                   );
                 }}
               </Field>
               <Field name={`${title}[${index}].endDate`}>
                 {({ form, field, meta }) => {
-                  const { setFieldValue, setFieldTouched } = form;
+                  const endDate = dateValid[index].endDate;
+                  const startDate = dateValid[index].startDate;
+                  const isEndValid = endDate?.isAfter(startDate);
+                  if (isEndValid) setDateValid(true);
+                  if (!isEndValid) setDateValid(false);
+
+                  const { setFieldValue, setFieldTouched, setFieldError } =
+                    form;
                   return (
                     <FormControl
                       fullWidth
@@ -130,9 +149,14 @@ const EducationInput = ({ form, push, remove, title }) => {
                           setFieldValue(`${title}[${index}].endDate`, val);
                         }}
                       />
-                      {/* {meta.error && meta.touched && (
-                        <FormHelperText>{meta.error}</FormHelperText>
-                      )} */}
+                      {meta.error && meta.touched && (
+                        <FormHelperText>Ending Date is required</FormHelperText>
+                      )}
+                      {!isEndValid && meta.touched && (
+                        <FormHelperText style={{ color: 'red' }}>
+                          End Date must be greater than Starting Date
+                        </FormHelperText>
+                      )}
                     </FormControl>
                   );
                 }}
@@ -189,7 +213,7 @@ const EducationInput = ({ form, push, remove, title }) => {
       ))}
       <Button
         style={
-          form.isValid
+          Boolean(form.isValid && DateValid)
             ? { alignSelf: 'center' }
             : { alignSelf: 'center', background: 'gray', color: 'white' }
         }
@@ -204,7 +228,7 @@ const EducationInput = ({ form, push, remove, title }) => {
           });
         }}
         endIcon={<AddIcon />}
-        disabled={!form.isValid}
+        disabled={Boolean(!form.isValid && !DateValid)}
       >
         Add More {title}s
       </Button>

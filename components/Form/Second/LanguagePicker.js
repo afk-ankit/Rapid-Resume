@@ -16,26 +16,41 @@ import {
   FormHelperText,
   FormGroup,
 } from '@mui/material';
-import { Field, Form } from 'formik';
+import { Field } from 'formik';
 import useWindowWidth from '@/components/utils/useWindow';
+import { useState } from 'react';
 const languageArr = Object.entries(language);
 
-const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
+const LanguagePicker = ({
+  label1,
+  label2,
+  form,
+  push,
+  remove,
+  tag,
+  setChoosen,
+  choosen,
+}) => {
   let skill;
   label1 === 'Soft-Skills' ? (skill = softSkill) : (skill = technicalSkill);
 
   const { values } = form;
   let arr;
 
-  if (field == 'language') {
+  if (tag == 'language') {
     arr = values.language;
   }
-  if (field == 'softSkill') {
+  if (tag == 'softSkill') {
     arr = values.softSkill;
   }
-  if (field == 'technicalSkill') {
+  if (tag == 'technicalSkill') {
     arr = values.technicalSkill;
   }
+
+  const choda = [];
+  const boka = languageArr.map((item) => item[1].name);
+  // values.language.forEach((item) => choda.push(boka));
+  // const [reducedLanguageArr, setReducedLanguageArr] = useState([...choda]);
 
   const isMobile = useWindowWidth() < 850;
 
@@ -44,8 +59,9 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
       <div>
         {arr.map((inputField, index) => (
           <div key={index} className={styles.languageContainer}>
-            <Field name={`${field}[${index}].name`}>
+            <Field name={`${tag}[${index}].name`}>
               {({ form, field, meta }) => {
+                const { setFieldValue } = form;
                 return (
                   <>
                     <div className={styles.language}>
@@ -64,12 +80,26 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                           id="language-select"
                           label="Select Language"
                           {...field}
+                          onChange={(e) => {
+                            setFieldValue(
+                              `${tag}[${index}].name`,
+                              e.target.value
+                            );
+                            // setChoosen((prev) => {
+                            //   return {
+                            //     array: [
+                            //       ...prev.array,
+                            //       { word: e.target.value, index },
+                            //     ],
+                            //   };
+                            // });
+                          }}
                           error={meta.touched && Boolean(meta.error)}
                         >
                           {label1 == 'Language'
-                            ? languageArr.map((value, count1) => (
-                                <MenuItem value={value[1].name} key={count1}>
-                                  {value[1].name}
+                            ? boka.map((value, count1) => (
+                                <MenuItem value={value} key={count1}>
+                                  {value}
                                 </MenuItem>
                               ))
                             : skill.map((value, count1) => (
@@ -87,7 +117,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
                 );
               }}
             </Field>
-            <Field name={`${field}[${index}].rating`}>
+            <Field name={`${tag}[${index}].rating`}>
               {({ field, form, meta }) => {
                 return (
                   <>
@@ -143,6 +173,11 @@ const LanguagePicker = ({ label1, label2, form, push, remove, field }) => {
             variant="contained"
             onClick={() => {
               push({ name: '', rating: 0 });
+              // setReducedLanguageArr((prev) => {
+              //   const arr = [...prev];
+              //   arr.push(boka);
+              //   return arr;
+              // });
             }}
             endIcon={<AddIcon />}
           >

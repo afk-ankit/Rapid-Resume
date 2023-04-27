@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { handleIsValid } from '../utils/handleIsValid';
 import StepCount from '../utils/StepCount';
+import { useState } from 'react';
 
 const arr = Object.entries(country);
 
@@ -24,6 +25,12 @@ const Second = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
   let language;
+
+  const [choosen, setChoosen] = useState({
+    array: [],
+  });
+
+  console.log(choosen);
 
   if (userData.language[0].name) {
     language = userData.language;
@@ -117,7 +124,8 @@ const Second = () => {
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      field={'language'}
+                      tag={'language'}
+                      setChoosen={setChoosen}
                     />
                   )}
                 />

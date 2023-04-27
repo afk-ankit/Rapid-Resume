@@ -15,6 +15,7 @@ import moment from 'moment';
 const Sixth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
+  const [dateValid, setDateValid] = useState(true);
   const savedData = Boolean(userData?.education[0].name);
   const [initialValues, setInitialValuse] = useState({
     education: [
@@ -70,6 +71,8 @@ const Sixth = () => {
                     push={arrayHelpers.push}
                     remove={arrayHelpers.remove}
                     title="education"
+                    setDateValid={setDateValid}
+                    DateValid={dateValid}
                   />
                 )}
               />
@@ -78,7 +81,11 @@ const Sixth = () => {
               prev={'/form/fifth'}
               next={'/form/seventh'}
               onSubmit={formik.handleSubmit}
-              isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
+              isValid={handleIsValid(
+                savedData,
+                formik.dirty,
+                formik.isValid && dateValid
+              )}
             />
           </Form>
         )}
