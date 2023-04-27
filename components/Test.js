@@ -1,31 +1,45 @@
-import { Field, FieldArray, Form, Formik } from 'formik';
-import Test2 from './Test2';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
-import { useDispatch, useSelector } from 'react-redux';
-import { populate } from '@/store/slice/userSlice';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import moment from 'moment';
+import React, { useState } from 'react';
+import { FieldArray, Form, Formik } from 'formik';
+import Autocomplete1 from './Form/Fourth/Autocomplete';
 
 const Test = () => {
-  const [value, setValue] = useState({
-    date: moment(),
-  });
+  const [value, setValue] = useState(null);
 
-  console.log(value);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleInputChange = (event, newInputValue) => {
+    setValue(newInputValue);
+  };
+
+  const initialValues = {
+    softSkill: [{ name: '', rating: 0 }],
+  };
+
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
-      <DatePicker
-        autoOk
-        vairant="inline"
-        label="Choose Starting Date"
-        value={value.date}
-        onChange={(e) => setValue({ date: e })}
-        views={['year', 'month']}
-      />
-    </LocalizationProvider>
+    <div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => console.log(values)}
+      >
+        <Form>
+          <FieldArray
+            name="softSkill"
+            render={(arrayHelpers) => {
+              return (
+                <Autocomplete1
+                  form={arrayHelpers.form}
+                  push={arrayHelpers.push}
+                  remove={arrayHelpers.remove}
+                />
+              );
+            }}
+          />
+          <button type="submit">Submit</button>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 

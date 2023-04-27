@@ -10,6 +10,7 @@ import { populate } from '@/store/slice/userSlice';
 import { ValidFour } from '@/schemas/ValidFour';
 import { handleIsValid } from '../utils/handleIsValid';
 import StepCount from '../utils/StepCount';
+import Autocomplete1 from './Fourth/Autocomplete';
 const Fourth = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
@@ -55,26 +56,24 @@ const Fourth = () => {
                 <FieldArray
                   name="softSkill"
                   render={(arrayHelpers) => (
-                    <LanguagePicker
-                      label1={'Soft-Skills'}
-                      label2={'Skill'}
+                    <Autocomplete1
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      tag={'softSkill'}
+                      label1="Soft-Skills"
+                      label2="softSkill"
                     />
                   )}
                 />
                 <FieldArray
                   name="technicalSkill"
                   render={(arrayHelpers) => (
-                    <LanguagePicker
-                      label1={'Technical-Skills'}
-                      label2={'Skill'}
+                    <Autocomplete1
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      tag={'technicalSkill'}
+                      label1="Technical-Skills"
+                      label2="technicalSkill"
                     />
                   )}
                 />

@@ -21,16 +21,7 @@ import useWindowWidth from '@/components/utils/useWindow';
 import { useState } from 'react';
 const languageArr = Object.entries(language);
 
-const LanguagePicker = ({
-  label1,
-  label2,
-  form,
-  push,
-  remove,
-  tag,
-  setChoosen,
-  choosen,
-}) => {
+const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
   let skill;
   label1 === 'Soft-Skills' ? (skill = softSkill) : (skill = technicalSkill);
 
@@ -47,10 +38,7 @@ const LanguagePicker = ({
     arr = values.technicalSkill;
   }
 
-  const choda = [];
-  const boka = languageArr.map((item) => item[1].name);
-  // values.language.forEach((item) => choda.push(boka));
-  // const [reducedLanguageArr, setReducedLanguageArr] = useState([...choda]);
+  const reducedLang = languageArr.map((item) => item[1].name);
 
   const isMobile = useWindowWidth() < 850;
 
@@ -85,19 +73,11 @@ const LanguagePicker = ({
                               `${tag}[${index}].name`,
                               e.target.value
                             );
-                            // setChoosen((prev) => {
-                            //   return {
-                            //     array: [
-                            //       ...prev.array,
-                            //       { word: e.target.value, index },
-                            //     ],
-                            //   };
-                            // });
                           }}
                           error={meta.touched && Boolean(meta.error)}
                         >
                           {label1 == 'Language'
-                            ? boka.map((value, count1) => (
+                            ? reducedLang.map((value, count1) => (
                                 <MenuItem value={value} key={count1}>
                                   {value}
                                 </MenuItem>
@@ -173,11 +153,6 @@ const LanguagePicker = ({
             variant="contained"
             onClick={() => {
               push({ name: '', rating: 0 });
-              // setReducedLanguageArr((prev) => {
-              //   const arr = [...prev];
-              //   arr.push(boka);
-              //   return arr;
-              // });
             }}
             endIcon={<AddIcon />}
           >

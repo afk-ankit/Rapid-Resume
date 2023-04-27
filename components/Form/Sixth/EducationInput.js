@@ -129,8 +129,7 @@ const EducationInput = ({
                   if (isEndValid) setDateValid(true);
                   if (!isEndValid) setDateValid(false);
                   const check = dateValid[index].currWorking;
-                  const { setFieldValue, setFieldTouched, setFieldError } =
-                    form;
+                  const { setFieldValue, setFieldTouched } = form;
                   return (
                     <FormControl
                       fullWidth
