@@ -14,6 +14,7 @@ import AddIcon from '@mui/icons-material/Add';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { CookieSharp } from '@mui/icons-material';
 
 const EducationInput = ({
   form,
@@ -23,7 +24,6 @@ const EducationInput = ({
   setDateValid,
   DateValid,
 }) => {
-  console.log(DateValid);
   const { values } = form;
   const { education, job } = values;
   let dateValid;
@@ -128,7 +128,7 @@ const EducationInput = ({
                   const isEndValid = endDate?.isAfter(startDate);
                   if (isEndValid) setDateValid(true);
                   if (!isEndValid) setDateValid(false);
-
+                  const check = dateValid[index].currWorking;
                   const { setFieldValue, setFieldTouched, setFieldError } =
                     form;
                   return (
@@ -139,20 +139,58 @@ const EducationInput = ({
                         setFieldTouched(`${title}[${index}].endDate`, true);
                       }}
                     >
-                      <DatePicker
-                        label="Choose Ending Date"
-                        views={['year', 'month']}
-                        minDate={new moment('2000-01-01T00:00:00.000Z')}
-                        className={styles.fullWidth}
-                        {...field}
-                        onChange={(val) => {
-                          setFieldValue(`${title}[${index}].endDate`, val);
+                      {!check && (
+                        <DatePicker
+                          label="Choose Ending Date"
+                          views={['year', 'month']}
+                          minDate={new moment('2000-01-01T00:00:00.000Z')}
+                          className={styles.fullWidth}
+                          {...field}
+                          onChange={(val) => {
+                            setFieldValue(`${title}[${index}].endDate`, val);
+                          }}
+                        />
+                      )}
+
+                      <Field name={`${title}[${index}].currWorking`}>
+                        {({ form, field, meta }) => {
+                          return (
+                            <div className={styles.currWorking}>
+                              <span>
+                                Currently{' '}
+                                {title == 'education' ? 'studying' : 'working'}?
+                              </span>
+                              <input
+                                type="checkbox"
+                                {...field}
+                                checked={meta.value}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setFieldValue(
+                                      `${title}[${index}].currWorking`,
+                                      true
+                                    );
+                                  } else {
+                                    setFieldValue(
+                                      `${title}[${index}].currWorking`,
+                                      false
+                                    );
+                                  }
+                                  setFieldValue(
+                                    `${title}[${index}].endDate`,
+                                    moment()
+                                  );
+                                  setDateValid(true);
+                                }}
+                              />
+                            </div>
+                          );
                         }}
-                      />
-                      {meta.error && meta.touched && (
+                      </Field>
+                      {meta.error && meta.touched && !check && (
                         <FormHelperText>Ending Date is required</FormHelperText>
                       )}
-                      {!isEndValid && meta.touched && (
+                      {!isEndValid && meta.touched && !check && (
                         <FormHelperText style={{ color: 'red' }}>
                           End Date must be greater than Starting Date
                         </FormHelperText>

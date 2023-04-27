@@ -93,7 +93,8 @@ const DesignOne = ({ handleRef, theme }) => {
                     <h2 className={styles.subHeadingLight}>{item.field}</h2>
                     <div className={styles.dateLocation}>
                       <h3 className={styles.date}>
-                        {item.pStartDate} - {item.pEndDate}
+                        {item.pStartDate} -{' '}
+                        {item.currWorking ? 'Currently Working' : item.pEndDate}
                       </h3>
                     </div>
                     {item.proud[0] && (
@@ -121,7 +122,10 @@ const DesignOne = ({ handleRef, theme }) => {
                     <h2 className={styles.subHeadingLight}>{item.field}</h2>
                     <div className={styles.dateLocation}>
                       <h3 className={styles.date}>
-                        {item.pStartDate} - {item.pEndDate}
+                        {item.pStartDate} -{' '}
+                        {item.currWorking
+                          ? 'Currently Studying'
+                          : item.pEndDate}
                       </h3>
                     </div>
                     {item.proud[0] && (

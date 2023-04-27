@@ -165,7 +165,8 @@ const DesignTwo = ({ handleRef, theme }) => {
                 <h2 className={styles.subHeadingBold}>{item.name}</h2>
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>
                 <h3 className={styles.date}>
-                  {item.pStartDate}-{item.pEndDate}
+                  {item.pStartDate}-
+                  {item.currWorking ? 'Currently Working' : item.pEndDate}
                 </h3>
                 {item[0] && (
                   <h3 className={styles.date}>Achievements/results</h3>
@@ -183,7 +184,8 @@ const DesignTwo = ({ handleRef, theme }) => {
                 <h2 className={styles.subHeadingBold}>{item.name}</h2>
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>
                 <h3 className={styles.date}>
-                  {item.pStartDate}-{item.pEndDate}
+                  {item.pStartDate}-
+                  {item.currWorking ? 'Currently Studying' : item.pEndDate}
                 </h3>
                 {item[0] && (
                   <h3 className={styles.date}>Achievements/results</h3>

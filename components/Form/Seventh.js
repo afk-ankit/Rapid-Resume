@@ -15,6 +15,7 @@ const Seventh = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state);
   const savedData = Boolean(userData?.job[0].name);
+  const [dateValid, setDateValid] = useState(true);
   const [initialValues, setInitialValuse] = useState({
     job: [
       {
@@ -22,6 +23,7 @@ const Seventh = () => {
         field: '',
         startDate: null,
         endDate: null,
+        currWorking: false,
         proud: ['', '', ''],
       },
     ],
@@ -49,18 +51,6 @@ const Seventh = () => {
     dispatch(populate(values));
   };
 
-  const initialValues1 = {
-    job: [
-      {
-        name: '',
-        field: '',
-        startDate: null,
-        endDate: null,
-        proud: ['', '', ''],
-      },
-    ],
-  };
-
   return (
     <Container>
       <StepCount count={6} />
@@ -82,6 +72,8 @@ const Seventh = () => {
                     push={arrayHelpers.push}
                     remove={arrayHelpers.remove}
                     title="job"
+                    setDateValid={setDateValid}
+                    DateValid={dateValid}
                   />
                 )}
               />
@@ -90,7 +82,11 @@ const Seventh = () => {
               prev={'/form/sixth'}
               next={'/form/eighth'}
               onSubmit={formik.handleSubmit}
-              isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
+              isValid={handleIsValid(
+                savedData,
+                formik.dirty,
+                formik.isValid && dateValid
+              )}
             />
           </Form>
         )}

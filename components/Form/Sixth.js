@@ -24,6 +24,7 @@ const Sixth = () => {
         field: '',
         startDate: null,
         endDate: null,
+        currWorking: null,
         proud: ['', '', ''],
       },
     ],
