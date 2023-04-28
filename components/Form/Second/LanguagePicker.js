@@ -1,4 +1,4 @@
-import language from '@/public/languageNames.json';
+import lang from '@/public/languageNames.json';
 import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import softSkill from '@/public/softSkill.json';
@@ -18,36 +18,28 @@ import {
 } from '@mui/material';
 import { Field } from 'formik';
 import useWindowWidth from '@/components/utils/useWindow';
-import { useState } from 'react';
-const languageArr = Object.entries(language);
+import { useEffect, useState } from 'react';
+const lang2 = Object.entries(lang);
+const language = lang2.map((item) => item[1].name);
 
-const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
-  let skill;
-  label1 === 'Soft-Skills' ? (skill = softSkill) : (skill = technicalSkill);
-
+const LanguagePicker = ({ form, push, remove, setChoosen, choosen }) => {
   const { values } = form;
-  let arr;
-
-  if (tag == 'language') {
-    arr = values.language;
-  }
-  if (tag == 'softSkill') {
-    arr = values.softSkill;
-  }
-  if (tag == 'technicalSkill') {
-    arr = values.technicalSkill;
-  }
-
-  const reducedLang = languageArr.map((item) => item[1].name);
-
+  const defaultArr = values.language.map((item) => language);
   const isMobile = useWindowWidth() < 850;
+  const [availableLanguages, setAvailableLanguages] = useState(language);
+  const [selectedLanguages, setSelectedLanguages] = useState(
+    new Array(language.length).fill(null)
+  );
+  useEffect(() => {
+    console.log(choosen);
+  }, [choosen, values]);
 
   return (
     <>
       <div>
-        {arr.map((inputField, index) => (
+        {values.language?.map((inputField, index) => (
           <div key={index} className={styles.languageContainer}>
-            <Field name={`${tag}[${index}].name`}>
+            <Field name={`language[${index}].name`}>
               {({ form, field, meta }) => {
                 const { setFieldValue } = form;
                 return (
@@ -61,32 +53,37 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
                           id="language-select"
                           error={meta.touched && Boolean(meta.error)}
                         >
-                          {label1}
+                          Language
                         </InputLabel>
                         <Select
                           labelId="language-select"
                           id="language-select"
                           label="Select Language"
                           {...field}
+                          value={selectedLanguages[index]}
                           onChange={(e) => {
                             setFieldValue(
-                              `${tag}[${index}].name`,
+                              `language[${index}].name`,
                               e.target.value
                             );
+                            setAvailableLanguages((prevLanguages) =>
+                              prevLanguages.filter(
+                                (lang) => lang !== e.target.value
+                              )
+                            );
+                            setSelectedLanguages((prevLanguages) => {
+                              const newLanguages = [...prevLanguages];
+                              newLanguages[index] = e.target.value;
+                              return newLanguages;
+                            });
                           }}
                           error={meta.touched && Boolean(meta.error)}
                         >
-                          {label1 == 'Language'
-                            ? reducedLang.map((value, count1) => (
-                                <MenuItem value={value} key={count1}>
-                                  {value}
-                                </MenuItem>
-                              ))
-                            : skill.map((value, count1) => (
-                                <MenuItem value={value} key={count1}>
-                                  {value}
-                                </MenuItem>
-                              ))}
+                          {language.map((value, count1) => (
+                            <MenuItem value={value} key={count1}>
+                              {value}
+                            </MenuItem>
+                          ))}
                         </Select>
                         {meta.error && meta.touched && (
                           <FormHelperText>{meta.error}</FormHelperText>
@@ -97,7 +94,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
                 );
               }}
             </Field>
-            <Field name={`${tag}[${index}].rating`}>
+            <Field name={`language[${index}].rating`}>
               {({ field, form, meta }) => {
                 return (
                   <>
@@ -107,7 +104,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
                           id="rating-select"
                           error={meta.error && meta.touched}
                         >
-                          {label2}
+                          Fluency
                         </InputLabel>
                         <Rating
                           name="simple-controlled"
@@ -121,7 +118,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
                       </FormGroup>
                     </div>
 
-                    {arr.length > 1 && !isMobile && (
+                    {values.language.length > 1 && !isMobile && (
                       <IconButton
                         className={styles.delete}
                         size="large"
@@ -133,7 +130,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
                         <DeleteIcon />
                       </IconButton>
                     )}
-                    {arr.length > 1 && isMobile && (
+                    {values.language.length > 1 && isMobile && (
                       <Button
                         variant="contained"
                         style={{ background: 'red', alignSelf: 'center' }}
@@ -156,7 +153,7 @@ const LanguagePicker = ({ label1, label2, form, push, remove, tag }) => {
             }}
             endIcon={<AddIcon />}
           >
-            Add another {label1}
+            Add another Language
           </Button>
         </div>
       </div>

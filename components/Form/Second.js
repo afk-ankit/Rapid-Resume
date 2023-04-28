@@ -26,11 +26,7 @@ const Second = () => {
   const userData = useSelector((state) => state);
   let language;
 
-  const [choosen, setChoosen] = useState({
-    array: [],
-  });
-
-  console.log(choosen);
+  const [choosen, setChoosen] = useState([]);
 
   if (userData.language[0].name) {
     language = userData.language;
@@ -119,13 +115,11 @@ const Second = () => {
                   name="language"
                   render={(arrayHelpers) => (
                     <LanguagePicker
-                      label1={'Language'}
-                      label2={'Fluency'}
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      tag={'language'}
                       setChoosen={setChoosen}
+                      choosen={choosen}
                     />
                   )}
                 />

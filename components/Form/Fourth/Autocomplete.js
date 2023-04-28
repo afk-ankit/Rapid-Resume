@@ -130,7 +130,7 @@ const Autocomplete1 = ({ form, push, remove, label1, label2 }) => {
           }}
           endIcon={<AddIcon />}
         >
-          Add another softskills
+          Add another {label1}
         </Button>
       </div>
     </>

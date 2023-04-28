@@ -4,7 +4,10 @@ export const ValidFour = () =>
     softSkill: Yup.array()
       .of(
         Yup.object().shape({
-          name: Yup.string().required('Soft Skill is required'),
+          name: Yup.string()
+            .required('Soft Skill is required')
+            .min(3, 'Must be at least 3 letters')
+            .max(25, 'Too many letters'),
           rating: Yup.number()
             .required('Soft Skill rating is required')
             .min(1, 'Rating must be at least 1')
@@ -15,9 +18,13 @@ export const ValidFour = () =>
     technicalSkill: Yup.array()
       .of(
         Yup.object().shape({
-          name: Yup.string().required('Technical Skill is required'),
+          name: Yup.string()
+            .required('Technical Skill is required')
+            .min(3, 'Must be at least 3 letters')
+            .max(25, 'Too many letters'),
           rating: Yup.number()
             .required('Technical Skill rating is required')
+
             .min(1, 'Rating must be at least 1')
             .max(5, 'Rating must be at most 5'),
         })

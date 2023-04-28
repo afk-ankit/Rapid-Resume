@@ -14,6 +14,7 @@ const Third = () => {
   const { url } = useSelector((state) => state);
   const [selectedFile, setSelectedFile] = useState(null);
   const [scale, setScale] = useState(1);
+  const [edit, setEdit] = useState(false);
 
   const handleScaleChange = (newScale) => {
     setScale(newScale.target.value);
@@ -40,12 +41,15 @@ const Third = () => {
               type="file"
               id="ankit"
               style={{ marginTop: '1rem' }}
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={(e) => {
+                setSelectedFile(e.target.files[0]);
+                setEdit(true);
+              }}
               accept="image/*"
             />
           </div>
 
-          {selectedFile && (
+          {edit && (
             <div
               style={{
                 display: 'flex',
@@ -85,7 +89,7 @@ const Third = () => {
                       const canvas = editorRef.current.getImageScaledToCanvas();
                       const croppedImage = canvas.toDataURL();
                       setCroppedImage(croppedImage);
-                      setSelectedFile(null);
+                      setEdit(false);
                     }
                   }}
                 >
@@ -95,13 +99,27 @@ const Third = () => {
             </div>
           )}
           {croppedImage && (
-            <div style={{ width: 'fit-content', margin: 'auto' }}>
-              <img
-                src={croppedImage}
-                alt="Cropped Image"
-                style={{ width: '200px', marginTop: '1rem' }}
-              />
-            </div>
+            <>
+              <div style={{ width: 'fit-content', margin: 'auto' }}>
+                <img
+                  src={croppedImage}
+                  alt="Cropped Image"
+                  style={{ width: '200px', marginTop: '1rem' }}
+                />
+              </div>
+              <div
+                style={{ width: 'fit-content', margin: ' 1rem auto 0 auto' }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setEdit(true);
+                  }}
+                >
+                  Edit Image
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </Page>
