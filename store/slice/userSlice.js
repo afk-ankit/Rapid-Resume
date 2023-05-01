@@ -46,6 +46,7 @@ const initialState = {
   ],
   hobby: [''],
   url: null,
+  file:null,
 };
 
 const userSlice = createSlice({

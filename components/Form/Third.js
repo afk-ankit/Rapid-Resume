@@ -7,12 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import StepCount from '../utils/StepCount';
 import AvatarEditor from 'react-avatar-editor';
-import { Label } from '@mui/icons-material';
-import styles from '@/styles/Third.module.scss';
 
 const Third = () => {
-  const { url } = useSelector((state) => state);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const { url, file } = useSelector((state) => state);
+  const [selectedFile, setSelectedFile] = useState(file);
   const [scale, setScale] = useState(1);
   const [edit, setEdit] = useState(false);
 
@@ -21,10 +19,11 @@ const Third = () => {
   };
   const editorRef = useRef();
   const [croppedImage, setCroppedImage] = useState(url);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     croppedImage
-      ? dispatch(populate({ url: croppedImage }))
+      ? dispatch(populate({ url: croppedImage,file:selectedFile }))
       : dispatch(populate({ url: null }));
   }, [croppedImage]);
 
@@ -42,7 +41,7 @@ const Third = () => {
               id="ankit"
               style={{ marginTop: '1rem' }}
               onChange={(e) => {
-                setSelectedFile(e.target.files[0]);
+                setSelectedFile(URL.createObjectURL(e.target.files[0]));
                 setEdit(true);
               }}
               accept="image/*"
@@ -60,7 +59,7 @@ const Third = () => {
             >
               <AvatarEditor
                 ref={editorRef}
-                image={selectedFile ? URL.createObjectURL(selectedFile) : null}
+                image={selectedFile ? selectedFile : null}
                 width={200}
                 height={200}
                 border={50}
