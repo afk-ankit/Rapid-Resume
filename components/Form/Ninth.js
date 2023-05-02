@@ -91,7 +91,7 @@ const Ninth = () => {
                 control={<Radio />}
                 label="Creative"
               />
-              <FormControlLabel value="2" control={<Radio />} label="Advance" />
+              <FormControlLabel value="2" control={<Radio />} label="Advanced" />
             </RadioGroup>
           </FormControl>
         </div>
@@ -126,7 +126,7 @@ const Ninth = () => {
           trigger={() => (
             <div>
               <Button variant="contained" endIcon={<LocalPrintshopIcon />}>
-                Download CV
+                Print CV
               </Button>
             </div>
           )}
@@ -136,7 +136,7 @@ const Ninth = () => {
           href={'https://danskudlandsrekruttering.dk/jobs-i-udlandet/'}
           target="_blank"
         >
-          <Button variant="contained">See open jobs</Button>
+          <Button style={{background: '#FF9300'}} variant="contained">See open jobs</Button>
         </Link>
       </div>
     </Container>

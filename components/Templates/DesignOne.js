@@ -94,7 +94,7 @@ const DesignOne = ({ handleRef, theme }) => {
                     <div className={styles.dateLocation}>
                       <h3 className={styles.date}>
                         {item.pStartDate} -{' '}
-                        {item.currWorking ? 'Currently Working' : item.pEndDate}
+                        {item.currWorking ? 'Present' : item.pEndDate}
                       </h3>
                     </div>
                     {item.proud[0] && (
@@ -124,7 +124,7 @@ const DesignOne = ({ handleRef, theme }) => {
                       <h3 className={styles.date}>
                         {item.pStartDate} -{' '}
                         {item.currWorking
-                          ? 'Currently Studying'
+                          ? 'Present'
                           : item.pEndDate}
                       </h3>
                     </div>

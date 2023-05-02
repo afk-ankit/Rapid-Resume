@@ -191,7 +191,7 @@ const EducationInput = ({
                       )}
                       {!isEndValid && meta.touched && !check && (
                         <FormHelperText style={{ color: 'red' }}>
-                          End Date must be greater than Starting Date
+                          End Date must be  after Starting Date
                         </FormHelperText>
                       )}
                     </FormControl>
@@ -200,7 +200,7 @@ const EducationInput = ({
               </Field>
             </div>
             <h3 className={styles.label}>
-              Three things you are proud of (Optional)
+              {title=='education'?<>Three things you are proud of (Optional)</>:<>Work responsibilities and tasks</>}
             </h3>
             <Field name={`${title}[${index}].proud[0]`}>
               {({ field }) => (

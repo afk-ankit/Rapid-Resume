@@ -1,8 +1,6 @@
 import lang from '@/public/languageNames.json';
 import styles from '@/styles/LanguagePicker.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
-import softSkill from '@/public/softSkill.json';
-import technicalSkill from '@/public/technicalSkill.json';
 import AddIcon from '@mui/icons-material/Add';
 
 import {
@@ -18,22 +16,15 @@ import {
 } from '@mui/material';
 import { Field } from 'formik';
 import useWindowWidth from '@/components/utils/useWindow';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 const lang2 = Object.entries(lang);
 const language = lang2.map((item) => item[1].name);
 
-const LanguagePicker = ({ form, push, remove, setChoosen, choosen }) => {
+const LanguagePicker = ({ form, push, remove }) => {
   const { values } = form;
-  const defaultArr = values.language.map((item) => language);
   const isMobile = useWindowWidth() < 850;
-  const [availableLanguages, setAvailableLanguages] = useState(language);
-  const [selectedLanguages, setSelectedLanguages] = useState(
-    new Array(language.length).fill(null)
-  );
-  useEffect(() => {
-    console.log(choosen);
-  }, [choosen, values]);
-
+  
+ 
   return (
     <>
       <div>
@@ -60,22 +51,12 @@ const LanguagePicker = ({ form, push, remove, setChoosen, choosen }) => {
                           id="language-select"
                           label="Select Language"
                           {...field}
-                          value={selectedLanguages[index]}
                           onChange={(e) => {
                             setFieldValue(
                               `language[${index}].name`,
                               e.target.value
                             );
-                            setAvailableLanguages((prevLanguages) =>
-                              prevLanguages.filter(
-                                (lang) => lang !== e.target.value
-                              )
-                            );
-                            setSelectedLanguages((prevLanguages) => {
-                              const newLanguages = [...prevLanguages];
-                              newLanguages[index] = e.target.value;
-                              return newLanguages;
-                            });
+                           
                           }}
                           error={meta.touched && Boolean(meta.error)}
                         >

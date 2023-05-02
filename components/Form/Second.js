@@ -26,7 +26,6 @@ const Second = () => {
   const userData = useSelector((state) => state);
   let language;
 
-  const [choosen, setChoosen] = useState([]);
 
   if (userData.language[0].name) {
     language = userData.language;
@@ -118,8 +117,7 @@ const Second = () => {
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      setChoosen={setChoosen}
-                      choosen={choosen}
+                      
                     />
                   )}
                 />

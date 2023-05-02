@@ -126,7 +126,7 @@ const DesignTwo = ({ handleRef, theme }) => {
                   class="bi bi-joystick"
                   style={{ color: 'white', fontSize: '1.8rem' }}
                 ></i>
-                <h1 className={styles.skillsHeading}>Interest</h1>
+                <h1 className={styles.skillsHeading}>Interests</h1>
               </div>
               <div className={styles.interestCollection}>
                 {hobby.map((item) => (
@@ -166,7 +166,7 @@ const DesignTwo = ({ handleRef, theme }) => {
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>
                 <h3 className={styles.date}>
                   {item.pStartDate}-
-                  {item.currWorking ? 'Currently Working' : item.pEndDate}
+                  {item.currWorking ? 'Present' : item.pEndDate}
                 </h3>
                 {item[0] && (
                   <h3 className={styles.date}>Achievements/results</h3>
@@ -185,7 +185,7 @@ const DesignTwo = ({ handleRef, theme }) => {
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>
                 <h3 className={styles.date}>
                   {item.pStartDate}-
-                  {item.currWorking ? 'Currently Studying' : item.pEndDate}
+                  {item.currWorking ? 'Present' : item.pEndDate}
                 </h3>
                 {item[0] && (
                   <h3 className={styles.date}>Achievements/results</h3>

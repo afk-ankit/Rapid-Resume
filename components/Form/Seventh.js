@@ -43,10 +43,11 @@ const Seventh = () => {
     }
   }, [userData]);
 
+  
   const onSubmit = (values) => {
     values.job.map((item) => {
-      item.pStartDate = moment(item.startDate.$d).format('MM/yyyy');
-      item.pEndDate = moment(item.endDate.$d).format('MM/yyyy');
+      item.pStartDate = moment(item.startDate).format('MM/yyyy');
+      item.pEndDate = moment(item.endDate).format('MM/yyyy');
     });
     dispatch(populate(values));
   };
