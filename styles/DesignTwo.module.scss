@@ -192,6 +192,8 @@ $secondary-light:var(--secondary-light);
     border-radius: 12px;
     display: grid;
     grid: 1fr 1fr/1fr 1fr;
+    grid-template-areas: "a a"
+                        "b c";
     padding: 14px;
     align-content:center;
 }

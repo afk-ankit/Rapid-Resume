@@ -1,56 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  country: '',
-  phoneNumber: '',
-  language: [{ name: '', rating: 0 }],
+  firstName: "",
+  lastName: "",
+  email: "",
+  country: "",
+  phoneNumber: "",
+  language: [{ name: "", rating: 0 }],
   softSkill: [
     {
-      name: '',
+      name: "",
       rating: 0,
     },
   ],
   technicalSkill: [
     {
-      name: '',
+      name: "",
       rating: 0,
     },
   ],
-  about: '',
+  about: "",
   education: [
     {
-      name: '',
-      field: '',
+      name: "",
+      field: "",
       startDate: null,
       endDate: null,
       pStartDate: null,
       pEndDate: null,
       currWorking: false,
-      proud: ['', '', ''],
+      proud: ["", "", ""],
     },
   ],
   job: [
     {
-      name: '',
-      field: '',
+      name: "",
+      field: "",
       startDate: null,
       endDate: null,
       pStartDate: null,
       pEndDate: null,
       currWorking: false,
-      proud: ['', '', ''],
+      proud: ["", "", ""],
     },
   ],
-  hobby: [''],
+  hobby: [""],
   url: null,
-  file:null,
+  file: null,
+  selectedSoftSkill: [],
+  selectedTechnicalSkill: [],
+  selectedLanguage: ["English"],
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     populate: (state, action) => {

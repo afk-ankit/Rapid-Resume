@@ -1,8 +1,8 @@
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { configureStore } from "@reduxjs/toolkit";
 
-import userReducer from './slice/userSlice';
+import userReducer from "./slice/userSlice";
 
 function excludeUrl(state) {
   const { url, ...stateWithoutUrl } = state;
@@ -10,21 +10,24 @@ function excludeUrl(state) {
 }
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
   whitelist: [
-    'firstName',
-    'lastName',
-    'email',
-    'country',
-    'phoneNumber',
-    'language',
-    'softSkill',
-    'technicalSkill',
-    'about',
-    'education',
-    'job',
-    'hobby',
+    "firstName",
+    "lastName",
+    "email",
+    "country",
+    "phoneNumber",
+    "language",
+    "softSkill",
+    "technicalSkill",
+    "about",
+    "education",
+    "job",
+    "hobby",
+    "selectedSoftSkill",
+    "selectedTechnicalSkill",
+    "selectedLanguage",
   ],
   // transforms: [excludeUrl],
 };

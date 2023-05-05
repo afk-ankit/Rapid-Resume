@@ -5,16 +5,16 @@ import {
   FormHelperText,
   InputLabel,
   TextField,
-} from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import styles from '@/styles/Sixth.module.scss';
-import { Field } from 'formik';
-import AddIcon from '@mui/icons-material/Add';
-import moment from 'moment';
-import { useEffect, useState } from 'react';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { CookieSharp } from '@mui/icons-material';
+} from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import styles from "@/styles/Sixth.module.scss";
+import { Field, FieldArray } from "formik";
+import AddIcon from "@mui/icons-material/Add";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { CookieSharp } from "@mui/icons-material";
 
 const EducationInput = ({
   form,
@@ -25,10 +25,10 @@ const EducationInput = ({
   DateValid,
 }) => {
   const { values } = form;
-  const { education, job } = values;
   let dateValid;
+  const [proudArray, setProudArray] = useState(3);
   let arr = [];
-  if (title == 'education') {
+  if (title == "education") {
     arr = values.education;
     dateValid = values.education;
   } else {
@@ -42,25 +42,27 @@ const EducationInput = ({
   let label4;
   let label5;
 
-  if (title == 'education') {
-    label1 = 'Name of School/Educational place';
-    label2 = 'Education i.e. Gymnasium or University degree';
-    label3 = 'Top grades in English';
-    label4 = 'Part of student advisory board';
-    label5 = 'Received school award for outstanding result';
+  if (title == "education") {
+    label1 = "Name of School/Educational place";
+    label2 = "Education i.e. Gymnasium or University degree";
+    label3 = "Top grades in English";
+    label4 = "Part of student advisory board";
+    label5 = "Received school award for outstanding result";
   } else {
-    label1 = 'Job title';
-    label2 = 'Company name';
-    label3 = 'Work responsibilty 1';
-    label4 = 'Work responsibilty 2';
-    label5 = 'Work responsibilty 3';
+    label1 = "Job title";
+    label2 = "Company name";
+    label3 = "Work responsibilty 1";
+    label4 = "Work responsibilty 2";
+    label5 = "Work responsibilty 3";
   }
+
+  let proudHandler;
 
   return (
     <>
       {arr.map((inputField, index) => (
         <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           key={index}
         >
           <Field name={`${title}[${index}].name`}>
@@ -105,14 +107,14 @@ const EducationInput = ({
                     >
                       <DatePicker
                         label="Choose Starting Date"
-                        views={['year', 'month']}
+                        views={["year", "month"]}
                         className={styles.fullWidth}
                         {...field}
                         onChange={(val) => {
                           setFieldValue(`${title}[${index}].startDate`, val);
                         }}
                         disableFuture
-                        minDate={new moment('2000-01-01T00:00:00.000Z')}
+                        minDate={new moment("2000-01-01T00:00:00.000Z")}
                       />
                       {meta.error && meta.touched && (
                         <FormHelperText>Start Date is Required</FormHelperText>
@@ -141,8 +143,8 @@ const EducationInput = ({
                       {!check && (
                         <DatePicker
                           label="Choose Ending Date"
-                          views={['year', 'month']}
-                          minDate={new moment('2000-01-01T00:00:00.000Z')}
+                          views={["year", "month"]}
+                          minDate={new moment("2000-01-01T00:00:00.000Z")}
                           className={styles.fullWidth}
                           {...field}
                           onChange={(val) => {
@@ -156,8 +158,8 @@ const EducationInput = ({
                           return (
                             <div className={styles.currWorking}>
                               <span>
-                                Currently{' '}
-                                {title == 'education' ? 'studying' : 'working'}?
+                                Currently{" "}
+                                {title == "education" ? "studying" : "working"}?
                               </span>
                               <input
                                 type="checkbox"
@@ -190,8 +192,8 @@ const EducationInput = ({
                         <FormHelperText>Ending Date is required</FormHelperText>
                       )}
                       {!isEndValid && meta.touched && !check && (
-                        <FormHelperText style={{ color: 'red' }}>
-                          End Date must be  after Starting Date
+                        <FormHelperText style={{ color: "red" }}>
+                          End Date must be after Starting Date
                         </FormHelperText>
                       )}
                     </FormControl>
@@ -200,46 +202,101 @@ const EducationInput = ({
               </Field>
             </div>
             <h3 className={styles.label}>
-              {title=='education'?<>Three things you are proud of (Optional)</>:<>Work responsibilities and tasks</>}
+              {title == "education" ? (
+                <>Three things you are proud of (Optional)</>
+              ) : (
+                <>Work responsibilities and tasks</>
+              )}
             </h3>
-            <Field name={`${title}[${index}].proud[0]`}>
-              {({ field }) => (
-                <TextField
-                  id="outlined-basic"
-                  placeholder={label3}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            </Field>
-            <Field name={`${title}[${index}].proud[1]`}>
-              {({ field }) => (
-                <TextField
-                  id="outlined-basic"
-                  placeholder={label4}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            </Field>
-            <Field name={`${title}[${index}].proud[2]`}>
-              {({ field }) => (
-                <TextField
-                  id="outlined-basic"
-                  placeholder={label5}
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
-              )}
-            </Field>
+            {title == "education" && (
+              <>
+                <Field name={`${title}[${index}].proud[0]`}>
+                  {({ field }) => (
+                    <TextField
+                      id="outlined-basic"
+                      placeholder={label3}
+                      variant="outlined"
+                      fullWidth
+                      {...field}
+                    />
+                  )}
+                </Field>
+                <Field name={`${title}[${index}].proud[1]`}>
+                  {({ field }) => (
+                    <TextField
+                      id="outlined-basic"
+                      placeholder={label4}
+                      variant="outlined"
+                      fullWidth
+                      {...field}
+                    />
+                  )}
+                </Field>
+                <Field name={`${title}[${index}].proud[2]`}>
+                  {({ field }) => (
+                    <TextField
+                      id="outlined-basic"
+                      placeholder={label5}
+                      variant="outlined"
+                      fullWidth
+                      {...field}
+                    />
+                  )}
+                </Field>
+              </>
+            )}
+            {title == "job" && (
+              <>
+                <FieldArray name={`${title}[${index}].proud`}>
+                  {({ push, form }) => {
+                    proudHandler = push;
+                    setProudArray(form.values.job[index].proud.length);
+
+                    return inputField.proud.map((item, data) => {
+                      return (
+                        <>
+                          <Field name={`${title}[${index}].proud[${data}]`}>
+                            {({ field, meta }) => {
+                              return (
+                                <TextField
+                                  id="outlined-basic"
+                                  placeholder={`Work responsibility ${
+                                    data + 1
+                                  }`}
+                                  variant="outlined"
+                                  fullWidth
+                                  {...field}
+                                />
+                              );
+                            }}
+                          </Field>
+                        </>
+                      );
+                    });
+                  }}
+                </FieldArray>
+                {console.log(proudArray)}
+                {proudArray > 5 ? null : (
+                  <Button
+                    style={{
+                      alignSelf: "center",
+                    }}
+                    variant="outlined"
+                    onClick={() => {
+                      proudHandler(null);
+                    }}
+                    endIcon={<AddIcon />}
+                  >
+                    Add More responsibilities/tasks
+                  </Button>
+                )}
+              </>
+            )}
           </LocalizationProvider>
           {arr.length > 1 && (
             <Button
               variant="contained"
-              style={{ background: 'red', alignSelf: 'center' }}
+              style={{ background: "red", alignSelf: "center" }}
               onClick={() => remove(index)}
             >
               Delete
@@ -251,17 +308,17 @@ const EducationInput = ({
       <Button
         style={
           Boolean(form.isValid && DateValid)
-            ? { alignSelf: 'center' }
-            : { alignSelf: 'center', background: 'gray', color: 'white' }
+            ? { alignSelf: "center" }
+            : { alignSelf: "center", background: "gray", color: "white" }
         }
         variant="contained"
         onClick={() => {
           push({
-            name: '',
-            field: '',
+            name: "",
+            field: "",
             startDate: null,
             endDate: null,
-            proud: ['', '', ''],
+            proud: ["", "", ""],
           });
         }}
         endIcon={<AddIcon />}

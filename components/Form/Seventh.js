@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populate } from '@/store/slice/userSlice';
 import { FieldArray, Form, Formik } from 'formik';
 import EducationInput from './Sixth/EducationInput';
-import { format } from 'date-fns';
 import { ValidSeven } from '@/schemas/ValidSeven';
 import { handleIsValid } from '../utils/handleIsValid';
 import StepCount from '../utils/StepCount';

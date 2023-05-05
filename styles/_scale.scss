@@ -1,14 +1,18 @@
 .scale{
     @media screen and (max-width:800px) {
+      text-size-adjust: none;
       zoom: 0.8;
     }
     @media screen and (max-width:650px) {
+      
       zoom: 0.6;
     }
     @media screen and (max-width:650px) {
+     
       zoom: 0.6;
     }
     @media screen and (max-width:550px) {
+     
       zoom: 0.4;
     }
     @media screen and (max-width:350px) {

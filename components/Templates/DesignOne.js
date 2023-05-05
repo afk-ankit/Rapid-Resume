@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import styles from '@/styles/DesignOne.module.scss';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from "react";
+import styles from "@/styles/DesignOne.module.scss";
+import { useSelector } from "react-redux";
 
 const DesignOne = ({ handleRef, theme }) => {
   const {
@@ -41,11 +41,11 @@ const DesignOne = ({ handleRef, theme }) => {
 
   const handleTheme = (theme) => {
     switch (theme) {
-      case '0':
+      case "0":
         return `${styles.page} ${styles.default}`;
-      case '1':
+      case "1":
         return `${styles.page} ${styles.primary}`;
-      case '2':
+      case "2":
         return `${styles.page} ${styles.secondary}`;
     }
   };
@@ -70,15 +70,15 @@ const DesignOne = ({ handleRef, theme }) => {
         </div>
         <div className={styles.blueBar}>
           <div className={styles.links}>
-            <i className="bi bi-envelope-fill" style={{ color: 'white' }}></i>
+            <i className="bi bi-envelope-fill" style={{ color: "white" }}></i>
             <a href="/#">{email}</a>
           </div>
           <div className={styles.links}>
-            <i className="bi bi-phone-fill" style={{ color: 'white' }}></i>
+            <i className="bi bi-phone-fill" style={{ color: "white" }}></i>
             <a href="/#">{phoneNumber}</a>
           </div>
           <div className={styles.links}>
-            <i className="bi bi-geo-alt-fill" style={{ color: 'white' }}></i>
+            <i className="bi bi-geo-alt-fill" style={{ color: "white" }}></i>
             <a href="/#">{country}</a>
           </div>
         </div>
@@ -88,13 +88,13 @@ const DesignOne = ({ handleRef, theme }) => {
               <h1 className={styles.heading}>Work Experience</h1>
               {job.map((item) => {
                 return (
-                  <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ marginBottom: "1rem" }}>
                     <h2 className={styles.subHeadingBold}>{item.name}</h2>
                     <h2 className={styles.subHeadingLight}>{item.field}</h2>
                     <div className={styles.dateLocation}>
                       <h3 className={styles.date}>
-                        {item.pStartDate} -{' '}
-                        {item.currWorking ? 'Present' : item.pEndDate}
+                        {item.pStartDate} -{" "}
+                        {item.currWorking ? "Present" : item.pEndDate}
                       </h3>
                     </div>
                     {item.proud[0] && (
@@ -104,7 +104,7 @@ const DesignOne = ({ handleRef, theme }) => {
                       className={`${styles.list} ${styles.normalDescription}`}
                     >
                       {item.proud.map((item) => {
-                        if (item) {
+                        if (Boolean(item)) {
                           return <li>{item}</li>;
                         }
                       })}
@@ -117,15 +117,13 @@ const DesignOne = ({ handleRef, theme }) => {
               <h1 className={styles.heading}>Education</h1>
               {education.map((item) => {
                 return (
-                  <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ marginBottom: "1rem" }}>
                     <h2 className={styles.subHeadingBold}>{item.name}</h2>
                     <h2 className={styles.subHeadingLight}>{item.field}</h2>
                     <div className={styles.dateLocation}>
                       <h3 className={styles.date}>
-                        {item.pStartDate} -{' '}
-                        {item.currWorking
-                          ? 'Present'
-                          : item.pEndDate}
+                        {item.pStartDate} -{" "}
+                        {item.currWorking ? "Present" : item.pEndDate}
                       </h3>
                     </div>
                     {item.proud[0] && (
@@ -145,7 +143,7 @@ const DesignOne = ({ handleRef, theme }) => {
           </div>
           <div>
             <div>
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: "16px" }}>
                 <h1 className={styles.heading}>Soft-Skills</h1>
                 <div
                   className={`${styles.skillsContainer} ${styles.normalDescription}`}

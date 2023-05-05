@@ -1,7 +1,7 @@
-import BtnGroup from '../utils/BtnGroup';
-import Container from '../utils/Container';
-import Page from '../utils/Page';
-import country from '@/public/countryNames.json';
+import BtnGroup from "../utils/BtnGroup";
+import Container from "../utils/Container";
+import Page from "../utils/Page";
+import country from "@/public/countryNames.json";
 import {
   FormControl,
   FormHelperText,
@@ -9,15 +9,15 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@mui/material';
-import LanguagePicker from './Second/LanguagePicker';
-import { Field, FieldArray, Form, Formik, useFormik } from 'formik';
-import { ValidTwo } from '@/schemas/ValidTwo';
-import { useDispatch, useSelector } from 'react-redux';
-import { populate } from '@/store/slice/userSlice';
-import { handleIsValid } from '../utils/handleIsValid';
-import StepCount from '../utils/StepCount';
-import { useState } from 'react';
+} from "@mui/material";
+import LanguagePicker from "./Second/LanguagePicker";
+import { Field, FieldArray, Form, Formik, useFormik } from "formik";
+import { ValidTwo } from "@/schemas/ValidTwo";
+import { useDispatch, useSelector } from "react-redux";
+import { populate } from "@/store/slice/userSlice";
+import { handleIsValid } from "../utils/handleIsValid";
+import StepCount from "../utils/StepCount";
+import { useState } from "react";
 
 const arr = Object.entries(country);
 
@@ -26,11 +26,10 @@ const Second = () => {
   const userData = useSelector((state) => state);
   let language;
 
-
   if (userData.language[0].name) {
     language = userData.language;
   } else {
-    language = [{ name: 'English', rating: 0 }];
+    language = [{ name: "English", rating: 0 }];
   }
 
   const savedData =
@@ -39,8 +38,8 @@ const Second = () => {
     Boolean(userData.language.name);
 
   const initialValues = {
-    country: userData.country || 'Denmark',
-    phoneNumber: userData.phoneNumber || '',
+    country: userData.country || "Denmark",
+    phoneNumber: userData.phoneNumber || "",
     language,
   };
 
@@ -117,14 +116,13 @@ const Second = () => {
                       form={arrayHelpers.form}
                       push={arrayHelpers.push}
                       remove={arrayHelpers.remove}
-                      
                     />
                   )}
                 />
               </Page>
               <BtnGroup
                 prev="/form/first"
-                next={'/form/third'}
+                next={"/form/third"}
                 isValid={handleIsValid(savedData, formik.dirty, formik.isValid)}
                 onSubmit={formik.handleSubmit}
               />

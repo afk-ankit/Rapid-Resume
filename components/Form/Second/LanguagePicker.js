@@ -1,7 +1,7 @@
-import lang from '@/public/languageNames.json';
-import styles from '@/styles/LanguagePicker.module.scss';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import lang from "@/public/languageNames.json";
+import styles from "@/styles/LanguagePicker.module.scss";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 import {
   Button,
@@ -13,18 +13,25 @@ import {
   FormControl,
   FormHelperText,
   FormGroup,
-} from '@mui/material';
-import { Field } from 'formik';
-import useWindowWidth from '@/components/utils/useWindow';
-import { useEffect } from 'react';
+} from "@mui/material";
+import { Field } from "formik";
+import useWindowWidth from "@/components/utils/useWindow";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { populate } from "@/store/slice/userSlice";
 const lang2 = Object.entries(lang);
 const language = lang2.map((item) => item[1].name);
 
 const LanguagePicker = ({ form, push, remove }) => {
   const { values } = form;
   const isMobile = useWindowWidth() < 850;
-  
- 
+  const { selectedLanguage } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  // const [selectedLanguage, setSelectedLanguage] = useState(["English"]);
+  useEffect(() => {
+    console.log(selectedLanguage);
+  }, [selectedLanguage]);
   return (
     <>
       <div>
@@ -56,15 +63,25 @@ const LanguagePicker = ({ form, push, remove }) => {
                               `language[${index}].name`,
                               e.target.value
                             );
-                           
+                            let arr = [...selectedLanguage, e.target.value];
+                            dispatch(populate({ selectedLanguage: arr }));
                           }}
                           error={meta.touched && Boolean(meta.error)}
                         >
-                          {language.map((value, count1) => (
-                            <MenuItem value={value} key={count1}>
-                              {value}
-                            </MenuItem>
-                          ))}
+                          {language.map((value, count1) => {
+                            if (selectedLanguage.includes(value))
+                              return (
+                                <MenuItem value={value} key={count1} disabled>
+                                  {value}
+                                </MenuItem>
+                              );
+                            else
+                              return (
+                                <MenuItem value={value} key={count1}>
+                                  {value}
+                                </MenuItem>
+                              );
+                          })}
                         </Select>
                         {meta.error && meta.touched && (
                           <FormHelperText>{meta.error}</FormHelperText>
@@ -106,6 +123,16 @@ const LanguagePicker = ({ form, push, remove }) => {
                         color="primary"
                         onClick={() => {
                           remove(index);
+                          console.log(values.language[index].name);
+                          let demo = [...selectedLanguage];
+                          const result = demo.filter(
+                            (item) => item != values.language[index].name
+                          );
+                          dispatch(
+                            populate({
+                              selectedLanguage: [...result],
+                            })
+                          );
                         }}
                       >
                         <DeleteIcon />
@@ -114,7 +141,7 @@ const LanguagePicker = ({ form, push, remove }) => {
                     {values.language.length > 1 && isMobile && (
                       <Button
                         variant="contained"
-                        style={{ background: 'red', alignSelf: 'center' }}
+                        style={{ background: "red", alignSelf: "center" }}
                         onClick={() => remove(index)}
                       >
                         Delete
@@ -126,11 +153,11 @@ const LanguagePicker = ({ form, push, remove }) => {
             </Field>
           </div>
         ))}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Button
             variant="contained"
             onClick={() => {
-              push({ name: '', rating: 0 });
+              push({ name: "", rating: 0 });
             }}
             endIcon={<AddIcon />}
           >
