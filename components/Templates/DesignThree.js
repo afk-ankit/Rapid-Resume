@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import styles from '@/styles/DesignThree.module.scss';
-import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
-import ReactToPrint from 'react-to-print';
+import React, { useEffect, useRef } from "react";
+import styles from "@/styles/DesignThree.module.scss";
+import { useSelector } from "react-redux";
+import { Button } from "@mui/material";
+import ReactToPrint from "react-to-print";
+import moment from "moment";
 
 const DesignThree = ({ handleRef, theme }) => {
   const {
@@ -39,14 +40,50 @@ const DesignThree = ({ handleRef, theme }) => {
   });
   const handleTheme = (theme) => {
     switch (theme) {
-      case '0':
+      case "0":
         return `${styles.page} ${styles.default}`;
-      case '1':
+      case "1":
         return `${styles.page} ${styles.primary}`;
-      case '2':
+      case "2":
         return `${styles.page} ${styles.secondary}`;
     }
   };
+
+  const sortedEducation = [...education];
+  const sortedJob = [...job];
+
+  sortedEducation.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
+    }
+  });
+  sortedJob.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
+    }
+  });
   return (
     <div className={styles.scale}>
       <div className={handleTheme(theme)} ref={componentRef}>
@@ -84,13 +121,13 @@ const DesignThree = ({ handleRef, theme }) => {
                 <h1>Work Experience</h1>
                 <hr />
               </div>
-              {job.map((item) => (
+              {sortedJob.map((item) => (
                 <div>
                   <h2 className={styles.subHeadingBold}>{item.name}</h2>
                   <h3 className={styles.subHeadingLight}>{item.field}</h3>
                   <h3 className={styles.date}>
-                    {item.pStartDate} -{' '}
-                    {item.currWorking ? 'Currently Working' : item.pEndDate}
+                    {item.pStartDate} -{" "}
+                    {item.currWorking ? "Present" : item.pEndDate}
                   </h3>
                   {item.proud[0] && (
                     <h3 className={styles.date}>Achievements/Tasks</h3>
@@ -108,13 +145,13 @@ const DesignThree = ({ handleRef, theme }) => {
                 <h1>Education</h1>
                 <hr />
               </div>
-              {education.map((item) => (
+              {sortedEducation.map((item) => (
                 <div>
                   <h2 className={styles.subHeadingBold}>{item.name}</h2>
                   <h3 className={styles.subHeadingLight}>{item.field}</h3>
                   <h3 className={styles.date}>
-                    {item.pStartDate} -{' '}
-                    {item.currWorking ? 'Currently Studying' : item.pEndDate}
+                    {item.pStartDate} -{" "}
+                    {item.currWorking ? "Present" : item.pEndDate}
                   </h3>
                   {item.proud[0] && (
                     <h3 className={styles.date}>Achievements/Tasks</h3>
@@ -186,7 +223,7 @@ const DesignThree = ({ handleRef, theme }) => {
                 <hr />
                 <div
                   className={`${styles.skillsContainer} ${styles.normalDescription}`}
-                  style={{ marginTop: '16px' }}
+                  style={{ marginTop: "16px" }}
                 >
                   {hobby.map((item) => (
                     <span className={`${styles.hobby}`}>{item}</span>

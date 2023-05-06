@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "@/styles/DesignOne.module.scss";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const DesignOne = ({ handleRef, theme }) => {
   const {
@@ -28,6 +29,42 @@ const DesignOne = ({ handleRef, theme }) => {
     } else {
       // Otherwise, sort by rating
       return b.rating - a.rating;
+    }
+  });
+
+  const sortedEducation = [...education];
+  const sortedJob = [...job];
+
+  sortedEducation.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
+    }
+  });
+  sortedJob.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
     }
   });
 
@@ -64,7 +101,7 @@ const DesignOne = ({ handleRef, theme }) => {
             <h1 className={styles.headingName}>
               {firstName} {lastName}
             </h1>
-            <h2 className={styles.headingWork}>{job[0].name}</h2>
+            <h2 className={styles.headingWork}>{sortedJob[0].name}</h2>
             <p className={styles.headingDescription}>{about}</p>
           </div>
         </div>
@@ -86,7 +123,7 @@ const DesignOne = ({ handleRef, theme }) => {
           <div>
             <div>
               <h1 className={styles.heading}>Work Experience</h1>
-              {job.map((item) => {
+              {sortedJob.map((item) => {
                 return (
                   <div style={{ marginBottom: "1rem" }}>
                     <h2 className={styles.subHeadingBold}>{item.name}</h2>
@@ -115,7 +152,7 @@ const DesignOne = ({ handleRef, theme }) => {
             </div>
             <div>
               <h1 className={styles.heading}>Education</h1>
-              {education.map((item) => {
+              {sortedEducation.map((item) => {
                 return (
                   <div style={{ marginBottom: "1rem" }}>
                     <h2 className={styles.subHeadingBold}>{item.name}</h2>

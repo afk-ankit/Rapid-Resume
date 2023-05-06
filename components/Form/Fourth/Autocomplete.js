@@ -108,7 +108,7 @@ const Autocomplete1 = ({ form, push, remove, label1, label2 }) => {
                           {...params}
                           error={meta.touched && Boolean(meta.error)}
                           helperText={meta.touched && meta.error}
-                          label={`Type or select an ${label1}`}
+                          label={`Type or select a ${label1}`}
                         />
                       )}
                     />

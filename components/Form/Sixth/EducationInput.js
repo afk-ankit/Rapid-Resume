@@ -324,7 +324,7 @@ const EducationInput = ({
         endIcon={<AddIcon />}
         disabled={Boolean(!form.isValid && !DateValid)}
       >
-        Add More {title}s
+        Add another {title}
       </Button>
     </>
   );

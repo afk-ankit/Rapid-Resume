@@ -3,6 +3,7 @@ import styles from "@/styles/DesignTwo.module.scss";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import ReactToPrint from "react-to-print";
+import moment from "moment";
 
 const DesignTwo = ({ handleRef, theme }) => {
   const {
@@ -30,6 +31,43 @@ const DesignTwo = ({ handleRef, theme }) => {
       return b.rating - a.rating;
     }
   });
+
+  const sortedEducation = [...education];
+  const sortedJob = [...job];
+
+  sortedEducation.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
+    }
+  });
+  sortedJob.sort((a, b) => {
+    if (a.currWorking && !b.currWorking) {
+      return -1;
+    } else if (!a.currWorking && b.currWorking) {
+      return 1;
+    } else if (b.currWorking && a.currWorking) {
+      return moment(b.startDate).diff(moment(a.startDate));
+    } else {
+      const endDateDiff = moment(b.endDate).diff(moment(a.endDate));
+      if (endDateDiff !== 0) {
+        return endDateDiff;
+      } else {
+        return moment(b.startDate).diff(moment(a.startDate));
+      }
+    }
+  });
+
   useEffect(() => {
     handleRef((prev) => {
       const arr = [prev];
@@ -141,7 +179,7 @@ const DesignTwo = ({ handleRef, theme }) => {
             <h1>
               {firstName} {lastName}
             </h1>
-            <h2>{job[0].name}</h2>
+            <h2>{sortedJob[0].name}</h2>
             <p>{about}</p>
           </div>
           <div className={styles.blueBox}>
@@ -160,7 +198,7 @@ const DesignTwo = ({ handleRef, theme }) => {
           </div>
           <div className={styles.workContainer}>
             <h1 className={styles.heading}>Work Experience</h1>
-            {job.map((item) => (
+            {sortedJob.map((item) => (
               <>
                 <h2 className={styles.subHeadingBold}>{item.name}</h2>
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>
@@ -179,7 +217,7 @@ const DesignTwo = ({ handleRef, theme }) => {
           </div>
           <div className={styles.workContainer}>
             <h1 className={styles.heading}>Education</h1>
-            {education.map((item) => (
+            {sortedEducation.map((item) => (
               <>
                 <h2 className={styles.subHeadingBold}>{item.name}</h2>
                 <h2 className={styles.subHeadingLight}>{item.field}</h2>

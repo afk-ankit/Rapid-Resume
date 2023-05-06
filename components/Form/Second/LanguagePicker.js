@@ -142,7 +142,19 @@ const LanguagePicker = ({ form, push, remove }) => {
                       <Button
                         variant="contained"
                         style={{ background: "red", alignSelf: "center" }}
-                        onClick={() => remove(index)}
+                        onClick={() => {
+                          remove(index);
+                          console.log(values.language[index].name);
+                          let demo = [...selectedLanguage];
+                          const result = demo.filter(
+                            (item) => item != values.language[index].name
+                          );
+                          dispatch(
+                            populate({
+                              selectedLanguage: [...result],
+                            })
+                          );
+                        }}
                       >
                         Delete
                       </Button>
