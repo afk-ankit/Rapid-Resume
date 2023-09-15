@@ -235,7 +235,6 @@ const DesignTwo = ({ handleRef, theme }) => {
             ))}
           </div>
         </main>
-        <img src="/company-logo.png" className={styles.waterMark} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import { Button, ButtonGroup } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import { useRouter } from 'next/router';
+import { Button, ButtonGroup } from "@mui/material";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import { useRouter } from "next/router";
 
 const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
   const router = useRouter();
@@ -12,13 +12,13 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
   const btnStyle = (isValid) => {
     if (!isValid) {
       return {
-        background: '#808080',
-        color: 'white',
+        background: "#808080",
+        color: "white",
       };
     } else {
       return {
-        background: '#FF9300',
-        color: 'white',
+        background: "#FF9300",
+        color: "white",
       };
     }
   };
@@ -30,21 +30,21 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
   return (
     <div
       style={{
-        display: 'flex',
-        gap: '1rem',
-        width: 'fit-content',
-        margin: 'auto',
+        display: "flex",
+        gap: "1rem",
+        width: "fit-content",
+        margin: "auto",
       }}
     >
       {!single ? (
         <>
-          {' '}
+          {" "}
           <Button
             startIcon={<KeyboardArrowLeftIcon />}
             style={btnStyle(false)}
             onClick={prevHandler}
           >
-            Tilbage
+            Previous
           </Button>
           <Button
             endIcon={<KeyboardArrowRightIcon />}
@@ -52,7 +52,7 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
             onClick={nextHandler}
             disabled={!isValid}
           >
-            Næste
+            Next
           </Button>
         </>
       ) : (
@@ -62,7 +62,7 @@ const BtnGroup = ({ prev, next, isValid, onSubmit, single }) => {
           onClick={nextHandler}
           disabled={!isValid}
         >
-          Næste
+          Next
         </Button>
       )}
     </div>

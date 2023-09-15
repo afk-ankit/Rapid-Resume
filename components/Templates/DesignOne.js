@@ -236,7 +236,6 @@ const DesignOne = ({ handleRef, theme }) => {
             </div>
           </div>
         </main>
-        <img src="/company-logo.png" className={styles.waterMark} />
       </div>
     </div>
   );

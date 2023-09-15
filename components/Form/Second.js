@@ -38,7 +38,7 @@ const Second = () => {
     Boolean(userData.language.name);
 
   const initialValues = {
-    country: userData.country || "Denmark",
+    country: userData.country || "India",
     phoneNumber: userData.phoneNumber || "",
     language,
   };
